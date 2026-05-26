@@ -1,17 +1,1217 @@
 {
   "savingsTarget": 15,
   "months": {
-    "0":  { "income": { "salary": 0, "freelance": 0, "taxReturn": 0, "investments": 0, "gifts": 0, "other": 0 }, "housing": { "rent": 0, "hoa": 0, "arnona": 0, "electricity": 0, "water": 0, "gas": 0, "internetTv": 0, "phone": 0, "maintenance": 0 }, "food": { "supermarket": 0, "vegetables": 0, "meat": 0, "cleaning": 0, "hygiene": 0, "bread": 0, "restaurants": 0, "coffee": 0, "takeout": 0 }, "transport": { "fuel": 0, "carInsurance": 0, "carRepair": 0, "carTest": 0, "parking": 0, "carLease": 0, "publicTransport": 0, "taxi": 0, "uber": 0 }, "communication": { "mobile": 0, "homeInternet": 0, "streaming": 0, "music": 0, "software": 0 }, "health": { "healthIns": 0, "suppIns": 0, "medications": 0, "dentist": 0, "glasses": 0, "gym": 0 }, "leisure": { "restLeisure": 0, "bars": 0, "cinema": 0, "hobbies": 0, "gaming": 0, "sports": 0, "vacation": 0 }, "clothing": { "clothes": 0, "haircut": 0, "cosmetics": 0, "accessories": 0 }, "education": { "tuition": 0, "eduBooks": 0, "conferences": 0, "workshops": 0 }, "culture": { "entertainment": 0, "sportsGym": 0, "cultHobbies": 0, "press": 0, "presents": 0 }, "pets": { "vet": 0, "petCare": 0 }, "finance": { "bankFees": 0, "creditFees": 0, "donations": 0, "taxes": 0 }, "misc": { "bdayGifts": 0, "charity": 0, "unplanned": 0 } },
-    "1":  { "income": { "salary": 0, "freelance": 0, "taxReturn": 0, "investments": 0, "gifts": 0, "other": 0 }, "housing": { "rent": 0, "hoa": 0, "arnona": 0, "electricity": 0, "water": 0, "gas": 0, "internetTv": 0, "phone": 0, "maintenance": 0 }, "food": { "supermarket": 0, "vegetables": 0, "meat": 0, "cleaning": 0, "hygiene": 0, "bread": 0, "restaurants": 0, "coffee": 0, "takeout": 0 }, "transport": { "fuel": 0, "carInsurance": 0, "carRepair": 0, "carTest": 0, "parking": 0, "carLease": 0, "publicTransport": 0, "taxi": 0, "uber": 0 }, "communication": { "mobile": 0, "homeInternet": 0, "streaming": 0, "music": 0, "software": 0 }, "health": { "healthIns": 0, "suppIns": 0, "medications": 0, "dentist": 0, "glasses": 0, "gym": 0 }, "leisure": { "restLeisure": 0, "bars": 0, "cinema": 0, "hobbies": 0, "gaming": 0, "sports": 0, "vacation": 0 }, "clothing": { "clothes": 0, "haircut": 0, "cosmetics": 0, "accessories": 0 }, "education": { "tuition": 0, "eduBooks": 0, "conferences": 0, "workshops": 0 }, "culture": { "entertainment": 0, "sportsGym": 0, "cultHobbies": 0, "press": 0, "presents": 0 }, "pets": { "vet": 0, "petCare": 0 }, "finance": { "bankFees": 0, "creditFees": 0, "donations": 0, "taxes": 0 }, "misc": { "bdayGifts": 0, "charity": 0, "unplanned": 0 } },
-    "2":  { "income": { "salary": 0, "freelance": 0, "taxReturn": 0, "investments": 0, "gifts": 0, "other": 0 }, "housing": { "rent": 0, "hoa": 0, "arnona": 0, "electricity": 0, "water": 0, "gas": 0, "internetTv": 0, "phone": 0, "maintenance": 0 }, "food": { "supermarket": 0, "vegetables": 0, "meat": 0, "cleaning": 0, "hygiene": 0, "bread": 0, "restaurants": 0, "coffee": 0, "takeout": 0 }, "transport": { "fuel": 0, "carInsurance": 0, "carRepair": 0, "carTest": 0, "parking": 0, "carLease": 0, "publicTransport": 0, "taxi": 0, "uber": 0 }, "communication": { "mobile": 0, "homeInternet": 0, "streaming": 0, "music": 0, "software": 0 }, "health": { "healthIns": 0, "suppIns": 0, "medications": 0, "dentist": 0, "glasses": 0, "gym": 0 }, "leisure": { "restLeisure": 0, "bars": 0, "cinema": 0, "hobbies": 0, "gaming": 0, "sports": 0, "vacation": 0 }, "clothing": { "clothes": 0, "haircut": 0, "cosmetics": 0, "accessories": 0 }, "education": { "tuition": 0, "eduBooks": 0, "conferences": 0, "workshops": 0 }, "culture": { "entertainment": 0, "sportsGym": 0, "cultHobbies": 0, "press": 0, "presents": 0 }, "pets": { "vet": 0, "petCare": 0 }, "finance": { "bankFees": 0, "creditFees": 0, "donations": 0, "taxes": 0 }, "misc": { "bdayGifts": 0, "charity": 0, "unplanned": 0 } },
-    "3":  { "income": { "salary": 0, "freelance": 0, "taxReturn": 0, "investments": 0, "gifts": 0, "other": 0 }, "housing": { "rent": 0, "hoa": 0, "arnona": 0, "electricity": 0, "water": 0, "gas": 0, "internetTv": 0, "phone": 0, "maintenance": 0 }, "food": { "supermarket": 0, "vegetables": 0, "meat": 0, "cleaning": 0, "hygiene": 0, "bread": 0, "restaurants": 0, "coffee": 0, "takeout": 0 }, "transport": { "fuel": 0, "carInsurance": 0, "carRepair": 0, "carTest": 0, "parking": 0, "carLease": 0, "publicTransport": 0, "taxi": 0, "uber": 0 }, "communication": { "mobile": 0, "homeInternet": 0, "streaming": 0, "music": 0, "software": 0 }, "health": { "healthIns": 0, "suppIns": 0, "medications": 0, "dentist": 0, "glasses": 0, "gym": 0 }, "leisure": { "restLeisure": 0, "bars": 0, "cinema": 0, "hobbies": 0, "gaming": 0, "sports": 0, "vacation": 0 }, "clothing": { "clothes": 0, "haircut": 0, "cosmetics": 0, "accessories": 0 }, "education": { "tuition": 0, "eduBooks": 0, "conferences": 0, "workshops": 0 }, "culture": { "entertainment": 0, "sportsGym": 0, "cultHobbies": 0, "press": 0, "presents": 0 }, "pets": { "vet": 0, "petCare": 0 }, "finance": { "bankFees": 0, "creditFees": 0, "donations": 0, "taxes": 0 }, "misc": { "bdayGifts": 0, "charity": 0, "unplanned": 0 } },
-    "4":  { "income": { "salary": 0, "freelance": 0, "taxReturn": 0, "investments": 0, "gifts": 0, "other": 0 }, "housing": { "rent": 0, "hoa": 0, "arnona": 0, "electricity": 0, "water": 0, "gas": 0, "internetTv": 0, "phone": 0, "maintenance": 0 }, "food": { "supermarket": 0, "vegetables": 0, "meat": 0, "cleaning": 0, "hygiene": 0, "bread": 0, "restaurants": 0, "coffee": 0, "takeout": 0 }, "transport": { "fuel": 0, "carInsurance": 0, "carRepair": 0, "carTest": 0, "parking": 0, "carLease": 0, "publicTransport": 0, "taxi": 0, "uber": 0 }, "communication": { "mobile": 0, "homeInternet": 0, "streaming": 0, "music": 0, "software": 0 }, "health": { "healthIns": 0, "suppIns": 0, "medications": 0, "dentist": 0, "glasses": 0, "gym": 0 }, "leisure": { "restLeisure": 0, "bars": 0, "cinema": 0, "hobbies": 0, "gaming": 0, "sports": 0, "vacation": 0 }, "clothing": { "clothes": 0, "haircut": 0, "cosmetics": 0, "accessories": 0 }, "education": { "tuition": 0, "eduBooks": 0, "conferences": 0, "workshops": 0 }, "culture": { "entertainment": 0, "sportsGym": 0, "cultHobbies": 0, "press": 0, "presents": 0 }, "pets": { "vet": 0, "petCare": 0 }, "finance": { "bankFees": 0, "creditFees": 0, "donations": 0, "taxes": 0 }, "misc": { "bdayGifts": 0, "charity": 0, "unplanned": 0 } },
-    "5":  { "income": { "salary": 0, "freelance": 0, "taxReturn": 0, "investments": 0, "gifts": 0, "other": 0 }, "housing": { "rent": 0, "hoa": 0, "arnona": 0, "electricity": 0, "water": 0, "gas": 0, "internetTv": 0, "phone": 0, "maintenance": 0 }, "food": { "supermarket": 0, "vegetables": 0, "meat": 0, "cleaning": 0, "hygiene": 0, "bread": 0, "restaurants": 0, "coffee": 0, "takeout": 0 }, "transport": { "fuel": 0, "carInsurance": 0, "carRepair": 0, "carTest": 0, "parking": 0, "carLease": 0, "publicTransport": 0, "taxi": 0, "uber": 0 }, "communication": { "mobile": 0, "homeInternet": 0, "streaming": 0, "music": 0, "software": 0 }, "health": { "healthIns": 0, "suppIns": 0, "medications": 0, "dentist": 0, "glasses": 0, "gym": 0 }, "leisure": { "restLeisure": 0, "bars": 0, "cinema": 0, "hobbies": 0, "gaming": 0, "sports": 0, "vacation": 0 }, "clothing": { "clothes": 0, "haircut": 0, "cosmetics": 0, "accessories": 0 }, "education": { "tuition": 0, "eduBooks": 0, "conferences": 0, "workshops": 0 }, "culture": { "entertainment": 0, "sportsGym": 0, "cultHobbies": 0, "press": 0, "presents": 0 }, "pets": { "vet": 0, "petCare": 0 }, "finance": { "bankFees": 0, "creditFees": 0, "donations": 0, "taxes": 0 }, "misc": { "bdayGifts": 0, "charity": 0, "unplanned": 0 } },
-    "6":  { "income": { "salary": 0, "freelance": 0, "taxReturn": 0, "investments": 0, "gifts": 0, "other": 0 }, "housing": { "rent": 0, "hoa": 0, "arnona": 0, "electricity": 0, "water": 0, "gas": 0, "internetTv": 0, "phone": 0, "maintenance": 0 }, "food": { "supermarket": 0, "vegetables": 0, "meat": 0, "cleaning": 0, "hygiene": 0, "bread": 0, "restaurants": 0, "coffee": 0, "takeout": 0 }, "transport": { "fuel": 0, "carInsurance": 0, "carRepair": 0, "carTest": 0, "parking": 0, "carLease": 0, "publicTransport": 0, "taxi": 0, "uber": 0 }, "communication": { "mobile": 0, "homeInternet": 0, "streaming": 0, "music": 0, "software": 0 }, "health": { "healthIns": 0, "suppIns": 0, "medications": 0, "dentist": 0, "glasses": 0, "gym": 0 }, "leisure": { "restLeisure": 0, "bars": 0, "cinema": 0, "hobbies": 0, "gaming": 0, "sports": 0, "vacation": 0 }, "clothing": { "clothes": 0, "haircut": 0, "cosmetics": 0, "accessories": 0 }, "education": { "tuition": 0, "eduBooks": 0, "conferences": 0, "workshops": 0 }, "culture": { "entertainment": 0, "sportsGym": 0, "cultHobbies": 0, "press": 0, "presents": 0 }, "pets": { "vet": 0, "petCare": 0 }, "finance": { "bankFees": 0, "creditFees": 0, "donations": 0, "taxes": 0 }, "misc": { "bdayGifts": 0, "charity": 0, "unplanned": 0 } },
-    "7":  { "income": { "salary": 0, "freelance": 0, "taxReturn": 0, "investments": 0, "gifts": 0, "other": 0 }, "housing": { "rent": 0, "hoa": 0, "arnona": 0, "electricity": 0, "water": 0, "gas": 0, "internetTv": 0, "phone": 0, "maintenance": 0 }, "food": { "supermarket": 0, "vegetables": 0, "meat": 0, "cleaning": 0, "hygiene": 0, "bread": 0, "restaurants": 0, "coffee": 0, "takeout": 0 }, "transport": { "fuel": 0, "carInsurance": 0, "carRepair": 0, "carTest": 0, "parking": 0, "carLease": 0, "publicTransport": 0, "taxi": 0, "uber": 0 }, "communication": { "mobile": 0, "homeInternet": 0, "streaming": 0, "music": 0, "software": 0 }, "health": { "healthIns": 0, "suppIns": 0, "medications": 0, "dentist": 0, "glasses": 0, "gym": 0 }, "leisure": { "restLeisure": 0, "bars": 0, "cinema": 0, "hobbies": 0, "gaming": 0, "sports": 0, "vacation": 0 }, "clothing": { "clothes": 0, "haircut": 0, "cosmetics": 0, "accessories": 0 }, "education": { "tuition": 0, "eduBooks": 0, "conferences": 0, "workshops": 0 }, "culture": { "entertainment": 0, "sportsGym": 0, "cultHobbies": 0, "press": 0, "presents": 0 }, "pets": { "vet": 0, "petCare": 0 }, "finance": { "bankFees": 0, "creditFees": 0, "donations": 0, "taxes": 0 }, "misc": { "bdayGifts": 0, "charity": 0, "unplanned": 0 } },
-    "8":  { "income": { "salary": 0, "freelance": 0, "taxReturn": 0, "investments": 0, "gifts": 0, "other": 0 }, "housing": { "rent": 0, "hoa": 0, "arnona": 0, "electricity": 0, "water": 0, "gas": 0, "internetTv": 0, "phone": 0, "maintenance": 0 }, "food": { "supermarket": 0, "vegetables": 0, "meat": 0, "cleaning": 0, "hygiene": 0, "bread": 0, "restaurants": 0, "coffee": 0, "takeout": 0 }, "transport": { "fuel": 0, "carInsurance": 0, "carRepair": 0, "carTest": 0, "parking": 0, "carLease": 0, "publicTransport": 0, "taxi": 0, "uber": 0 }, "communication": { "mobile": 0, "homeInternet": 0, "streaming": 0, "music": 0, "software": 0 }, "health": { "healthIns": 0, "suppIns": 0, "medications": 0, "dentist": 0, "glasses": 0, "gym": 0 }, "leisure": { "restLeisure": 0, "bars": 0, "cinema": 0, "hobbies": 0, "gaming": 0, "sports": 0, "vacation": 0 }, "clothing": { "clothes": 0, "haircut": 0, "cosmetics": 0, "accessories": 0 }, "education": { "tuition": 0, "eduBooks": 0, "conferences": 0, "workshops": 0 }, "culture": { "entertainment": 0, "sportsGym": 0, "cultHobbies": 0, "press": 0, "presents": 0 }, "pets": { "vet": 0, "petCare": 0 }, "finance": { "bankFees": 0, "creditFees": 0, "donations": 0, "taxes": 0 }, "misc": { "bdayGifts": 0, "charity": 0, "unplanned": 0 } },
-    "9":  { "income": { "salary": 0, "freelance": 0, "taxReturn": 0, "investments": 0, "gifts": 0, "other": 0 }, "housing": { "rent": 0, "hoa": 0, "arnona": 0, "electricity": 0, "water": 0, "gas": 0, "internetTv": 0, "phone": 0, "maintenance": 0 }, "food": { "supermarket": 0, "vegetables": 0, "meat": 0, "cleaning": 0, "hygiene": 0, "bread": 0, "restaurants": 0, "coffee": 0, "takeout": 0 }, "transport": { "fuel": 0, "carInsurance": 0, "carRepair": 0, "carTest": 0, "parking": 0, "carLease": 0, "publicTransport": 0, "taxi": 0, "uber": 0 }, "communication": { "mobile": 0, "homeInternet": 0, "streaming": 0, "music": 0, "software": 0 }, "health": { "healthIns": 0, "suppIns": 0, "medications": 0, "dentist": 0, "glasses": 0, "gym": 0 }, "leisure": { "restLeisure": 0, "bars": 0, "cinema": 0, "hobbies": 0, "gaming": 0, "sports": 0, "vacation": 0 }, "clothing": { "clothes": 0, "haircut": 0, "cosmetics": 0, "accessories": 0 }, "education": { "tuition": 0, "eduBooks": 0, "conferences": 0, "workshops": 0 }, "culture": { "entertainment": 0, "sportsGym": 0, "cultHobbies": 0, "press": 0, "presents": 0 }, "pets": { "vet": 0, "petCare": 0 }, "finance": { "bankFees": 0, "creditFees": 0, "donations": 0, "taxes": 0 }, "misc": { "bdayGifts": 0, "charity": 0, "unplanned": 0 } },
-    "10": { "income": { "salary": 0, "freelance": 0, "taxReturn": 0, "investments": 0, "gifts": 0, "other": 0 }, "housing": { "rent": 0, "hoa": 0, "arnona": 0, "electricity": 0, "water": 0, "gas": 0, "internetTv": 0, "phone": 0, "maintenance": 0 }, "food": { "supermarket": 0, "vegetables": 0, "meat": 0, "cleaning": 0, "hygiene": 0, "bread": 0, "restaurants": 0, "coffee": 0, "takeout": 0 }, "transport": { "fuel": 0, "carInsurance": 0, "carRepair": 0, "carTest": 0, "parking": 0, "carLease": 0, "publicTransport": 0, "taxi": 0, "uber": 0 }, "communication": { "mobile": 0, "homeInternet": 0, "streaming": 0, "music": 0, "software": 0 }, "health": { "healthIns": 0, "suppIns": 0, "medications": 0, "dentist": 0, "glasses": 0, "gym": 0 }, "leisure": { "restLeisure": 0, "bars": 0, "cinema": 0, "hobbies": 0, "gaming": 0, "sports": 0, "vacation": 0 }, "clothing": { "clothes": 0, "haircut": 0, "cosmetics": 0, "accessories": 0 }, "education": { "tuition": 0, "eduBooks": 0, "conferences": 0, "workshops": 0 }, "culture": { "entertainment": 0, "sportsGym": 0, "cultHobbies": 0, "press": 0, "presents": 0 }, "pets": { "vet": 0, "petCare": 0 }, "finance": { "bankFees": 0, "creditFees": 0, "donations": 0, "taxes": 0 }, "misc": { "bdayGifts": 0, "charity": 0, "unplanned": 0 } },
-    "11": { "income": { "salary": 0, "freelance": 0, "taxReturn": 0, "investments": 0, "gifts": 0, "other": 0 }, "housing": { "rent": 0, "hoa": 0, "arnona": 0, "electricity": 0, "water": 0, "gas": 0, "internetTv": 0, "phone": 0, "maintenance": 0 }, "food": { "supermarket": 0, "vegetables": 0, "meat": 0, "cleaning": 0, "hygiene": 0, "bread": 0, "restaurants": 0, "coffee": 0, "takeout": 0 }, "transport": { "fuel": 0, "carInsurance": 0, "carRepair": 0, "carTest": 0, "parking": 0, "carLease": 0, "publicTransport": 0, "taxi": 0, "uber": 0 }, "communication": { "mobile": 0, "homeInternet": 0, "streaming": 0, "music": 0, "software": 0 }, "health": { "healthIns": 0, "suppIns": 0, "medications": 0, "dentist": 0, "glasses": 0, "gym": 0 }, "leisure": { "restLeisure": 0, "bars": 0, "cinema": 0, "hobbies": 0, "gaming": 0, "sports": 0, "vacation": 0 }, "clothing": { "clothes": 0, "haircut": 0, "cosmetics": 0, "accessories": 0 }, "education": { "tuition": 0, "eduBooks": 0, "conferences": 0, "workshops": 0 }, "culture": { "entertainment": 0, "sportsGym": 0, "cultHobbies": 0, "press": 0, "presents": 0 }, "pets": { "vet": 0, "petCare": 0 }, "finance": { "bankFees": 0, "creditFees": 0, "donations": 0, "taxes": 0 }, "misc": { "bdayGifts": 0, "charity": 0, "unplanned": 0 } }
+    "0": {
+      "income": {
+        "salary": 0,
+        "freelance": 0,
+        "taxReturn": 0,
+        "investments": 0,
+        "gifts": 0,
+        "other": 0
+      },
+      "housing": {
+        "rent": 0,
+        "hoa": 0,
+        "arnona": 0,
+        "electricity": 0,
+        "water": 0,
+        "gas": 0,
+        "internetTv": 0,
+        "phone": 0,
+        "maintenance": 0
+      },
+      "food": {
+        "supermarket": 0,
+        "vegetables": 0,
+        "meat": 0,
+        "cleaning": 0,
+        "hygiene": 0,
+        "bread": 0,
+        "restaurants": 0,
+        "coffee": 0,
+        "takeout": 0
+      },
+      "transport": {
+        "fuel": 0,
+        "carInsurance": 0,
+        "carRepair": 0,
+        "carTest": 0,
+        "parking": 0,
+        "carLease": 0,
+        "publicTransport": 0,
+        "taxi": 0,
+        "uber": 0
+      },
+      "communication": {
+        "mobile": 0,
+        "homeInternet": 0,
+        "streaming": 0,
+        "music": 0,
+        "software": 0
+      },
+      "health": {
+        "healthIns": 0,
+        "suppIns": 0,
+        "medications": 0,
+        "dentist": 0,
+        "glasses": 0,
+        "gym": 0
+      },
+      "leisure": {
+        "restLeisure": 0,
+        "bars": 0,
+        "cinema": 0,
+        "hobbies": 0,
+        "gaming": 0,
+        "sports": 0,
+        "vacation": 0
+      },
+      "clothing": {
+        "clothes": 0,
+        "haircut": 0,
+        "cosmetics": 0,
+        "accessories": 0
+      },
+      "education": {
+        "tuition": 0,
+        "eduBooks": 0,
+        "conferences": 0,
+        "workshops": 0
+      },
+      "culture": {
+        "entertainment": 0,
+        "sportsGym": 0,
+        "cultHobbies": 0,
+        "press": 0,
+        "presents": 0
+      },
+      "pets": {
+        "vet": 0,
+        "petCare": 0
+      },
+      "finance": {
+        "bankFees": 0,
+        "creditFees": 0,
+        "donations": 0,
+        "taxes": 0
+      },
+      "misc": {
+        "bdayGifts": 0,
+        "charity": 0,
+        "unplanned": 0
+      }
+    },
+    "1": {
+      "income": {
+        "salary": 0,
+        "freelance": 0,
+        "taxReturn": 0,
+        "investments": 0,
+        "gifts": 0,
+        "other": 0
+      },
+      "housing": {
+        "rent": 0,
+        "hoa": 0,
+        "arnona": 0,
+        "electricity": 0,
+        "water": 0,
+        "gas": 0,
+        "internetTv": 0,
+        "phone": 0,
+        "maintenance": 0
+      },
+      "food": {
+        "supermarket": 0,
+        "vegetables": 0,
+        "meat": 0,
+        "cleaning": 0,
+        "hygiene": 0,
+        "bread": 0,
+        "restaurants": 0,
+        "coffee": 0,
+        "takeout": 0
+      },
+      "transport": {
+        "fuel": 0,
+        "carInsurance": 0,
+        "carRepair": 0,
+        "carTest": 0,
+        "parking": 0,
+        "carLease": 0,
+        "publicTransport": 0,
+        "taxi": 0,
+        "uber": 0
+      },
+      "communication": {
+        "mobile": 0,
+        "homeInternet": 0,
+        "streaming": 0,
+        "music": 0,
+        "software": 0
+      },
+      "health": {
+        "healthIns": 0,
+        "suppIns": 0,
+        "medications": 0,
+        "dentist": 0,
+        "glasses": 0,
+        "gym": 0
+      },
+      "leisure": {
+        "restLeisure": 0,
+        "bars": 0,
+        "cinema": 0,
+        "hobbies": 0,
+        "gaming": 0,
+        "sports": 0,
+        "vacation": 0
+      },
+      "clothing": {
+        "clothes": 0,
+        "haircut": 0,
+        "cosmetics": 0,
+        "accessories": 0
+      },
+      "education": {
+        "tuition": 0,
+        "eduBooks": 0,
+        "conferences": 0,
+        "workshops": 0
+      },
+      "culture": {
+        "entertainment": 0,
+        "sportsGym": 0,
+        "cultHobbies": 0,
+        "press": 0,
+        "presents": 0
+      },
+      "pets": {
+        "vet": 0,
+        "petCare": 0
+      },
+      "finance": {
+        "bankFees": 0,
+        "creditFees": 0,
+        "donations": 0,
+        "taxes": 0
+      },
+      "misc": {
+        "bdayGifts": 0,
+        "charity": 0,
+        "unplanned": 0
+      }
+    },
+    "2": {
+      "income": {
+        "salary": 0,
+        "freelance": 0,
+        "taxReturn": 0,
+        "investments": 0,
+        "gifts": 0,
+        "other": 0
+      },
+      "housing": {
+        "rent": 0,
+        "hoa": 0,
+        "arnona": 0,
+        "electricity": 0,
+        "water": 0,
+        "gas": 0,
+        "internetTv": 0,
+        "phone": 0,
+        "maintenance": 0
+      },
+      "food": {
+        "supermarket": 0,
+        "vegetables": 0,
+        "meat": 0,
+        "cleaning": 0,
+        "hygiene": 0,
+        "bread": 0,
+        "restaurants": 0,
+        "coffee": 0,
+        "takeout": 0
+      },
+      "transport": {
+        "fuel": 0,
+        "carInsurance": 0,
+        "carRepair": 0,
+        "carTest": 0,
+        "parking": 0,
+        "carLease": 0,
+        "publicTransport": 0,
+        "taxi": 0,
+        "uber": 0
+      },
+      "communication": {
+        "mobile": 0,
+        "homeInternet": 0,
+        "streaming": 0,
+        "music": 0,
+        "software": 0
+      },
+      "health": {
+        "healthIns": 0,
+        "suppIns": 0,
+        "medications": 0,
+        "dentist": 0,
+        "glasses": 0,
+        "gym": 0
+      },
+      "leisure": {
+        "restLeisure": 0,
+        "bars": 0,
+        "cinema": 0,
+        "hobbies": 0,
+        "gaming": 0,
+        "sports": 0,
+        "vacation": 0
+      },
+      "clothing": {
+        "clothes": 0,
+        "haircut": 0,
+        "cosmetics": 0,
+        "accessories": 0
+      },
+      "education": {
+        "tuition": 0,
+        "eduBooks": 0,
+        "conferences": 0,
+        "workshops": 0
+      },
+      "culture": {
+        "entertainment": 0,
+        "sportsGym": 0,
+        "cultHobbies": 0,
+        "press": 0,
+        "presents": 0
+      },
+      "pets": {
+        "vet": 0,
+        "petCare": 0
+      },
+      "finance": {
+        "bankFees": 0,
+        "creditFees": 0,
+        "donations": 0,
+        "taxes": 0
+      },
+      "misc": {
+        "bdayGifts": 0,
+        "charity": 0,
+        "unplanned": 0
+      }
+    },
+    "3": {
+      "income": {
+        "salary": 0,
+        "freelance": 0,
+        "taxReturn": 0,
+        "investments": 0,
+        "gifts": 0,
+        "other": 0
+      },
+      "housing": {
+        "rent": 0,
+        "hoa": 0,
+        "arnona": 0,
+        "electricity": 0,
+        "water": 0,
+        "gas": 0,
+        "internetTv": 0,
+        "phone": 0,
+        "maintenance": 0
+      },
+      "food": {
+        "supermarket": 0,
+        "vegetables": 0,
+        "meat": 0,
+        "cleaning": 0,
+        "hygiene": 0,
+        "bread": 0,
+        "restaurants": 0,
+        "coffee": 0,
+        "takeout": 0
+      },
+      "transport": {
+        "fuel": 0,
+        "carInsurance": 0,
+        "carRepair": 0,
+        "carTest": 0,
+        "parking": 0,
+        "carLease": 0,
+        "publicTransport": 0,
+        "taxi": 0,
+        "uber": 0
+      },
+      "communication": {
+        "mobile": 0,
+        "homeInternet": 0,
+        "streaming": 0,
+        "music": 0,
+        "software": 0
+      },
+      "health": {
+        "healthIns": 0,
+        "suppIns": 0,
+        "medications": 0,
+        "dentist": 0,
+        "glasses": 0,
+        "gym": 0
+      },
+      "leisure": {
+        "restLeisure": 0,
+        "bars": 0,
+        "cinema": 0,
+        "hobbies": 0,
+        "gaming": 0,
+        "sports": 0,
+        "vacation": 0
+      },
+      "clothing": {
+        "clothes": 0,
+        "haircut": 0,
+        "cosmetics": 0,
+        "accessories": 0
+      },
+      "education": {
+        "tuition": 0,
+        "eduBooks": 0,
+        "conferences": 0,
+        "workshops": 0
+      },
+      "culture": {
+        "entertainment": 0,
+        "sportsGym": 0,
+        "cultHobbies": 0,
+        "press": 0,
+        "presents": 0
+      },
+      "pets": {
+        "vet": 0,
+        "petCare": 0
+      },
+      "finance": {
+        "bankFees": 0,
+        "creditFees": 0,
+        "donations": 0,
+        "taxes": 0
+      },
+      "misc": {
+        "bdayGifts": 0,
+        "charity": 0,
+        "unplanned": 0
+      }
+    },
+    "4": {
+      "income": {
+        "salary": 0,
+        "freelance": 0,
+        "taxReturn": 0,
+        "investments": 0,
+        "gifts": 0,
+        "other": 0
+      },
+      "housing": {
+        "rent": 0,
+        "hoa": 0,
+        "arnona": 0,
+        "electricity": 0,
+        "water": 0,
+        "gas": 0,
+        "internetTv": 0,
+        "phone": 0,
+        "maintenance": 0
+      },
+      "food": {
+        "supermarket": 0,
+        "vegetables": 0,
+        "meat": 0,
+        "cleaning": 0,
+        "hygiene": 0,
+        "bread": 0,
+        "restaurants": 0,
+        "coffee": 0,
+        "takeout": 0
+      },
+      "transport": {
+        "fuel": 0,
+        "carInsurance": 0,
+        "carRepair": 0,
+        "carTest": 0,
+        "parking": 0,
+        "carLease": 0,
+        "publicTransport": 0,
+        "taxi": 0,
+        "uber": 0
+      },
+      "communication": {
+        "mobile": 0,
+        "homeInternet": 0,
+        "streaming": 0,
+        "music": 0,
+        "software": 0
+      },
+      "health": {
+        "healthIns": 0,
+        "suppIns": 0,
+        "medications": 0,
+        "dentist": 0,
+        "glasses": 0,
+        "gym": 0
+      },
+      "leisure": {
+        "restLeisure": 0,
+        "bars": 0,
+        "cinema": 0,
+        "hobbies": 0,
+        "gaming": 0,
+        "sports": 0,
+        "vacation": 0
+      },
+      "clothing": {
+        "clothes": 0,
+        "haircut": 0,
+        "cosmetics": 0,
+        "accessories": 0
+      },
+      "education": {
+        "tuition": 0,
+        "eduBooks": 0,
+        "conferences": 0,
+        "workshops": 0
+      },
+      "culture": {
+        "entertainment": 0,
+        "sportsGym": 0,
+        "cultHobbies": 0,
+        "press": 0,
+        "presents": 0
+      },
+      "pets": {
+        "vet": 0,
+        "petCare": 0
+      },
+      "finance": {
+        "bankFees": 0,
+        "creditFees": 0,
+        "donations": 0,
+        "taxes": 0
+      },
+      "misc": {
+        "bdayGifts": 0,
+        "charity": 0,
+        "unplanned": 0
+      }
+    },
+    "5": {
+      "income": {
+        "salary": 0,
+        "freelance": 0,
+        "taxReturn": 0,
+        "investments": 0,
+        "gifts": 0,
+        "other": 0
+      },
+      "housing": {
+        "rent": 0,
+        "hoa": 0,
+        "arnona": 0,
+        "electricity": 0,
+        "water": 0,
+        "gas": 0,
+        "internetTv": 0,
+        "phone": 0,
+        "maintenance": 0
+      },
+      "food": {
+        "supermarket": 0,
+        "vegetables": 0,
+        "meat": 0,
+        "cleaning": 0,
+        "hygiene": 0,
+        "bread": 0,
+        "restaurants": 0,
+        "coffee": 0,
+        "takeout": 0
+      },
+      "transport": {
+        "fuel": 0,
+        "carInsurance": 0,
+        "carRepair": 0,
+        "carTest": 0,
+        "parking": 0,
+        "carLease": 0,
+        "publicTransport": 0,
+        "taxi": 0,
+        "uber": 0
+      },
+      "communication": {
+        "mobile": 0,
+        "homeInternet": 0,
+        "streaming": 0,
+        "music": 0,
+        "software": 0
+      },
+      "health": {
+        "healthIns": 0,
+        "suppIns": 0,
+        "medications": 0,
+        "dentist": 0,
+        "glasses": 0,
+        "gym": 0
+      },
+      "leisure": {
+        "restLeisure": 0,
+        "bars": 0,
+        "cinema": 0,
+        "hobbies": 0,
+        "gaming": 0,
+        "sports": 0,
+        "vacation": 0
+      },
+      "clothing": {
+        "clothes": 0,
+        "haircut": 0,
+        "cosmetics": 0,
+        "accessories": 0
+      },
+      "education": {
+        "tuition": 0,
+        "eduBooks": 0,
+        "conferences": 0,
+        "workshops": 0
+      },
+      "culture": {
+        "entertainment": 0,
+        "sportsGym": 0,
+        "cultHobbies": 0,
+        "press": 0,
+        "presents": 0
+      },
+      "pets": {
+        "vet": 0,
+        "petCare": 0
+      },
+      "finance": {
+        "bankFees": 0,
+        "creditFees": 0,
+        "donations": 0,
+        "taxes": 0
+      },
+      "misc": {
+        "bdayGifts": 0,
+        "charity": 0,
+        "unplanned": 0
+      }
+    },
+    "6": {
+      "income": {
+        "salary": 0,
+        "freelance": 0,
+        "taxReturn": 0,
+        "investments": 0,
+        "gifts": 0,
+        "other": 0
+      },
+      "housing": {
+        "rent": 0,
+        "hoa": 0,
+        "arnona": 0,
+        "electricity": 0,
+        "water": 0,
+        "gas": 0,
+        "internetTv": 0,
+        "phone": 0,
+        "maintenance": 0
+      },
+      "food": {
+        "supermarket": 0,
+        "vegetables": 0,
+        "meat": 0,
+        "cleaning": 0,
+        "hygiene": 0,
+        "bread": 0,
+        "restaurants": 0,
+        "coffee": 0,
+        "takeout": 0
+      },
+      "transport": {
+        "fuel": 0,
+        "carInsurance": 0,
+        "carRepair": 0,
+        "carTest": 0,
+        "parking": 0,
+        "carLease": 0,
+        "publicTransport": 0,
+        "taxi": 0,
+        "uber": 0
+      },
+      "communication": {
+        "mobile": 0,
+        "homeInternet": 0,
+        "streaming": 0,
+        "music": 0,
+        "software": 0
+      },
+      "health": {
+        "healthIns": 0,
+        "suppIns": 0,
+        "medications": 0,
+        "dentist": 0,
+        "glasses": 0,
+        "gym": 0
+      },
+      "leisure": {
+        "restLeisure": 0,
+        "bars": 0,
+        "cinema": 0,
+        "hobbies": 0,
+        "gaming": 0,
+        "sports": 0,
+        "vacation": 0
+      },
+      "clothing": {
+        "clothes": 0,
+        "haircut": 0,
+        "cosmetics": 0,
+        "accessories": 0
+      },
+      "education": {
+        "tuition": 0,
+        "eduBooks": 0,
+        "conferences": 0,
+        "workshops": 0
+      },
+      "culture": {
+        "entertainment": 0,
+        "sportsGym": 0,
+        "cultHobbies": 0,
+        "press": 0,
+        "presents": 0
+      },
+      "pets": {
+        "vet": 0,
+        "petCare": 0
+      },
+      "finance": {
+        "bankFees": 0,
+        "creditFees": 0,
+        "donations": 0,
+        "taxes": 0
+      },
+      "misc": {
+        "bdayGifts": 0,
+        "charity": 0,
+        "unplanned": 0
+      }
+    },
+    "7": {
+      "income": {
+        "salary": 0,
+        "freelance": 0,
+        "taxReturn": 0,
+        "investments": 0,
+        "gifts": 0,
+        "other": 0
+      },
+      "housing": {
+        "rent": 0,
+        "hoa": 0,
+        "arnona": 0,
+        "electricity": 0,
+        "water": 0,
+        "gas": 0,
+        "internetTv": 0,
+        "phone": 0,
+        "maintenance": 0
+      },
+      "food": {
+        "supermarket": 0,
+        "vegetables": 0,
+        "meat": 0,
+        "cleaning": 0,
+        "hygiene": 0,
+        "bread": 0,
+        "restaurants": 0,
+        "coffee": 0,
+        "takeout": 0
+      },
+      "transport": {
+        "fuel": 0,
+        "carInsurance": 0,
+        "carRepair": 0,
+        "carTest": 0,
+        "parking": 0,
+        "carLease": 0,
+        "publicTransport": 0,
+        "taxi": 0,
+        "uber": 0
+      },
+      "communication": {
+        "mobile": 0,
+        "homeInternet": 0,
+        "streaming": 0,
+        "music": 0,
+        "software": 0
+      },
+      "health": {
+        "healthIns": 0,
+        "suppIns": 0,
+        "medications": 0,
+        "dentist": 0,
+        "glasses": 0,
+        "gym": 0
+      },
+      "leisure": {
+        "restLeisure": 0,
+        "bars": 0,
+        "cinema": 0,
+        "hobbies": 0,
+        "gaming": 0,
+        "sports": 0,
+        "vacation": 0
+      },
+      "clothing": {
+        "clothes": 0,
+        "haircut": 0,
+        "cosmetics": 0,
+        "accessories": 0
+      },
+      "education": {
+        "tuition": 0,
+        "eduBooks": 0,
+        "conferences": 0,
+        "workshops": 0
+      },
+      "culture": {
+        "entertainment": 0,
+        "sportsGym": 0,
+        "cultHobbies": 0,
+        "press": 0,
+        "presents": 0
+      },
+      "pets": {
+        "vet": 0,
+        "petCare": 0
+      },
+      "finance": {
+        "bankFees": 0,
+        "creditFees": 0,
+        "donations": 0,
+        "taxes": 0
+      },
+      "misc": {
+        "bdayGifts": 0,
+        "charity": 0,
+        "unplanned": 0
+      }
+    },
+    "8": {
+      "income": {
+        "salary": 0,
+        "freelance": 0,
+        "taxReturn": 0,
+        "investments": 0,
+        "gifts": 0,
+        "other": 0
+      },
+      "housing": {
+        "rent": 0,
+        "hoa": 0,
+        "arnona": 0,
+        "electricity": 0,
+        "water": 0,
+        "gas": 0,
+        "internetTv": 0,
+        "phone": 0,
+        "maintenance": 0
+      },
+      "food": {
+        "supermarket": 0,
+        "vegetables": 0,
+        "meat": 0,
+        "cleaning": 0,
+        "hygiene": 0,
+        "bread": 0,
+        "restaurants": 0,
+        "coffee": 0,
+        "takeout": 0
+      },
+      "transport": {
+        "fuel": 0,
+        "carInsurance": 0,
+        "carRepair": 0,
+        "carTest": 0,
+        "parking": 0,
+        "carLease": 0,
+        "publicTransport": 0,
+        "taxi": 0,
+        "uber": 0
+      },
+      "communication": {
+        "mobile": 0,
+        "homeInternet": 0,
+        "streaming": 0,
+        "music": 0,
+        "software": 0
+      },
+      "health": {
+        "healthIns": 0,
+        "suppIns": 0,
+        "medications": 0,
+        "dentist": 0,
+        "glasses": 0,
+        "gym": 0
+      },
+      "leisure": {
+        "restLeisure": 0,
+        "bars": 0,
+        "cinema": 0,
+        "hobbies": 0,
+        "gaming": 0,
+        "sports": 0,
+        "vacation": 0
+      },
+      "clothing": {
+        "clothes": 0,
+        "haircut": 0,
+        "cosmetics": 0,
+        "accessories": 0
+      },
+      "education": {
+        "tuition": 0,
+        "eduBooks": 0,
+        "conferences": 0,
+        "workshops": 0
+      },
+      "culture": {
+        "entertainment": 0,
+        "sportsGym": 0,
+        "cultHobbies": 0,
+        "press": 0,
+        "presents": 0
+      },
+      "pets": {
+        "vet": 0,
+        "petCare": 0
+      },
+      "finance": {
+        "bankFees": 0,
+        "creditFees": 0,
+        "donations": 0,
+        "taxes": 0
+      },
+      "misc": {
+        "bdayGifts": 0,
+        "charity": 0,
+        "unplanned": 0
+      }
+    },
+    "9": {
+      "income": {
+        "salary": 0,
+        "freelance": 0,
+        "taxReturn": 0,
+        "investments": 0,
+        "gifts": 0,
+        "other": 0
+      },
+      "housing": {
+        "rent": 0,
+        "hoa": 0,
+        "arnona": 0,
+        "electricity": 0,
+        "water": 0,
+        "gas": 0,
+        "internetTv": 0,
+        "phone": 0,
+        "maintenance": 0
+      },
+      "food": {
+        "supermarket": 0,
+        "vegetables": 0,
+        "meat": 0,
+        "cleaning": 0,
+        "hygiene": 0,
+        "bread": 0,
+        "restaurants": 0,
+        "coffee": 0,
+        "takeout": 0
+      },
+      "transport": {
+        "fuel": 0,
+        "carInsurance": 0,
+        "carRepair": 0,
+        "carTest": 0,
+        "parking": 0,
+        "carLease": 0,
+        "publicTransport": 0,
+        "taxi": 0,
+        "uber": 0
+      },
+      "communication": {
+        "mobile": 0,
+        "homeInternet": 0,
+        "streaming": 0,
+        "music": 0,
+        "software": 0
+      },
+      "health": {
+        "healthIns": 0,
+        "suppIns": 0,
+        "medications": 0,
+        "dentist": 0,
+        "glasses": 0,
+        "gym": 0
+      },
+      "leisure": {
+        "restLeisure": 0,
+        "bars": 0,
+        "cinema": 0,
+        "hobbies": 0,
+        "gaming": 0,
+        "sports": 0,
+        "vacation": 0
+      },
+      "clothing": {
+        "clothes": 0,
+        "haircut": 0,
+        "cosmetics": 0,
+        "accessories": 0
+      },
+      "education": {
+        "tuition": 0,
+        "eduBooks": 0,
+        "conferences": 0,
+        "workshops": 0
+      },
+      "culture": {
+        "entertainment": 0,
+        "sportsGym": 0,
+        "cultHobbies": 0,
+        "press": 0,
+        "presents": 0
+      },
+      "pets": {
+        "vet": 0,
+        "petCare": 0
+      },
+      "finance": {
+        "bankFees": 0,
+        "creditFees": 0,
+        "donations": 0,
+        "taxes": 0
+      },
+      "misc": {
+        "bdayGifts": 0,
+        "charity": 0,
+        "unplanned": 0
+      }
+    },
+    "10": {
+      "income": {
+        "salary": 0,
+        "freelance": 0,
+        "taxReturn": 0,
+        "investments": 0,
+        "gifts": 0,
+        "other": 0
+      },
+      "housing": {
+        "rent": 0,
+        "hoa": 0,
+        "arnona": 0,
+        "electricity": 0,
+        "water": 0,
+        "gas": 0,
+        "internetTv": 0,
+        "phone": 0,
+        "maintenance": 0
+      },
+      "food": {
+        "supermarket": 0,
+        "vegetables": 0,
+        "meat": 0,
+        "cleaning": 0,
+        "hygiene": 0,
+        "bread": 0,
+        "restaurants": 0,
+        "coffee": 0,
+        "takeout": 0
+      },
+      "transport": {
+        "fuel": 0,
+        "carInsurance": 0,
+        "carRepair": 0,
+        "carTest": 0,
+        "parking": 0,
+        "carLease": 0,
+        "publicTransport": 0,
+        "taxi": 0,
+        "uber": 0
+      },
+      "communication": {
+        "mobile": 0,
+        "homeInternet": 0,
+        "streaming": 0,
+        "music": 0,
+        "software": 0
+      },
+      "health": {
+        "healthIns": 0,
+        "suppIns": 0,
+        "medications": 0,
+        "dentist": 0,
+        "glasses": 0,
+        "gym": 0
+      },
+      "leisure": {
+        "restLeisure": 0,
+        "bars": 0,
+        "cinema": 0,
+        "hobbies": 0,
+        "gaming": 0,
+        "sports": 0,
+        "vacation": 0
+      },
+      "clothing": {
+        "clothes": 0,
+        "haircut": 0,
+        "cosmetics": 0,
+        "accessories": 0
+      },
+      "education": {
+        "tuition": 0,
+        "eduBooks": 0,
+        "conferences": 0,
+        "workshops": 0
+      },
+      "culture": {
+        "entertainment": 0,
+        "sportsGym": 0,
+        "cultHobbies": 0,
+        "press": 0,
+        "presents": 0
+      },
+      "pets": {
+        "vet": 0,
+        "petCare": 0
+      },
+      "finance": {
+        "bankFees": 0,
+        "creditFees": 0,
+        "donations": 0,
+        "taxes": 0
+      },
+      "misc": {
+        "bdayGifts": 0,
+        "charity": 0,
+        "unplanned": 0
+      }
+    },
+    "11": {
+      "income": {
+        "salary": 0,
+        "freelance": 0,
+        "taxReturn": 0,
+        "investments": 0,
+        "gifts": 0,
+        "other": 0
+      },
+      "housing": {
+        "rent": 0,
+        "hoa": 0,
+        "arnona": 0,
+        "electricity": 0,
+        "water": 0,
+        "gas": 0,
+        "internetTv": 0,
+        "phone": 0,
+        "maintenance": 0
+      },
+      "food": {
+        "supermarket": 0,
+        "vegetables": 0,
+        "meat": 0,
+        "cleaning": 0,
+        "hygiene": 0,
+        "bread": 0,
+        "restaurants": 0,
+        "coffee": 0,
+        "takeout": 0
+      },
+      "transport": {
+        "fuel": 0,
+        "carInsurance": 0,
+        "carRepair": 0,
+        "carTest": 0,
+        "parking": 0,
+        "carLease": 0,
+        "publicTransport": 0,
+        "taxi": 0,
+        "uber": 0
+      },
+      "communication": {
+        "mobile": 0,
+        "homeInternet": 0,
+        "streaming": 0,
+        "music": 0,
+        "software": 0
+      },
+      "health": {
+        "healthIns": 0,
+        "suppIns": 0,
+        "medications": 0,
+        "dentist": 0,
+        "glasses": 0,
+        "gym": 0
+      },
+      "leisure": {
+        "restLeisure": 0,
+        "bars": 0,
+        "cinema": 0,
+        "hobbies": 0,
+        "gaming": 0,
+        "sports": 0,
+        "vacation": 0
+      },
+      "clothing": {
+        "clothes": 0,
+        "haircut": 0,
+        "cosmetics": 0,
+        "accessories": 0
+      },
+      "education": {
+        "tuition": 0,
+        "eduBooks": 0,
+        "conferences": 0,
+        "workshops": 0
+      },
+      "culture": {
+        "entertainment": 0,
+        "sportsGym": 0,
+        "cultHobbies": 0,
+        "press": 0,
+        "presents": 0
+      },
+      "pets": {
+        "vet": 0,
+        "petCare": 0
+      },
+      "finance": {
+        "bankFees": 0,
+        "creditFees": 0,
+        "donations": 0,
+        "taxes": 0
+      },
+      "misc": {
+        "bdayGifts": 0,
+        "charity": 0,
+        "unplanned": 0
+      }
+    }
   }
 }
