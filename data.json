@@ -1,5 +1,5 @@
 {
-  "savingsTarget": 15,
+  "savingsTarget": 70,
   "months": {
     "0": {
       "income": {
@@ -407,7 +407,7 @@
     },
     "4": {
       "income": {
-        "salary": 1000,
+        "salary": 10000,
         "freelance": 0,
         "taxReturn": 0,
         "investments": 0,
@@ -415,7 +415,7 @@
         "other": 0
       },
       "housing": {
-        "rent": 0,
+        "rent": 5000,
         "hoa": 0,
         "arnona": 0,
         "electricity": 0,
@@ -508,7 +508,7 @@
     },
     "5": {
       "income": {
-        "salary": 100058,
+        "salary": 0,
         "freelance": 0,
         "taxReturn": 0,
         "investments": 0,
