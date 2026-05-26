@@ -1,0 +1,11 @@
+[
+  {
+    "name": "ראשי",
+    "file": "data.json"
+  },
+  {
+    "name": "אוהד",
+    "file": "data-2.json",
+    "pin": "123"
+  }
+]
