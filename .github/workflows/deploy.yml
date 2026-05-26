@@ -6,29 +6,31 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Inject access token
-        env:
-          BUDGET_PAT: ${{ secrets.BUDGET_PAT }}
-        run: |
-          if [ -n "$BUDGET_PAT" ]; then
-            ENC=$(echo -n "$BUDGET_PAT" | base64 | tr -d '\n' | rev)
-            sed -i "s|__BUDGET_TOKEN__|${ENC}|g" index.html
-            echo "✓ Token injected"
-          else
-            echo "⚠ BUDGET_PAT secret not set"
-          fi
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          exclude_assets: '.github,*.xlsx,*.tmp,desktop.ini,Thumbs.db,.DS_Store'
+          path: ./
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
