@@ -7,5 +7,10 @@
     "name": "אוהד",
     "file": "data-2.json",
     "pin": "123"
+  },
+  {
+    "name": "מאי",
+    "file": "data-3.json",
+    "pin": "123"
   }
 ]
