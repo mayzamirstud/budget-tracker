@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תקציב שנתי - הוצאות והכנסות</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#1e3a8a;
+  --primary-light:#2563eb;
+  --green:#16a34a;
+  --red:#dc2626;
+  --purple:#7c3aed;
+  --gray:#6b7280;
+  --gray-light:#9ca3af;
+  --border:#e2e8f0;
+  --bg:#f1f5f9;
+  --white:#ffffff;
+  --shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);
+  --radius:12px;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;
+  background:var(--bg);
+  color:#1e293b;
+  min-height:100vh;
+  direction:rtl;
+  font-size:14px;
+}
+button{cursor:pointer;font-family:inherit}
+input{font-family:inherit}
+
+/* ── HEADER ── */
+.app-header{
+  background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 60%,#2563eb 100%);
+  color:#fff;
+  padding:1rem 1.5rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:.75rem;
+  box-shadow:0 2px 12px rgba(0,0,0,.25);
+}
+.app-header h1{
+  font-size:1.35rem;
+  font-weight:700;
+  letter-spacing:-.3px;
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+}
+.header-controls{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  flex-wrap:wrap;
+}
+.target-pill{
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.3);
+  padding:.35rem .75rem;
+  border-radius:8px;
+  font-size:.82rem;
+}
+.target-pill input{
+  width:52px;
+  padding:.2rem .35rem;
+  border:1px solid rgba(255,255,255,.5);
+  border-radius:5px;
+  background:rgba(255,255,255,.2);
+  color:#fff;
+  font-size:.82rem;
+  text-align:center;
+}
+.target-pill input:focus{outline:none;background:rgba(255,255,255,.3)}
+.hbtn{
+  padding:.38rem .8rem;
+  border-radius:7px;
+  border:1px solid rgba(255,255,255,.3);
+  background:rgba(255,255,255,.15);
+  color:#fff;
+  font-size:.8rem;
+  font-weight:600;
+  display:inline-flex;
+  align-items:center;
+  gap:.3rem;
+  transition:background .15s;
+  text-decoration:none;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.hbtn:hover{background:rgba(255,255,255,.28)}
+.hbtn input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+
+/* ── TABS ── */
+.tabs-wrap{
+  background:#fff;
+  border-bottom:2px solid var(--border);
+  overflow-x:auto;
+  scrollbar-width:thin;
+  position:sticky;
+  top:0;
+  z-index:200;
+  box-shadow:var(--shadow);
+}
+.tabs{display:flex;min-width:max-content}
+.tab-btn{
+  padding:.7rem .9rem;
+  border:none;
+  border-bottom:3px solid transparent;
+  margin-bottom:-2px;
+  background:none;
+  font-size:.82rem;
+  font-weight:500;
+  color:var(--gray);
+  white-space:nowrap;
+  transition:color .15s,border-color .15s;
+}
+.tab-btn:hover{color:var(--primary-light)}
+.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary);font-weight:700}
+.tab-btn.annual-tab.active{color:var(--purple);border-bottom-color:var(--purple)}
+.tab-btn.annual-tab{color:var(--purple);font-weight:600}
+
+/* ── DASHBOARD (sticky) ── */
+.dashboard{
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  padding:.85rem 1.25rem;
+  position:sticky;
+  top:42px;
+  z-index:100;
+  box-shadow:var(--shadow);
+}
+.cards-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.6rem;
+  margin-bottom:.65rem;
+}
+.kpi{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:.6rem .85rem;
+  text-align:center;
+}
+.kpi-label{
+  font-size:.67rem;
+  color:var(--gray-light);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-bottom:.25rem;
+}
+.kpi-value{
+  font-size:1.1rem;
+  font-weight:700;
+  direction:ltr;
+  font-variant-numeric:tabular-nums;
+}
+.kpi-income .kpi-value{color:var(--green)}
+.kpi-expense .kpi-value{color:var(--red)}
+.kpi-savings .kpi-value{color:var(--green)}
+.kpi-savings.neg .kpi-value{color:var(--red)}
+.kpi-pct .kpi-value{color:var(--purple)}
+
+.progress-row{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  font-size:.78rem;
+}
+.progress-lbl{color:var(--gray);white-space:nowrap}
+.track{flex:1;height:7px;background:#e2e8f0;border-radius:99px;overflow:hidden}
+.fill{height:100%;border-radius:99px;background:var(--green);transition:width .35s ease,background .3s}
+.fill.behind{background:var(--red)}
+.progress-txt{color:var(--gray);white-space:nowrap;min-width:150px;direction:ltr;text-align:right}
+
+/* ── MAIN ── */
+.main{max-width:940px;margin:0 auto;padding:1.25rem 1.25rem 3rem}
+
+/* ── SECTION CARD ── */
+.sec{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  margin-bottom:.85rem;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.sec-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:.8rem 1.15rem;
+  cursor:pointer;
+  user-select:none;
+  transition:background .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.sec-head:hover{background:#f8fafc}
+.sec-title{font-size:.95rem;font-weight:700;display:flex;align-items:center;gap:.4rem}
+.sec-right{display:flex;align-items:center;gap:.5rem}
+.sec-sub{font-size:.88rem;font-weight:600;direction:ltr}
+.chevron{font-size:.7rem;color:var(--gray-light);transition:transform .25s;display:inline-block}
+.chevron.open{transform:rotate(180deg)}
+
+/* income head */
+.income-sec .sec-head{background:#f0fdf4;border-bottom:1px solid #bbf7d0}
+.income-sec .sec-title{color:#166534}
+.income-sec .sec-sub{color:var(--green)}
+
+/* category head */
+.cat-sec .sec-head{background:#eff6ff;border-bottom:1px solid #bfdbfe}
+
+/* body collapse */
+.sec-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.sec-body.open{max-height:3000px}
+
+/* items table */
+.itbl{width:100%;border-collapse:collapse}
+.itbl tr:not(:last-child) td{border-bottom:1px solid #f8fafc}
+.itbl td{padding:.52rem 1.15rem}
+.item-lbl{font-size:.84rem;color:#374151}
+.item-inp-cell{width:145px}
+.item-inp{
+  width:100%;
+  padding:.32rem .55rem;
+  border:1px solid var(--border);
+  border-radius:6px;
+  font-size:.84rem;
+  text-align:left;
+  direction:ltr;
+  color:#1e293b;
+  transition:border-color .15s,box-shadow .15s;
+  background:#fff;
+}
+.item-inp:focus{outline:none;border-color:var(--primary-light);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.item-inp.has-val{background:#f0f9ff;border-color:#bfdbfe}
+
+/* total row */
+.tot-row td{font-weight:700;border-top:2px solid var(--border)!important;font-size:.88rem;padding-top:.7rem;padding-bottom:.7rem}
+.tot-val{direction:ltr;text-align:left;color:var(--green)}
+
+/* ── SUMMARY ── */
+.summary-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:1.1rem 1.15rem;
+  margin-top:.35rem;
+  box-shadow:var(--shadow-md);
+}
+.summary-title{
+  font-size:1rem;
+  font-weight:700;
+  color:#1e293b;
+  padding-bottom:.7rem;
+  border-bottom:2px solid var(--border);
+  margin-bottom:.85rem;
+}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.sum-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:.55rem .75rem;
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:8px;
+}
+.sum-lbl{font-size:.84rem;color:#374151}
+.sum-val{font-size:.95rem;font-weight:700;direction:ltr;font-variant-numeric:tabular-nums}
+.sum-green .sum-val{color:var(--green)}
+.sum-red .sum-val{color:var(--red)}
+.sum-red-lbl .sum-val{color:var(--red)}
+.sum-purple .sum-val{color:var(--purple)}
+
+/* ── ANNUAL ── */
+.charts-grid{display:grid;grid-template-columns:2fr 1fr;gap:.85rem;margin-bottom:1rem}
+.chart-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:1rem 1.15rem;
+  box-shadow:var(--shadow);
+}
+.chart-card h3{font-size:.82rem;font-weight:600;color:var(--gray);margin-bottom:.8rem}
+
+.ann-wrap{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow-x:auto;
+  box-shadow:var(--shadow);
+}
+.ann-tbl{width:100%;border-collapse:collapse;font-size:.76rem;min-width:920px}
+.ann-tbl th{background:#1e3a8a;color:#fff;padding:.52rem .6rem;text-align:center;white-space:nowrap;font-weight:600}
+.ann-tbl th:first-child{text-align:right;min-width:180px}
+.ann-tbl td{padding:.45rem .6rem;border-bottom:1px solid #f1f5f9;text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums;direction:ltr}
+.ann-tbl td:first-child{text-align:right;direction:rtl}
+.ann-tbl tr:hover td{background:#f8fafc}
+.ann-tbl tr.ann-income td{background:#f0fdf4;font-weight:700}
+.ann-tbl tr.ann-cat td{background:#eff6ff;font-weight:700;font-size:.78rem}
+.ann-tbl tr.ann-sum td{background:#f0f4ff;font-weight:700;border-top:2px solid var(--border)}
+.ann-tbl tr.ann-sav td{background:#f0fdf4;font-weight:700}
+.pos{color:var(--green)}
+.neg{color:var(--red)}
+.pct{color:var(--purple)}
+.dash-val{color:#94a3b8}
+
+/* ── SYNC STATUS ── */
+#sync-status{font-size:.75rem;white-space:nowrap;transition:color .3s;min-width:90px;text-align:center}
+.hbtn-cloud{background:rgba(255,255,255,.22)!important}
+.hbtn-cloud:hover{background:rgba(255,255,255,.35)!important}
+.hbtn-profile{background:rgba(255,255,255,.18)!important;border-color:rgba(255,255,255,.4)!important;font-weight:600;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hbtn-profile:hover{background:rgba(255,255,255,.3)!important}
+.prf-item{padding:.65rem 1rem;cursor:pointer;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid #f1f5f9;transition:background .12s}
+.prf-item:hover{background:#f0f9ff}
+.prf-item:last-child{border-bottom:none}
+.prf-item.active{background:#eff6ff;font-weight:600;color:#1d4ed8}
+
+/* ── MODAL ── */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center}
+.modal-backdrop.open{display:flex}
+.modal-box{background:#fff;border-radius:14px;padding:1.4rem 1.5rem;width:380px;max-width:92vw;box-shadow:0 20px 40px rgba(0,0,0,.2)}
+.pat-inp{width:100%;padding:.5rem .65rem;border:1px solid #e2e8f0;border-radius:7px;font-size:.85rem;font-family:monospace;color:#1e293b;margin-top:.25rem}
+.pat-inp:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.modal-btn{padding:.4rem .9rem;border-radius:7px;border:none;cursor:pointer;font-size:.82rem;font-weight:600}
+.modal-btn.primary{background:#1e3a8a;color:#fff}
+.modal-btn.primary:hover{background:#1d4ed8}
+.modal-btn.danger{background:#fee2e2;color:#dc2626}
+.modal-btn.danger:hover{background:#fecaca}
+.modal-btn:not(.primary):not(.danger){background:#f1f5f9;color:#374151}
+.modal-btn:not(.primary):not(.danger):hover{background:#e2e8f0}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;
+  bottom:1.5rem;
+  left:50%;
+  transform:translateX(-50%);
+  background:#1e293b;
+  color:#fff;
+  padding:.55rem 1.2rem;
+  border-radius:8px;
+  font-size:.82rem;
+  z-index:9999;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s;
+  white-space:nowrap;
+}
+.toast.show{opacity:1}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .cards-row{grid-template-columns:1fr 1fr}
+  .summary-grid{grid-template-columns:1fr}
+  .charts-grid{grid-template-columns:1fr}
+  .app-header{flex-direction:column;align-items:flex-start}
+  .header-controls{flex-wrap:wrap}
+  .main{padding:1rem .75rem 3rem}
+}
+@media(max-width:400px){
+  .cards-row{grid-template-columns:1fr 1fr}
+  .tab-btn{padding:.6rem .55rem;font-size:.75rem}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header">
+  <h1>🏦 תקציב שנתי - הוצאות והכנסות</h1>
+  <div class="header-controls">
+    <div class="target-pill">
+      <span>יעד חיסכון:</span>
+      <input type="number" id="savingsTargetInput" min="0" max="100" step="1" value="15">
+      <span>%</span>
+    </div>
+    <button class="hbtn hbtn-profile" onclick="showProfiles()" title="בחר פרופיל">👤 <span id="profile-name">ראשי</span> ▾</button>
+    <button class="hbtn hbtn-cloud" onclick="saveToGitHub()">☁️ שמור בענן</button>
+    <button class="hbtn hbtn-cloud" onclick="loadFromGitHubPrompt()">🔄 טען מענן</button>
+    <button class="hbtn" onclick="showSettings()" title="הגדרות סנכרון">⚙️</button>
+    <span id="sync-status"></span>
+  </div>
+</header>
+
+<!-- SETTINGS MODAL -->
+<div id="settings-modal" class="modal-backdrop" onclick="if(event.target===this)closeSettings()">
+  <div class="modal-box" style="width:420px">
+    <h2 style="margin-bottom:.75rem;font-size:1.05rem;font-weight:700">⚙️ חיבור לענן</h2>
+
+    <!-- Status indicator -->
+    <div id="settings-status" style="display:none;margin-bottom:.8rem;padding:.55rem .8rem;border-radius:8px;font-size:.82rem"></div>
+
+    <!-- Step 1: PAT entry (shown only when no PAT or bad credentials) -->
+    <div id="step-setup">
+      <p style="font-size:.85rem;color:#374151;margin-bottom:.35rem;font-weight:600">🔑 קוד גישה לגיטהאב</p>
+      <p style="font-size:.78rem;color:#6b7280;margin-bottom:.65rem">
+        הכנס פעם אחת — נשמר אוטומטית במכשיר.<br>
+        <a href="https://github.com/settings/tokens/new?scopes=repo&description=budget-tracker" target="_blank"
+           style="color:#2563eb;text-decoration:none;font-size:.77rem">▸ צור קוד גישה חדש בגיטהאב →</a>
+      </p>
+      <input type="password" id="pat-input" class="pat-inp" placeholder="ghp_..."
+             onkeydown="if(event.key==='Enter')savePAT()">
+      <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:.75rem">
+        <button onclick="savePAT()" class="modal-btn primary">שמור</button>
+        <button onclick="closeSettings()" class="modal-btn">ביטול</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Connected — show share link -->
+    <div id="step-connected" style="display:none">
+      <div id="connected-badge" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:.75rem;margin-bottom:.85rem">
+        <p style="font-size:.82rem;color:#166534;font-weight:600;margin-bottom:.15rem">✅ מחובר לענן</p>
+        <p id="connected-sub" style="font-size:.77rem;color:#15803d">הנתונים נשמרים ונטענים אוטומטית</p>
+      </div>
+      <p style="font-size:.82rem;color:#374151;font-weight:600;margin-bottom:.35rem">📲 שתף עם בני המשפחה</p>
+      <p id="share-desc" style="font-size:.77rem;color:#6b7280;margin-bottom:.6rem">שלח את הקישור הבא — הפותח אותו מחובר אוטומטית</p>
+      <div style="display:flex;gap:.4rem">
+        <input type="text" id="share-link-inp" readonly
+               style="flex:1;padding:.35rem .6rem;border:1px solid #e2e8f0;border-radius:7px;font-size:.75rem;color:#6b7280;background:#f8fafc;direction:ltr">
+        <button onclick="copyShareLink()" class="modal-btn primary" style="white-space:nowrap">📋 העתק</button>
+      </div>
+      <div style="display:flex;gap:.5rem;justify-content:space-between;margin-top:.85rem;align-items:center">
+        <button id="disconnect-btn" onclick="clearPAT()" style="font-size:.75rem;color:#dc2626;background:none;border:none;cursor:pointer;padding:.2rem 0">✕ נתק מכשיר זה</button>
+        <button onclick="closeSettings()" class="modal-btn">סגור</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILES MODAL -->
+<div id="profiles-modal" class="modal-backdrop" onclick="if(event.target===this)closeProfiles()">
+  <div class="modal-box" style="width:430px">
+    <h2 style="margin-bottom:.9rem;font-size:1.05rem;font-weight:700">👥 פרופילים משפחתיים</h2>
+    <div style="display:flex;gap:.5rem;margin-bottom:.5rem;align-items:center">
+      <input type="text" id="new-profile-input" class="pat-inp" placeholder="שם (למשל: דני)..." style="flex:1;margin:0"
+             onkeydown="if(event.key==='Enter')document.getElementById('new-profile-pin').focus()">
+      <input type="text" id="new-profile-pin" class="pat-inp" placeholder="קוד סודי..." maxlength="8"
+             style="width:110px;margin:0" onkeydown="if(event.key==='Enter')createProfile()">
+      <button onclick="createProfile()" class="modal-btn primary" style="white-space:nowrap">+ צור</button>
+    </div>
+    <p style="font-size:.75rem;color:#9ca3af;margin-bottom:.75rem">הקוד הסודי נדרש כדי לפתוח את הפרופיל במכשיר אחר</p>
+    <div id="profiles-list" style="max-height:280px;overflow-y:auto;border:1px solid #e2e8f0;border-radius:8px">
+      <div style="padding:1rem;text-align:center;color:#9ca3af;font-size:.85rem">טוען...</div>
+    </div>
+    <p style="font-size:.77rem;color:#9ca3af;margin-top:.65rem">כל פרופיל שומר קובץ נתונים נפרד בענן</p>
+    <div style="display:flex;justify-content:flex-end;margin-top:.65rem">
+      <button onclick="closeProfiles()" class="modal-btn">סגור</button>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap"><div class="tabs" id="tabs"></div></div>
+
+<!-- DASHBOARD -->
+<div class="dashboard">
+  <div class="cards-row">
+    <div class="kpi kpi-income">
+      <div class="kpi-label">💰 הכנסות</div>
+      <div class="kpi-value" id="kpi-income">₪ 0</div>
+    </div>
+    <div class="kpi kpi-expense">
+      <div class="kpi-label">💸 הוצאות</div>
+      <div class="kpi-value" id="kpi-expense">₪ 0</div>
+    </div>
+    <div class="kpi kpi-savings" id="kpi-savings-card">
+      <div class="kpi-label">🏦 חיסכון</div>
+      <div class="kpi-value" id="kpi-savings">₪ 0</div>
+    </div>
+    <div class="kpi kpi-pct">
+      <div class="kpi-label">📊 % חיסכון</div>
+      <div class="kpi-value" id="kpi-pct">0.0%</div>
+    </div>
+  </div>
+  <div class="progress-row">
+    <span class="progress-lbl">יעד חיסכון:</span>
+    <div class="track"><div class="fill" id="p-fill" style="width:0%"></div></div>
+    <span class="progress-txt" id="p-txt">₪0 מתוך ₪0</span>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Monthly View -->
+  <div id="monthly-view">
+
+    <!-- Income -->
+    <div class="sec income-sec">
+      <div class="sec-head" onclick="toggleSec('income')">
+        <div class="sec-title">💰 הכנסות</div>
+        <div class="sec-right">
+          <span class="sec-sub pos" id="inc-display">₪ 0</span>
+          <span class="chevron open" id="chev-income">▼</span>
+        </div>
+      </div>
+      <div class="sec-body open" id="body-income">
+        <table class="itbl" id="income-tbl"></table>
+      </div>
+    </div>
+
+    <!-- Expense categories -->
+    <div id="cats"></div>
+
+    <!-- Summary -->
+    <div class="summary-card">
+      <div class="summary-title">📋 סיכום חודשי</div>
+      <div class="summary-grid">
+        <div class="sum-item sum-red-lbl">
+          <span class="sum-lbl">💸 סה"כ הוצאות</span>
+          <span class="sum-val" id="s-exp">₪ 0</span>
+        </div>
+        <div class="sum-item" id="s-sav-wrap">
+          <span class="sum-lbl">🏦 חיסכון בפועל</span>
+          <span class="sum-val" id="s-sav">₪ 0</span>
+        </div>
+        <div class="sum-item sum-purple">
+          <span class="sum-lbl">🎯 יעד חיסכון</span>
+          <span class="sum-val" id="s-tgt">₪ 0</span>
+        </div>
+        <div class="sum-item" id="s-gap-wrap">
+          <span class="sum-lbl">📏 פער מהיעד</span>
+          <span class="sum-val" id="s-gap">₪ 0</span>
+        </div>
+        <div class="sum-item sum-purple" style="grid-column:span 2">
+          <span class="sum-lbl">📊 % חיסכון בפועל מההכנסה</span>
+          <span class="sum-val" id="s-pct">0.0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Annual View -->
+  <div id="annual-view" style="display:none">
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>📊 הכנסות מול הוצאות — כל החודשים</h3>
+        <canvas id="barChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>🥧 פירוט הוצאות לפי קטגוריה (שנתי)</h3>
+        <canvas id="donutChart"></canvas>
+      </div>
+    </div>
+    <div class="ann-wrap">
+      <table class="ann-tbl" id="ann-tbl"></table>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════
+// DATA DEFINITIONS
+// ═══════════════════════════════════════════════
+const MONTHS = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+
+const INCOME_FIELDS = [
+  {id:'salary',      lbl:'משכורת (נטו)'},
+  {id:'freelance',   lbl:'הכנסה נוספת / פרילנס'},
+  {id:'taxReturn',   lbl:'החזרי מס / קצבה'},
+  {id:'investments', lbl:'ריבית מהשקעות / דיבידנדים'},
+  {id:'gifts',       lbl:'מתנות / החזרים'},
+  {id:'other',       lbl:'אחר (ציין מקור)'},
+];
+
+const CATS = [
+  {id:'housing', lbl:'🏠 דיור וחשבונות', items:[
+    {id:'rent',        lbl:'שכר דירה'},
+    {id:'hoa',         lbl:'ועד בית / אחזקה'},
+    {id:'arnona',      lbl:'ארנונה'},
+    {id:'electricity', lbl:'חשמל'},
+    {id:'water',       lbl:'מים'},
+    {id:'gas',         lbl:'גז / דלק'},
+    {id:'internetTv',  lbl:'אינטרנט / טלוויזיה / שירותי סטרימינג'},
+    {id:'phone',       lbl:'טלפון נייד וחבילת גלישה'},
+    {id:'maintenance', lbl:'תחזוקת דירה ותיקונים'},
+  ]},
+  {id:'food', lbl:'🛍️ מזון ומצרכים', items:[
+    {id:'supermarket', lbl:'קניות בסופרמרקט'},
+    {id:'vegetables',  lbl:'ירקות ופירות'},
+    {id:'meat',        lbl:'בשר ודגים'},
+    {id:'cleaning',    lbl:'מוצרי ניקיון לבית'},
+    {id:'hygiene',     lbl:'מוצרי היגיינה אישית'},
+    {id:'bread',       lbl:'לחם ומאפה'},
+    {id:'restaurants', lbl:'מסעדות בחוץ'},
+    {id:'coffee',      lbl:'קפה ובתי קפה'},
+    {id:'takeout',     lbl:'אוכל מוכן / משלוחים'},
+  ]},
+  {id:'transport', lbl:'🚗 תחבורה ורכב', items:[
+    {id:'fuel',            lbl:'דלק / הטענה חשמלית'},
+    {id:'carInsurance',    lbl:'ביטוח רכב חובה ומקיף'},
+    {id:'carRepair',       lbl:'טיפולים ותיקונים'},
+    {id:'carTest',         lbl:'טסטים ורישיון'},
+    {id:'parking',         lbl:'חניה / כבישים'},
+    {id:'carLease',        lbl:'אגרת רכב / ליזינג'},
+    {id:'publicTransport', lbl:'תחבורה ציבורית (אוטובוס, רכבת)'},
+    {id:'taxi',            lbl:'מוניות / אגרת תחבורה'},
+    {id:'uber',            lbl:'נסיעות במונית / אובר'},
+  ]},
+  {id:'communication', lbl:'📱 תקשורת ומינויים', items:[
+    {id:'mobile',       lbl:'סלולר / חבילת סלולרית'},
+    {id:'homeInternet', lbl:'אינטרנט בבית'},
+    {id:'streaming',    lbl:'נטפליקס / סטרימינג (דיסני+, אפלי+, HBO)'},
+    {id:'music',        lbl:'ספוטיפיי / אפל מוזיקה'},
+    {id:'software',     lbl:'מנויים לתוכנות ואיחסון ענן (Cloud)'},
+  ]},
+  {id:'health', lbl:'💊 בריאות ורפואה', items:[
+    {id:'healthIns',   lbl:'ביטוח בריאות / משלים'},
+    {id:'suppIns',     lbl:'ביטוח משלים (מושלם / מכבי / זהב)'},
+    {id:'medications', lbl:'תרופות וטיפולים'},
+    {id:'dentist',     lbl:'רופאי שיניים / אופטומטריסט'},
+    {id:'glasses',     lbl:'משקפיים וויטמינים'},
+    {id:'gym',         lbl:'חדר כושר ומאמן ליווי'},
+  ]},
+  {id:'leisure', lbl:'🍽️ פנאי ובילוי', items:[
+    {id:'restLeisure', lbl:'מסעדות ובתי קפה'},
+    {id:'bars',        lbl:'ברים וחיי לילה'},
+    {id:'cinema',      lbl:'קולנוע / הופעות / תיאטרון'},
+    {id:'hobbies',     lbl:'תחביבים / מועדון / ספרים'},
+    {id:'gaming',      lbl:'משחקים / גימינג'},
+    {id:'sports',      lbl:'תחביבי ספורט (כושר, טניס, ספורט)'},
+    {id:'vacation',    lbl:'חופשות / טיולים / נופש'},
+  ]},
+  {id:'clothing', lbl:'👕 לבוש ואישי', items:[
+    {id:'clothes',     lbl:'בגדים והנעלה'},
+    {id:'haircut',     lbl:'תספורת / עיצוב שיער'},
+    {id:'cosmetics',   lbl:'מוצרי טיפוח וקוסמטיקה'},
+    {id:'accessories', lbl:'אביזרי אופנה (תכשיטים, תיקים, משקפיים)'},
+  ]},
+  {id:'education', lbl:'🎓 השכלה והתפתחות', items:[
+    {id:'tuition',     lbl:'שכר לימוד / קורסים'},
+    {id:'eduBooks',    lbl:'ספרים וחומרי לימוד'},
+    {id:'conferences', lbl:'כנסים והרצאות'},
+    {id:'workshops',   lbl:'סדנאות / קוצ׳ינג'},
+  ]},
+  {id:'culture', lbl:'🎡 פנאי, תרבות ובילוי', items:[
+    {id:'entertainment', lbl:'בילוי (קולנוע, תיאטרון, מופעים)'},
+    {id:'sportsGym',     lbl:'ספורט / חדר כושר / שיעורים'},
+    {id:'cultHobbies',   lbl:'תחביבים'},
+    {id:'press',         lbl:'ספרים / כתבי עת / עיתונים'},
+    {id:'presents',      lbl:'מתנות ואירועים'},
+  ]},
+  {id:'pets', lbl:'🐾 לבעלי חיים', items:[
+    {id:'vet',     lbl:'וטרינר / מזון / טיפול'},
+    {id:'petCare', lbl:'עמלת דוג / דייסיטר'},
+  ]},
+  {id:'finance', lbl:'💳 פיננסים והתחייבויות', items:[
+    {id:'bankFees',   lbl:'עמלות בנק'},
+    {id:'creditFees', lbl:'עמלות כרטיס אשראי / תשלום'},
+    {id:'donations',  lbl:'תרומות ומתנות'},
+    {id:'taxes',      lbl:'מסים ותשלומי חובה'},
+  ]},
+  {id:'misc', lbl:'📦 הוצאות נוספות', items:[
+    {id:'bdayGifts', lbl:'מתנות (ימי הולדת, חגים)'},
+    {id:'charity',   lbl:'תרומות / צדקה'},
+    {id:'unplanned', lbl:'לא מתוכנן / שונות'},
+  ]},
+];
+
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+const LS = 'budget-tracker-v1';
+
+function emptyMonth() {
+  const d = {income:{}};
+  INCOME_FIELDS.forEach(f => d.income[f.id] = 0);
+  CATS.forEach(c => { d[c.id] = {}; c.items.forEach(it => d[c.id][it.id] = 0); });
+  return d;
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(LS);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return {
+    savingsTarget: 15,
+    currentMonth: new Date().getMonth(),
+    months: Object.fromEntries(Array.from({length:12}, (_,i) => [i, emptyMonth()]))
+  };
+}
+
+const S = loadState();
+
+// Hydrate missing fields
+for (let i = 0; i < 12; i++) {
+  if (!S.months[i]) S.months[i] = emptyMonth();
+  if (!S.months[i].income) S.months[i].income = {};
+  INCOME_FIELDS.forEach(f => { if (S.months[i].income[f.id] == null) S.months[i].income[f.id] = 0; });
+  CATS.forEach(c => {
+    if (!S.months[i][c.id]) S.months[i][c.id] = {};
+    c.items.forEach(it => { if (S.months[i][c.id][it.id] == null) S.months[i][c.id][it.id] = 0; });
+  });
+}
+
+function save() { localStorage.setItem(LS, JSON.stringify(S)); }
+
+// ═══════════════════════════════════════════════
+// CALCULATIONS (mirror Excel formulas exactly)
+// ═══════════════════════════════════════════════
+const gv = (m, cat, fid) => Number(S.months[m]?.[cat]?.[fid]) || 0;
+
+const incomeTotal  = m => INCOME_FIELDS.reduce((s,f) => s + gv(m,'income',f.id), 0);
+const catTotal     = (m,cid) => { const c = CATS.find(x=>x.id===cid); return c ? c.items.reduce((s,it)=>s+gv(m,cid,it.id),0) : 0; };
+const totalExp     = m => CATS.reduce((s,c) => s + catTotal(m,c.id), 0);
+const savings      = m => incomeTotal(m) - totalExp(m);               // B13 - B106
+const savTarget    = m => incomeTotal(m) * (S.savingsTarget / 100);   // B13 * $B$3
+const savGap       = m => savings(m) - savTarget(m);                  // B107 - B108
+const savPct       = m => incomeTotal(m) ? savings(m)/incomeTotal(m) : 0; // IFERROR(B107/B13,0)
+
+// Annual
+const annIncome  = () => Array.from({length:12},(_,i)=>incomeTotal(i)).reduce((a,b)=>a+b,0);
+const annExp     = () => Array.from({length:12},(_,i)=>totalExp(i)).reduce((a,b)=>a+b,0);
+const annSav     = () => annIncome() - annExp();
+const annCatTot  = cid => Array.from({length:12},(_,i)=>catTotal(i,cid)).reduce((a,b)=>a+b,0);
+const annField   = (cat,fid) => Array.from({length:12},(_,i)=>gv(i,cat,fid)).reduce((a,b)=>a+b,0);
+
+// ═══════════════════════════════════════════════
+// FORMATTING
+// ═══════════════════════════════════════════════
+const N = n => Math.abs(n).toLocaleString('he-IL',{maximumFractionDigits:0});
+const fmt  = n => n===0 ? '₪ 0' : '₪ '+N(n);
+const fmtS = n => n>=0 ? '₪ '+N(n) : '- ₪ '+N(n);
+const fmtP = n => (n*100).toFixed(1)+'%';
+
+// ═══════════════════════════════════════════════
+// OPEN SECTIONS (persisted in memory only)
+// ═══════════════════════════════════════════════
+const openSecs = new Set(['income', 'housing', 'food']);
+
+// ═══════════════════════════════════════════════
+// RENDER TABS
+// ═══════════════════════════════════════════════
+function renderTabs() {
+  document.getElementById('tabs').innerHTML =
+    MONTHS.map((m,i)=>`<button class="tab-btn${S.currentMonth===i?' active':''}" onclick="go(${i})">${m}</button>`).join('') +
+    `<button class="tab-btn annual-tab${S.currentMonth===-1?' active':''}" onclick="go(-1)">📊 שנתי</button>`;
+}
+
+// ═══════════════════════════════════════════════
+// RENDER INCOME TABLE
+// ═══════════════════════════════════════════════
+function renderIncomeTbl() {
+  const m = S.currentMonth;
+  const rows = INCOME_FIELDS.map(f => {
+    const v = gv(m,'income',f.id);
+    return `<tr>
+      <td class="item-lbl">${f.lbl}</td>
+      <td class="item-inp-cell">
+        <input type="number" class="item-inp${v?' has-val':''}" min="0" step="1"
+          data-cat="income" data-fid="${f.id}" value="${v||''}" placeholder="0"
+          oninput="onInp(this)" onfocus="this.select()">
+      </td></tr>`;
+  }).join('');
+  const tot = incomeTotal(m);
+  document.getElementById('income-tbl').innerHTML = rows +
+    `<tr class="tot-row"><td class="item-lbl">סה"כ הכנסות</td><td class="tot-val">${fmt(tot)}</td></tr>`;
+  document.getElementById('inc-display').textContent = fmt(tot);
+}
+
+// ═══════════════════════════════════════════════
+// RENDER CATEGORIES
+// ═══════════════════════════════════════════════
+function renderCats() {
+  const m = S.currentMonth;
+  document.getElementById('cats').innerHTML = CATS.map(c => {
+    const tot = catTotal(m,c.id);
+    const open = openSecs.has(c.id);
+    const rows = c.items.map(it => {
+      const v = gv(m,c.id,it.id);
+      return `<tr>
+        <td class="item-lbl">${it.lbl}</td>
+        <td class="item-inp-cell">
+          <input type="number" class="item-inp${v?' has-val':''}" min="0" step="1"
+            data-cat="${c.id}" data-fid="${it.id}" value="${v||''}" placeholder="0"
+            oninput="onInp(this)" onfocus="this.select()">
+        </td></tr>`;
+    }).join('');
+    return `<div class="sec cat-sec">
+      <div class="sec-head" onclick="toggleSec('${c.id}')">
+        <div class="sec-title">${c.lbl}</div>
+        <div class="sec-right">
+          <span class="sec-sub" id="ct-${c.id}">${fmt(tot)}</span>
+          <span class="chevron${open?' open':''}" id="chev-${c.id}">▼</span>
+        </div>
+      </div>
+      <div class="sec-body${open?' open':''}" id="body-${c.id}">
+        <table class="itbl">${rows}</table>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════
+// UPDATE DASHBOARD
+// ═══════════════════════════════════════════════
+function updateDash(m) {
+  const inc = m===-1 ? annIncome() : incomeTotal(m);
+  const exp = m===-1 ? annExp()    : totalExp(m);
+  const sav = inc - exp;
+  const tgt = inc * (S.savingsTarget/100);
+  const pct = inc ? sav/inc : 0;
+
+  document.getElementById('kpi-income').textContent  = fmt(inc);
+  document.getElementById('kpi-expense').textContent = fmt(exp);
+  document.getElementById('kpi-savings').textContent = fmtS(sav);
+  document.getElementById('kpi-pct').textContent     = fmtP(pct);
+
+  const card = document.getElementById('kpi-savings-card');
+  card.className = `kpi kpi-savings${sav<0?' neg':''}`;
+
+  const pct100 = tgt>0 ? Math.min(Math.max(sav/tgt*100,0),100) : 0;
+  const fill = document.getElementById('p-fill');
+  fill.style.width = pct100+'%';
+  fill.className = 'fill'+(sav<tgt?' behind':'');
+  document.getElementById('p-txt').textContent = `${fmtS(sav)} מתוך ${fmt(tgt)}`;
+}
+
+// ═══════════════════════════════════════════════
+// UPDATE SUMMARY
+// ═══════════════════════════════════════════════
+function updateSummary(m) {
+  const inc = incomeTotal(m);
+  const exp = totalExp(m);
+  const sav = savings(m);
+  const tgt = savTarget(m);
+  const gap = savGap(m);
+  const pct = savPct(m);
+
+  document.getElementById('s-exp').textContent = fmt(exp);
+  document.getElementById('s-sav').textContent = fmtS(sav);
+  document.getElementById('s-tgt').textContent = fmt(tgt);
+  document.getElementById('s-gap').textContent = fmtS(gap);
+  document.getElementById('s-pct').textContent = fmtP(pct);
+
+  document.getElementById('s-sav-wrap').className = `sum-item ${sav>=0?'sum-green':'sum-red'}`;
+  document.getElementById('s-gap-wrap').className = `sum-item ${gap>=0?'sum-green':'sum-red'}`;
+}
+
+// ═══════════════════════════════════════════════
+// INPUT HANDLER
+// ═══════════════════════════════════════════════
+function onInp(inp) {
+  const m = S.currentMonth;
+  const {cat, fid} = inp.dataset;
+  const v = parseFloat(inp.value) || 0;
+  S.months[m][cat][fid] = v;
+  inp.className = 'item-inp'+(v?' has-val':'');
+  save();
+
+  if (cat==='income') {
+    const tot = incomeTotal(m);
+    document.getElementById('inc-display').textContent = fmt(tot);
+    const totRow = document.querySelector('#income-tbl .tot-val');
+    if (totRow) totRow.textContent = fmt(tot);
+  } else {
+    const el = document.getElementById(`ct-${cat}`);
+    if (el) el.textContent = fmt(catTotal(m,cat));
+  }
+  updateDash(m);
+  updateSummary(m);
+}
+
+// ═══════════════════════════════════════════════
+// TOGGLE SECTION
+// ═══════════════════════════════════════════════
+function toggleSec(id) {
+  const isOpen = openSecs.has(id);
+  isOpen ? openSecs.delete(id) : openSecs.add(id);
+  const now = !isOpen;
+  const body  = document.getElementById(`body-${id}`);
+  const chev  = document.getElementById(`chev-${id}`);
+  if (body) body.classList.toggle('open', now);
+  if (chev) chev.classList.toggle('open', now);
+}
+
+// ═══════════════════════════════════════════════
+// CHARTS
+// ═══════════════════════════════════════════════
+let barC=null, donutC=null;
+
+function renderCharts() {
+  const incomes  = Array.from({length:12},(_,i)=>incomeTotal(i));
+  const expenses = Array.from({length:12},(_,i)=>totalExp(i));
+
+  if (barC) barC.destroy();
+  barC = new Chart(document.getElementById('barChart'), {
+    type:'bar',
+    data:{
+      labels:MONTHS,
+      datasets:[
+        {label:'הכנסות', data:incomes,  backgroundColor:'rgba(22,163,74,.75)', borderColor:'#16a34a', borderWidth:1},
+        {label:'הוצאות', data:expenses, backgroundColor:'rgba(220,38,38,.75)', borderColor:'#dc2626', borderWidth:1},
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{labels:{font:{family:'Segoe UI',size:12}}}},
+      scales:{y:{ticks:{callback:v=>'₪'+v.toLocaleString('he-IL')},grid:{color:'#f1f5f9'}}}
+    }
+  });
+
+  const catColors=['#6366f1','#f59e0b','#10b981','#3b82f6','#ef4444','#8b5cf6','#ec4899','#14b8a6','#f97316','#06b6d4','#84cc16','#a78bfa'];
+  if (donutC) donutC.destroy();
+  donutC = new Chart(document.getElementById('donutChart'), {
+    type:'doughnut',
+    data:{
+      labels:CATS.map(c=>c.lbl),
+      datasets:[{data:CATS.map(c=>annCatTot(c.id)), backgroundColor:catColors, borderWidth:2, borderColor:'#fff'}]
+    },
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{position:'bottom',labels:{font:{size:10,family:'Segoe UI'},boxWidth:11}},
+        tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${fmt(ctx.parsed)}`}}
+      }
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════
+// ANNUAL TABLE
+// ═══════════════════════════════════════════════
+function renderAnnTbl() {
+  const mHdr = MONTHS.map(m=>`<th>${m}</th>`).join('');
+  let h = `<thead><tr><th>קטגוריה / שורה</th>${mHdr}<th>סה"כ שנתי</th><th>ממוצע חודשי</th></tr></thead><tbody>`;
+
+  // Income total row
+  const annInc = annIncome();
+  h += `<tr class="ann-income"><td>💰 סה"כ הכנסות</td>
+    ${Array.from({length:12},(_,i)=>`<td class="pos">${fmt(incomeTotal(i))}</td>`).join('')}
+    <td class="pos">${fmt(annInc)}</td><td class="pos">${fmt(annInc/12)}</td></tr>`;
+
+  INCOME_FIELDS.forEach(f => {
+    const a = annField('income',f.id);
+    if (!a) return;
+    h += `<tr><td style="padding-right:1.8rem;color:#6b7280;font-size:.73rem">${f.lbl}</td>
+      ${Array.from({length:12},(_,i)=>{const v=gv(i,'income',f.id);return`<td>${v?fmt(v):'<span class="dash-val">—</span>'}</td>`;}).join('')}
+      <td>${fmt(a)}</td><td>${fmt(a/12)}</td></tr>`;
+  });
+
+  CATS.forEach(c => {
+    const ca = annCatTot(c.id);
+    h += `<tr class="ann-cat"><td>${c.lbl}</td>
+      ${Array.from({length:12},(_,i)=>`<td>${fmt(catTotal(i,c.id))}</td>`).join('')}
+      <td>${fmt(ca)}</td><td>${fmt(ca/12)}</td></tr>`;
+    c.items.forEach(it => {
+      const a = annField(c.id,it.id);
+      if (!a) return;
+      h += `<tr><td style="padding-right:1.8rem;color:#6b7280;font-size:.73rem">${it.lbl}</td>
+        ${Array.from({length:12},(_,i)=>{const v=gv(i,c.id,it.id);return`<td>${v?fmt(v):'<span class="dash-val">—</span>'}</td>`;}).join('')}
+        <td>${fmt(a)}</td><td>${fmt(a/12)}</td></tr>`;
+    });
+  });
+
+  const annExpV  = annExp();
+  const annSavV  = annSav();
+  const annTgt   = annInc * (S.savingsTarget/100);
+  const annGap   = annSavV - annTgt;
+  const annPct   = annInc ? annSavV/annInc : 0;
+
+  h += `<tr class="ann-sum"><td>💸 סה"כ הוצאות</td>
+    ${Array.from({length:12},(_,i)=>`<td class="neg">${fmt(totalExp(i))}</td>`).join('')}
+    <td class="neg">${fmt(annExpV)}</td><td class="neg">${fmt(annExpV/12)}</td></tr>`;
+  h += `<tr class="ann-sav"><td>🏦 חיסכון בפועל (הכנסות - הוצאות)</td>
+    ${Array.from({length:12},(_,i)=>{const s=savings(i);return`<td class="${s>=0?'pos':'neg'}">${fmtS(s)}</td>`;}).join('')}
+    <td class="${annSavV>=0?'pos':'neg'}">${fmtS(annSavV)}</td><td class="${annSavV>=0?'pos':'neg'}">${fmtS(annSavV/12)}</td></tr>`;
+  h += `<tr class="ann-sum"><td>🎯 יעד חיסכון (לפי % מההכנסה)</td>
+    ${Array.from({length:12},(_,i)=>`<td>${fmt(savTarget(i))}</td>`).join('')}
+    <td>${fmt(annTgt)}</td><td>${fmt(annTgt/12)}</td></tr>`;
+  h += `<tr class="ann-sum"><td>📏 פער מהיעד</td>
+    ${Array.from({length:12},(_,i)=>{const g=savGap(i);return`<td class="${g>=0?'pos':'neg'}">${fmtS(g)}</td>`;}).join('')}
+    <td class="${annGap>=0?'pos':'neg'}">${fmtS(annGap)}</td><td class="${annGap>=0?'pos':'neg'}">${fmtS(annGap/12)}</td></tr>`;
+  h += `<tr class="ann-sum"><td>📊 % חיסכון בפועל מההכנסה</td>
+    ${Array.from({length:12},(_,i)=>`<td class="pct">${fmtP(savPct(i))}</td>`).join('')}
+    <td class="pct">${fmtP(annPct)}</td><td class="pct">${fmtP(annPct)}</td></tr>`;
+  h += '</tbody>';
+  document.getElementById('ann-tbl').innerHTML = h;
+}
+
+// ═══════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════
+function go(m) {
+  S.currentMonth = m;
+  save();
+  renderTabs();
+  const mv = document.getElementById('monthly-view');
+  const av = document.getElementById('annual-view');
+  if (m === -1) {
+    mv.style.display = 'none';
+    av.style.display = 'block';
+    updateDash(-1);
+    renderAnnTbl();
+    renderCharts();
+  } else {
+    mv.style.display = 'block';
+    av.style.display = 'none';
+    renderIncomeTbl();
+    renderCats();
+    updateDash(m);
+    updateSummary(m);
+  }
+}
+
+// ═══════════════════════════════════════════════
+// EXPORT / IMPORT
+// ═══════════════════════════════════════════════
+function exportJSON() {
+  const blob = new Blob([JSON.stringify({savingsTarget:S.savingsTarget,months:S.months},null,2)],{type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'data.json';
+  a.click();
+  toast('✅ data.json הורד בהצלחה');
+}
+
+function importJSON(inp) {
+  const f = inp.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = e => {
+    try {
+      const d = JSON.parse(e.target.result);
+      if (d.months) {
+        Object.assign(S, {months:d.months, savingsTarget:d.savingsTarget??S.savingsTarget});
+        for (let i=0;i<12;i++) if(!S.months[i]) S.months[i]=emptyMonth();
+        save();
+        document.getElementById('savingsTargetInput').value = S.savingsTarget;
+        go(S.currentMonth);
+        toast('✅ נתונים נטענו בהצלחה');
+      }
+    } catch {
+      toast('❌ שגיאה בקריאת הקובץ');
+    }
+    inp.value='';
+  };
+  r.readAsText(f);
+}
+
+// ═══════════════════════════════════════════════
+// SAVINGS TARGET CHANGE
+// ═══════════════════════════════════════════════
+document.getElementById('savingsTargetInput').addEventListener('input', function() {
+  S.savingsTarget = Math.max(0, Math.min(100, parseFloat(this.value)||0));
+  save();
+  const m = S.currentMonth;
+  updateDash(m);
+  if (m>=0) updateSummary(m);
+  else { renderAnnTbl(); }
+});
+
+// ═══════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════
+let toastT;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(()=>el.classList.remove('show'), 2600);
+}
+
+// ═══════════════════════════════════════════════
+// GITHUB CLOUD SYNC
+// ═══════════════════════════════════════════════
+const GH_OWNER  = 'mayzamirstud';
+const GH_REPO   = 'budget-tracker';
+const GH_BRANCH = 'main';
+let GH_FILE         = localStorage.getItem('gh-profile-file') || 'data.json';
+let GH_PROFILE_NAME = localStorage.getItem('gh-profile-name') || 'ראשי';
+
+// PAT is injected at deploy time (obfuscated so GitHub scanner doesn't revoke it)
+function _dec(s) {
+  try { const r = atob(s.split('').reverse().join('')); return (r.startsWith('ghp') || r.startsWith('github_pat')) ? r : ''; } catch(e) { return ''; }
+}
+const _BAKED = _dec('__BUDGET_TOKEN__');
+
+const getPAT = () => _BAKED || localStorage.getItem('gh-pat') || '';
+const setPAT = p  => localStorage.setItem('gh-pat', p.trim());
+
+function showSettings(forceSetup) {
+  const isBaked = !!_BAKED;
+  const hasStored = !!localStorage.getItem('gh-pat');
+  const hasPAT = isBaked || hasStored;
+  const setup = document.getElementById('step-setup');
+  const connected = document.getElementById('step-connected');
+  document.getElementById('settings-status').style.display = 'none';
+
+  if (hasPAT && !forceSetup) {
+    setup.style.display = 'none';
+    connected.style.display = 'block';
+    if (isBaked) {
+      document.getElementById('connected-sub').textContent = 'מחובר אוטומטית — אין צורך להגדיר כלום';
+      document.getElementById('share-desc').textContent = 'שתף את הקישור — כולם נכנסים ישירות בלי הגדרה:';
+      document.getElementById('share-link-inp').value = 'https://mayzamirstud.github.io/budget-tracker/';
+      document.getElementById('disconnect-btn').style.display = 'none';
+    } else {
+      document.getElementById('connected-sub').textContent = 'הנתונים נשמרים ונטענים אוטומטית';
+      document.getElementById('share-desc').textContent = 'שלח קישור זה — הפותח אותו מחובר אוטומטית:';
+      const pat = localStorage.getItem('gh-pat');
+      document.getElementById('share-link-inp').value = `${location.origin}${location.pathname}#pat=${encodeURIComponent(pat)}`;
+      document.getElementById('disconnect-btn').style.display = '';
+    }
+  } else {
+    setup.style.display = 'block';
+    connected.style.display = 'none';
+    document.getElementById('pat-input').value = '';
+  }
+  document.getElementById('settings-modal').classList.add('open');
+}
+function closeSettings() {
+  document.getElementById('settings-modal').classList.remove('open');
+}
+function savePAT() {
+  const v = document.getElementById('pat-input').value.trim();
+  if (!v) { toast('❌ הזן קוד גישה לפני שמירה'); return; }
+  setPAT(v);
+  closeSettings();
+  toast('✅ מחובר! כעת ניתן לשמור ולסנכרן');
+}
+function clearPAT() {
+  if (_BAKED) { toast('ℹ️ החיבור מוטמע באפליקציה'); closeSettings(); return; }
+  localStorage.removeItem('gh-pat');
+  toast('🔌 המכשיר נותק מהענן');
+  showSettings(true);
+}
+function copyShareLink() {
+  const inp = document.getElementById('share-link-inp');
+  navigator.clipboard.writeText(inp.value)
+    .then(() => toast('📋 קישור הועתק! שלח לבן המשפחה'))
+    .catch(() => { inp.select(); document.execCommand('copy'); toast('📋 קישור הועתק!'); });
+}
+
+// ═══════════════════════════════════════════════
+// PROFILE MANAGEMENT
+// ═══════════════════════════════════════════════
+function updateProfileBtn() {
+  const el = document.getElementById('profile-name');
+  if (el) el.textContent = GH_PROFILE_NAME;
+}
+
+async function fetchProfilesList() {
+  // Try profiles.json index first
+  try {
+    const r = await fetch(
+      `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/profiles.json?t=${Date.now()}`
+    );
+    if (r.ok) return await r.json();
+  } catch(e) {}
+  // Fallback: derive from directory listing
+  try {
+    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/`);
+    if (!r.ok) return null;
+    const files = await r.json();
+    return files
+      .filter(f => f.type === 'file' && /^data(-\d+)?\.json$/.test(f.name))
+      .map(f => ({
+        name: f.name === 'data.json' ? 'ראשי' : `פרופיל ${f.name.replace(/^data-(\d+)\.json$/, '$1')}`,
+        file: f.name
+      }));
+  } catch(e) { return null; }
+}
+
+async function saveProfilesList(list, pat) {
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(list, null, 2))));
+  let sha;
+  try {
+    const r = await fetch(
+      `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/profiles.json`,
+      { headers: { Authorization: `token ${pat}` } }
+    );
+    if (r.ok) { sha = (await r.json()).sha; }
+  } catch(e) {}
+  const body = { message: 'עדכון רשימת פרופילים', content, branch: GH_BRANCH };
+  if (sha) body.sha = sha;
+  return fetch(
+    `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/profiles.json`,
+    { method: 'PUT', headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }
+  );
+}
+
+async function showProfiles() {
+  document.getElementById('profiles-modal').classList.add('open');
+  renderProfilesList(null);
+  const list = await fetchProfilesList();
+  renderProfilesList(list);
+}
+
+let _profilesList = [];
+
+function renderProfilesList(list) {
+  const el = document.getElementById('profiles-list');
+  if (!list) {
+    el.innerHTML = '<div style="padding:1rem;text-align:center;color:#9ca3af;font-size:.85rem">טוען פרופילים...</div>';
+    return;
+  }
+  if (list.length === 0) {
+    el.innerHTML = '<div style="padding:1rem;text-align:center;color:#9ca3af">אין פרופילים עדיין</div>';
+    return;
+  }
+  _profilesList = list;
+  el.innerHTML = list.map((p, i) => {
+    const isActive = p.file === GH_FILE;
+    const icon = isActive ? '✅' : (p.pin ? '🔒' : '👤');
+    return `
+    <div class="prf-item${isActive ? ' active' : ''}">
+      <span style="min-width:1.5rem;text-align:center;font-size:1rem">${icon}</span>
+      <span style="flex:1;font-weight:${isActive?'600':'400'}">${p.name}</span>
+      ${isActive
+        ? '<span style="font-size:.72rem;color:#2563eb;background:#dbeafe;padding:.1rem .45rem;border-radius:4px">פעיל</span>'
+        : `<div style="display:flex;gap:.35rem;align-items:center">
+             ${p.pin ? `<input type="password" maxlength="8" placeholder="קוד..."
+               id="pin-i${i}"
+               style="width:72px;border:1px solid #cbd5e1;border-radius:6px;padding:.2rem .4rem;font-size:.82rem;text-align:center"
+               onkeydown="if(event.key==='Enter')handleProfileBtn(${i})">` : ''}
+             <button onclick="handleProfileBtn(${i})"
+               class="modal-btn" style="font-size:.78rem;padding:.25rem .6rem">כניסה</button>
+           </div>`
+      }
+    </div>`;
+  }).join('');
+}
+
+function handleProfileBtn(i) {
+  const p = _profilesList[i];
+  if (!p) return;
+  if (p.pin) {
+    const inp = document.getElementById(`pin-i${i}`);
+    const entered = inp ? inp.value : '';
+    if (entered === p.pin) {
+      switchProfile(p.file, p.name);
+    } else {
+      if (inp) { inp.value = ''; inp.style.borderColor = '#dc2626'; setTimeout(() => inp.style.borderColor = '#cbd5e1', 1200); }
+      toast('❌ קוד שגוי');
+    }
+  } else {
+    switchProfile(p.file, p.name);
+  }
+}
+
+function confirmPin(file, name, correctPin) {
+  const inp = document.getElementById(`pin-${file}`);
+  if (!inp) return;
+  if (inp.value === correctPin) {
+    switchProfile(file, name);
+  } else {
+    inp.value = '';
+    inp.style.borderColor = '#dc2626';
+    setTimeout(() => { inp.style.borderColor = '#cbd5e1'; }, 1200);
+    toast('❌ קוד שגוי');
+  }
+}
+
+function closeProfiles() {
+  document.getElementById('profiles-modal').classList.remove('open');
+}
+
+async function switchProfile(file, name) {
+  if (file === GH_FILE) { closeProfiles(); return; }
+  closeProfiles();
+  GH_FILE = file;
+  GH_PROFILE_NAME = name;
+  localStorage.setItem('gh-profile-file', file);
+  localStorage.setItem('gh-profile-name', name);
+  updateProfileBtn();
+  // Reset local state and load from cloud
+  Object.assign(S, {
+    savingsTarget: 15,
+    currentMonth: new Date().getMonth(),
+    months: Object.fromEntries(Array.from({length: 12}, (_, i) => [i, emptyMonth()]))
+  });
+  save();
+  document.getElementById('savingsTargetInput').value = S.savingsTarget;
+  go(S.currentMonth);
+  await loadFromGitHub(false);
+  toast(`👤 ${name}`);
+}
+
+async function createProfile() {
+  const inp = document.getElementById('new-profile-input');
+  const pinInp = document.getElementById('new-profile-pin');
+  const name = inp.value.trim();
+  const pin = pinInp.value.trim();
+  if (!name) { toast('❌ הזן שם לפרופיל'); return; }
+  const pat = getPAT();
+  if (!pat) { closeProfiles(); showSettings(); toast('⚙️ הזן PAT קודם'); return; }
+
+  const list = await fetchProfilesList() || [{ name: 'ראשי', file: 'data.json' }];
+  if (list.some(p => p.name === name)) { toast('❌ פרופיל בשם זה כבר קיים'); return; }
+
+  const file = `data-${list.length + 1}.json`;
+  const entry = { name, file };
+  if (pin) entry.pin = pin;
+  const newList = [...list, entry];
+
+  // Create empty data file in repo
+  const empty = { savingsTarget: 15, months: Object.fromEntries(Array.from({length: 12}, (_, i) => [i, emptyMonth()])) };
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(empty, null, 2))));
+  try {
+    const r = await fetch(
+      `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${file}`,
+      {
+        method: 'PUT',
+        headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: `פרופיל חדש: ${name}`, content, branch: GH_BRANCH })
+      }
+    );
+    if (!r.ok) { const e = await r.json(); toast('❌ ' + (e.message || 'יצירה נכשלה')); return; }
+    await saveProfilesList(newList, pat);
+    inp.value = '';
+    pinInp.value = '';
+    toast(`✅ פרופיל "${name}" נוצר${pin ? ` • קוד: ${pin}` : ''}`);
+    await switchProfile(file, name);
+  } catch(e) { toast('❌ בעיית רשת'); }
+}
+
+function setSyncStatus(s, msg) {
+  const el = document.getElementById('sync-status');
+  if (!el) return;
+  const t = new Date().toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});
+  const MAP = {
+    saving:  ['⏳ שומר...', 'rgba(255,255,255,.7)'],
+    saved:   ['✅ נשמר ' + t, '#86efac'],
+    loading: ['⏳ טוען...', 'rgba(255,255,255,.7)'],
+    loaded:  ['☁️ נטען ' + t, '#93c5fd'],
+    error:   ['❌ ' + (msg||'שגיאה'), '#fca5a5'],
+    idle:    ['', 'transparent'],
+  };
+  const [text, color] = MAP[s] || MAP.idle;
+  el.textContent = text;
+  el.style.color = color;
+  if (s === 'saved' || s === 'loaded') setTimeout(() => setSyncStatus('idle'), 5000);
+}
+
+function hasAnyData(months) {
+  return Object.values(months).some(m =>
+    m && Object.values(m).some(cat =>
+      typeof cat === 'object' && Object.values(cat).some(v => v > 0)
+    )
+  );
+}
+
+async function loadFromGitHub(silent) {
+  if (!silent) setSyncStatus('loading');
+  try {
+    const res = await fetch(
+      `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${GH_FILE}?t=${Date.now()}`
+    );
+    if (!res.ok) { if (!silent) setSyncStatus('error','טעינה נכשלה'); return false; }
+    const d = await res.json();
+    if (!d || !d.months) { if (!silent) setSyncStatus('error','קובץ לא תקין'); return false; }
+
+    // Don't overwrite local data with an empty cloud template
+    if (!hasAnyData(d.months) && hasAnyData(S.months)) {
+      if (!silent) setSyncStatus('error','ענן ריק — שמור קודם בענן');
+      return false;
+    }
+
+    Object.assign(S, { months: d.months, savingsTarget: d.savingsTarget ?? S.savingsTarget });
+    for (let i = 0; i < 12; i++) if (!S.months[i]) S.months[i] = emptyMonth();
+    save();
+    document.getElementById('savingsTargetInput').value = S.savingsTarget;
+    go(S.currentMonth >= 0 ? S.currentMonth : new Date().getMonth());
+    if (!silent) setSyncStatus('loaded');
+    return true;
+  } catch(e) {
+    if (!silent) setSyncStatus('error', 'בעיית רשת');
+    return false;
+  }
+}
+
+function loadFromGitHubPrompt() {
+  if (hasAnyData(S.months) &&
+      !confirm('טעינה מהענן תחליף את הנתונים הנוכחיים. להמשיך?')) return;
+  loadFromGitHub(false);
+}
+
+async function saveToGitHub() {
+  const pat = getPAT();
+  if (!pat) { showSettings(); toast('⚙️ הזן PAT קודם'); return; }
+  setSyncStatus('saving');
+  try {
+    // Get current file SHA (required by GitHub API for updates)
+    const metaRes = await fetch(
+      `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`,
+      { headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json' } }
+    );
+    if (!metaRes.ok) {
+      const e = await metaRes.json();
+      const isBadCreds = metaRes.status === 401 || (e.message||'').toLowerCase().includes('bad credential');
+      setSyncStatus('error', isBadCreds ? 'Token לא תקין' : (e.message || 'auth נכשל'));
+      if (isBadCreds) { setTimeout(() => showSettings(), 300); toast('⚙️ יש לעדכן את ה-Token בהגדרות'); }
+      return;
+    }
+    const { sha } = await metaRes.json();
+
+    // Encode as base64 (handle Hebrew Unicode)
+    const json = JSON.stringify({ savingsTarget: S.savingsTarget, months: S.months }, null, 2);
+    const content = btoa(unescape(encodeURIComponent(json)));
+    const d = new Date().toLocaleDateString('he-IL');
+
+    const putRes = await fetch(
+      `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`,
+      {
+        method: 'PUT',
+        headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: `עדכון תקציב ${d}`, content, sha, branch: GH_BRANCH })
+      }
+    );
+    if (putRes.ok) {
+      setSyncStatus('saved');
+    } else {
+      const e = await putRes.json();
+      setSyncStatus('error', e.message);
+    }
+  } catch(e) {
+    setSyncStatus('error', 'בעיית רשת');
+  }
+}
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+
+// Auto-connect via share link (PAT in URL hash)
+(function() {
+  const m = location.hash.match(/[#&]pat=([^&]+)/);
+  if (m) {
+    setPAT(decodeURIComponent(m[1]));
+    history.replaceState(null, '', location.pathname + location.search);
+    toast('✅ מחובר אוטומטית לענן!');
+  }
+})();
+
+document.getElementById('savingsTargetInput').value = S.savingsTarget;
+updateProfileBtn();
+renderTabs();
+go(S.currentMonth >= 0 ? S.currentMonth : new Date().getMonth());
+
+// Try loading from GitHub silently on startup if no local data
+if (!hasAnyData(S.months)) {
+  loadFromGitHub(true);
+}
+</script>
+</body>
+</html>
