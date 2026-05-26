@@ -322,6 +322,12 @@ input{font-family:inherit}
 #sync-status{font-size:.75rem;white-space:nowrap;transition:color .3s;min-width:90px;text-align:center}
 .hbtn-cloud{background:rgba(255,255,255,.22)!important}
 .hbtn-cloud:hover{background:rgba(255,255,255,.35)!important}
+.hbtn-profile{background:rgba(255,255,255,.18)!important;border-color:rgba(255,255,255,.4)!important;font-weight:600;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hbtn-profile:hover{background:rgba(255,255,255,.3)!important}
+.prf-item{padding:.65rem 1rem;cursor:pointer;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid #f1f5f9;transition:background .12s}
+.prf-item:hover{background:#f0f9ff}
+.prf-item:last-child{border-bottom:none}
+.prf-item.active{background:#eff6ff;font-weight:600;color:#1d4ed8}
 
 /* ── MODAL ── */
 .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center}
@@ -387,6 +393,7 @@ input{font-family:inherit}
       📤 ייבוא JSON
       <input type="file" id="importFile" accept=".json" onchange="importJSON(this)">
     </label>
+    <button class="hbtn hbtn-profile" onclick="showProfiles()" title="בחר פרופיל">👤 <span id="profile-name">ראשי</span> ▾</button>
     <button class="hbtn hbtn-cloud" onclick="saveToGitHub()">☁️ שמור בענן</button>
     <button class="hbtn hbtn-cloud" onclick="loadFromGitHubPrompt()">🔄 טען מענן</button>
     <button class="hbtn" onclick="showSettings()" title="הגדרות סנכרון">⚙️</button>
@@ -405,6 +412,25 @@ input{font-family:inherit}
       <button onclick="savePAT()" class="modal-btn primary">שמור</button>
       <button onclick="clearPAT()" class="modal-btn danger">מחק Token</button>
       <button onclick="closeSettings()" class="modal-btn">ביטול</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILES MODAL -->
+<div id="profiles-modal" class="modal-backdrop" onclick="if(event.target===this)closeProfiles()">
+  <div class="modal-box" style="width:430px">
+    <h2 style="margin-bottom:.9rem;font-size:1.05rem;font-weight:700">👥 פרופילים משפחתיים</h2>
+    <div style="display:flex;gap:.5rem;margin-bottom:1rem;align-items:center">
+      <input type="text" id="new-profile-input" class="pat-inp" placeholder="שם פרופיל חדש..." style="flex:1;margin:0"
+             onkeydown="if(event.key==='Enter')createProfile()">
+      <button onclick="createProfile()" class="modal-btn primary" style="white-space:nowrap">+ צור</button>
+    </div>
+    <div id="profiles-list" style="max-height:280px;overflow-y:auto;border:1px solid #e2e8f0;border-radius:8px">
+      <div style="padding:1rem;text-align:center;color:#9ca3af;font-size:.85rem">טוען...</div>
+    </div>
+    <p style="font-size:.77rem;color:#9ca3af;margin-top:.65rem">כל פרופיל שומר קובץ נתונים נפרד בענן</p>
+    <div style="display:flex;justify-content:flex-end;margin-top:.65rem">
+      <button onclick="closeProfiles()" class="modal-btn">סגור</button>
     </div>
   </div>
 </div>
@@ -1030,8 +1056,9 @@ function toast(msg) {
 // ═══════════════════════════════════════════════
 const GH_OWNER  = 'mayzamirstud';
 const GH_REPO   = 'budget-tracker';
-const GH_FILE   = 'data.json';
 const GH_BRANCH = 'main';
+let GH_FILE         = localStorage.getItem('gh-profile-file') || 'data.json';
+let GH_PROFILE_NAME = localStorage.getItem('gh-profile-name') || 'ראשי';
 
 const getPAT = () => localStorage.getItem('gh-pat') || '';
 const setPAT = p  => localStorage.setItem('gh-pat', p.trim());
@@ -1054,6 +1081,139 @@ function clearPAT() {
   localStorage.removeItem('gh-pat');
   document.getElementById('pat-input').value = '';
   toast('🗑️ Token נמחק');
+}
+
+// ═══════════════════════════════════════════════
+// PROFILE MANAGEMENT
+// ═══════════════════════════════════════════════
+function updateProfileBtn() {
+  const el = document.getElementById('profile-name');
+  if (el) el.textContent = GH_PROFILE_NAME;
+}
+
+async function fetchProfilesList() {
+  // Try profiles.json index first
+  try {
+    const r = await fetch(
+      `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/profiles.json?t=${Date.now()}`
+    );
+    if (r.ok) return await r.json();
+  } catch(e) {}
+  // Fallback: derive from directory listing
+  try {
+    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/`);
+    if (!r.ok) return null;
+    const files = await r.json();
+    return files
+      .filter(f => f.type === 'file' && /^data(-\d+)?\.json$/.test(f.name))
+      .map(f => ({
+        name: f.name === 'data.json' ? 'ראשי' : `פרופיל ${f.name.replace(/^data-(\d+)\.json$/, '$1')}`,
+        file: f.name
+      }));
+  } catch(e) { return null; }
+}
+
+async function saveProfilesList(list, pat) {
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(list, null, 2))));
+  let sha;
+  try {
+    const r = await fetch(
+      `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/profiles.json`,
+      { headers: { Authorization: `token ${pat}` } }
+    );
+    if (r.ok) { sha = (await r.json()).sha; }
+  } catch(e) {}
+  const body = { message: 'עדכון רשימת פרופילים', content, branch: GH_BRANCH };
+  if (sha) body.sha = sha;
+  return fetch(
+    `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/profiles.json`,
+    { method: 'PUT', headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body) }
+  );
+}
+
+async function showProfiles() {
+  document.getElementById('profiles-modal').classList.add('open');
+  renderProfilesList(null);
+  const list = await fetchProfilesList();
+  renderProfilesList(list);
+}
+
+function renderProfilesList(list) {
+  const el = document.getElementById('profiles-list');
+  if (!list) {
+    el.innerHTML = '<div style="padding:1rem;text-align:center;color:#9ca3af;font-size:.85rem">טוען פרופילים...</div>';
+    return;
+  }
+  if (list.length === 0) {
+    el.innerHTML = '<div style="padding:1rem;text-align:center;color:#9ca3af">אין פרופילים עדיין</div>';
+    return;
+  }
+  el.innerHTML = list.map(p => `
+    <div class="prf-item${p.file === GH_FILE ? ' active' : ''}"
+         onclick="switchProfile('${p.file}',${JSON.stringify(p.name)})">
+      <span style="min-width:1.3rem;text-align:center">${p.file === GH_FILE ? '✅' : '👤'}</span>
+      <span style="flex:1">${p.name}</span>
+      ${p.file === GH_FILE ? '<span style="font-size:.72rem;color:#2563eb;background:#dbeafe;padding:.1rem .4rem;border-radius:4px">פעיל</span>' : ''}
+    </div>
+  `).join('');
+}
+
+function closeProfiles() {
+  document.getElementById('profiles-modal').classList.remove('open');
+}
+
+async function switchProfile(file, name) {
+  if (file === GH_FILE) { closeProfiles(); return; }
+  closeProfiles();
+  GH_FILE = file;
+  GH_PROFILE_NAME = name;
+  localStorage.setItem('gh-profile-file', file);
+  localStorage.setItem('gh-profile-name', name);
+  updateProfileBtn();
+  // Reset local state and load from cloud
+  Object.assign(S, {
+    savingsTarget: 15,
+    currentMonth: new Date().getMonth(),
+    months: Object.fromEntries(Array.from({length: 12}, (_, i) => [i, emptyMonth()]))
+  });
+  save();
+  document.getElementById('savingsTargetInput').value = S.savingsTarget;
+  go(S.currentMonth);
+  await loadFromGitHub(false);
+  toast(`👤 ${name}`);
+}
+
+async function createProfile() {
+  const inp = document.getElementById('new-profile-input');
+  const name = inp.value.trim();
+  if (!name) { toast('❌ הזן שם לפרופיל'); return; }
+  const pat = getPAT();
+  if (!pat) { closeProfiles(); showSettings(); toast('⚙️ הזן PAT קודם'); return; }
+
+  const list = await fetchProfilesList() || [{ name: 'ראשי', file: 'data.json' }];
+  if (list.some(p => p.name === name)) { toast('❌ פרופיל בשם זה כבר קיים'); return; }
+
+  const file = `data-${list.length + 1}.json`;
+  const newList = [...list, { name, file }];
+
+  // Create empty data file in repo
+  const empty = { savingsTarget: 15, months: Object.fromEntries(Array.from({length: 12}, (_, i) => [i, emptyMonth()])) };
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(empty, null, 2))));
+  try {
+    const r = await fetch(
+      `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${file}`,
+      {
+        method: 'PUT',
+        headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: `פרופיל חדש: ${name}`, content, branch: GH_BRANCH })
+      }
+    );
+    if (!r.ok) { const e = await r.json(); toast('❌ ' + (e.message || 'יצירה נכשלה')); return; }
+    await saveProfilesList(newList, pat);
+    inp.value = '';
+    toast(`✅ פרופיל "${name}" נוצר`);
+    await switchProfile(file, name);
+  } catch(e) { toast('❌ בעיית רשת'); }
 }
 
 function setSyncStatus(s, msg) {
@@ -1162,6 +1322,7 @@ async function saveToGitHub() {
 // INIT
 // ═══════════════════════════════════════════════
 document.getElementById('savingsTargetInput').value = S.savingsTarget;
+updateProfileBtn();
 renderTabs();
 go(S.currentMonth >= 0 ? S.currentMonth : new Date().getMonth());
 
