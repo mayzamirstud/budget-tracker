@@ -388,11 +388,6 @@ input{font-family:inherit}
       <input type="number" id="savingsTargetInput" min="0" max="100" step="1" value="15">
       <span>%</span>
     </div>
-    <button class="hbtn" onclick="exportJSON()">📥 ייצוא JSON</button>
-    <label class="hbtn">
-      📤 ייבוא JSON
-      <input type="file" id="importFile" accept=".json" onchange="importJSON(this)">
-    </label>
     <button class="hbtn hbtn-profile" onclick="showProfiles()" title="בחר פרופיל">👤 <span id="profile-name">ראשי</span> ▾</button>
     <button class="hbtn hbtn-cloud" onclick="saveToGitHub()">☁️ שמור בענן</button>
     <button class="hbtn hbtn-cloud" onclick="loadFromGitHubPrompt()">🔄 טען מענן</button>
@@ -403,15 +398,45 @@ input{font-family:inherit}
 
 <!-- SETTINGS MODAL -->
 <div id="settings-modal" class="modal-backdrop" onclick="if(event.target===this)closeSettings()">
-  <div class="modal-box">
-    <h2 style="margin-bottom:.75rem;font-size:1.05rem;font-weight:700">⚙️ הגדרות סנכרון ענן</h2>
-    <p style="font-size:.82rem;color:#6b7280;margin-bottom:.5rem">Personal Access Token (PAT) עם הרשאת <code style="background:#f1f5f9;padding:.1rem .3rem;border-radius:4px">repo</code></p>
-    <p style="font-size:.78rem;color:#9ca3af;margin-bottom:.75rem">הtoken נשמר רק במכשיר זה (localStorage)</p>
-    <input type="password" id="pat-input" class="pat-inp" placeholder="ghp_...">
-    <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:.85rem">
-      <button onclick="savePAT()" class="modal-btn primary">שמור</button>
-      <button onclick="clearPAT()" class="modal-btn danger">מחק Token</button>
-      <button onclick="closeSettings()" class="modal-btn">ביטול</button>
+  <div class="modal-box" style="width:420px">
+    <h2 style="margin-bottom:.75rem;font-size:1.05rem;font-weight:700">⚙️ חיבור לענן</h2>
+
+    <!-- Status indicator -->
+    <div id="settings-status" style="display:none;margin-bottom:.8rem;padding:.55rem .8rem;border-radius:8px;font-size:.82rem"></div>
+
+    <!-- Step 1: PAT entry (shown only when no PAT or bad credentials) -->
+    <div id="step-setup">
+      <p style="font-size:.85rem;color:#374151;margin-bottom:.35rem;font-weight:600">🔑 קוד גישה לגיטהאב</p>
+      <p style="font-size:.78rem;color:#6b7280;margin-bottom:.65rem">
+        הכנס פעם אחת — נשמר אוטומטית במכשיר.<br>
+        <a href="https://github.com/settings/tokens/new?scopes=repo&description=budget-tracker" target="_blank"
+           style="color:#2563eb;text-decoration:none;font-size:.77rem">▸ צור קוד גישה חדש בגיטהאב →</a>
+      </p>
+      <input type="password" id="pat-input" class="pat-inp" placeholder="ghp_..."
+             onkeydown="if(event.key==='Enter')savePAT()">
+      <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:.75rem">
+        <button onclick="savePAT()" class="modal-btn primary">שמור</button>
+        <button onclick="closeSettings()" class="modal-btn">ביטול</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Connected — show share link -->
+    <div id="step-connected" style="display:none">
+      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:.75rem;margin-bottom:.85rem">
+        <p style="font-size:.82rem;color:#166534;font-weight:600;margin-bottom:.3rem">✅ מחובר לענן</p>
+        <p style="font-size:.77rem;color:#15803d">הנתונים נשמרים ונטענים אוטומטית</p>
+      </div>
+      <p style="font-size:.82rem;color:#374151;font-weight:600;margin-bottom:.35rem">📲 הוסף מכשיר / בן משפחה</p>
+      <p style="font-size:.77rem;color:#6b7280;margin-bottom:.6rem">שלח את הקישור הבא — הפותח אותו יתחבר אוטומטית ללא צורך להכניס שום דבר</p>
+      <div style="display:flex;gap:.4rem">
+        <input type="text" id="share-link-inp" readonly
+               style="flex:1;padding:.35rem .6rem;border:1px solid #e2e8f0;border-radius:7px;font-size:.75rem;color:#6b7280;background:#f8fafc;direction:ltr">
+        <button onclick="copyShareLink()" class="modal-btn primary" style="white-space:nowrap">📋 העתק</button>
+      </div>
+      <div style="display:flex;gap:.5rem;justify-content:space-between;margin-top:.85rem;align-items:center">
+        <button onclick="clearPAT()" style="font-size:.75rem;color:#dc2626;background:none;border:none;cursor:pointer;padding:.2rem 0">✕ נתק מכשיר זה</button>
+        <button onclick="closeSettings()" class="modal-btn">סגור</button>
+      </div>
     </div>
   </div>
 </div>
@@ -420,11 +445,14 @@ input{font-family:inherit}
 <div id="profiles-modal" class="modal-backdrop" onclick="if(event.target===this)closeProfiles()">
   <div class="modal-box" style="width:430px">
     <h2 style="margin-bottom:.9rem;font-size:1.05rem;font-weight:700">👥 פרופילים משפחתיים</h2>
-    <div style="display:flex;gap:.5rem;margin-bottom:1rem;align-items:center">
-      <input type="text" id="new-profile-input" class="pat-inp" placeholder="שם פרופיל חדש..." style="flex:1;margin:0"
-             onkeydown="if(event.key==='Enter')createProfile()">
+    <div style="display:flex;gap:.5rem;margin-bottom:.5rem;align-items:center">
+      <input type="text" id="new-profile-input" class="pat-inp" placeholder="שם (למשל: דני)..." style="flex:1;margin:0"
+             onkeydown="if(event.key==='Enter')document.getElementById('new-profile-pin').focus()">
+      <input type="text" id="new-profile-pin" class="pat-inp" placeholder="קוד סודי..." maxlength="8"
+             style="width:110px;margin:0" onkeydown="if(event.key==='Enter')createProfile()">
       <button onclick="createProfile()" class="modal-btn primary" style="white-space:nowrap">+ צור</button>
     </div>
+    <p style="font-size:.75rem;color:#9ca3af;margin-bottom:.75rem">הקוד הסודי נדרש כדי לפתוח את הפרופיל במכשיר אחר</p>
     <div id="profiles-list" style="max-height:280px;overflow-y:auto;border:1px solid #e2e8f0;border-radius:8px">
       <div style="padding:1rem;text-align:center;color:#9ca3af;font-size:.85rem">טוען...</div>
     </div>
@@ -1063,8 +1091,24 @@ let GH_PROFILE_NAME = localStorage.getItem('gh-profile-name') || 'ראשי';
 const getPAT = () => localStorage.getItem('gh-pat') || '';
 const setPAT = p  => localStorage.setItem('gh-pat', p.trim());
 
-function showSettings() {
-  document.getElementById('pat-input').value = getPAT();
+function showSettings(forceSetup) {
+  const hasPAT = !!getPAT();
+  const setup = document.getElementById('step-setup');
+  const connected = document.getElementById('step-connected');
+  const statusEl = document.getElementById('settings-status');
+  statusEl.style.display = 'none';
+  if (!hasPAT || forceSetup) {
+    setup.style.display = 'block';
+    connected.style.display = 'none';
+    document.getElementById('pat-input').value = '';
+  } else {
+    setup.style.display = 'none';
+    connected.style.display = 'block';
+    // Build share link (mask token in the displayed field for privacy)
+    const pat = getPAT();
+    const url = `${location.origin}${location.pathname}#pat=${encodeURIComponent(pat)}`;
+    document.getElementById('share-link-inp').value = url;
+  }
   document.getElementById('settings-modal').classList.add('open');
 }
 function closeSettings() {
@@ -1072,15 +1116,21 @@ function closeSettings() {
 }
 function savePAT() {
   const v = document.getElementById('pat-input').value.trim();
-  if (!v) { toast('❌ הזן token לפני שמירה'); return; }
+  if (!v) { toast('❌ הזן קוד גישה לפני שמירה'); return; }
   setPAT(v);
   closeSettings();
-  toast('✅ Token נשמר במכשיר זה');
+  toast('✅ מחובר! כעת ניתן לשמור ולסנכרן');
 }
 function clearPAT() {
   localStorage.removeItem('gh-pat');
-  document.getElementById('pat-input').value = '';
-  toast('🗑️ Token נמחק');
+  toast('🔌 המכשיר נותק מהענן');
+  showSettings(true);
+}
+function copyShareLink() {
+  const inp = document.getElementById('share-link-inp');
+  navigator.clipboard.writeText(inp.value)
+    .then(() => toast('📋 קישור הועתק! שלח לבן המשפחה'))
+    .catch(() => { inp.select(); document.execCommand('copy'); toast('📋 קישור הועתק!'); });
 }
 
 // ═══════════════════════════════════════════════
@@ -1148,14 +1198,41 @@ function renderProfilesList(list) {
     el.innerHTML = '<div style="padding:1rem;text-align:center;color:#9ca3af">אין פרופילים עדיין</div>';
     return;
   }
-  el.innerHTML = list.map(p => `
-    <div class="prf-item${p.file === GH_FILE ? ' active' : ''}"
-         onclick="switchProfile('${p.file}',${JSON.stringify(p.name)})">
-      <span style="min-width:1.3rem;text-align:center">${p.file === GH_FILE ? '✅' : '👤'}</span>
-      <span style="flex:1">${p.name}</span>
-      ${p.file === GH_FILE ? '<span style="font-size:.72rem;color:#2563eb;background:#dbeafe;padding:.1rem .4rem;border-radius:4px">פעיל</span>' : ''}
-    </div>
-  `).join('');
+  el.innerHTML = list.map(p => {
+    const isActive = p.file === GH_FILE;
+    const icon = isActive ? '✅' : (p.pin ? '🔒' : '👤');
+    return `
+    <div class="prf-item${isActive ? ' active' : ''}">
+      <span style="min-width:1.5rem;text-align:center;font-size:1rem">${icon}</span>
+      <span style="flex:1;font-weight:${isActive?'600':'400'}">${p.name}</span>
+      ${isActive
+        ? '<span style="font-size:.72rem;color:#2563eb;background:#dbeafe;padding:.1rem .45rem;border-radius:4px">פעיל</span>'
+        : `<div style="display:flex;gap:.35rem;align-items:center">
+             ${p.pin ? `<input type="password" maxlength="8" placeholder="קוד..."
+               id="pin-${p.file}"
+               style="width:72px;border:1px solid #cbd5e1;border-radius:6px;padding:.2rem .4rem;font-size:.82rem;text-align:center"
+               onkeydown="if(event.key==='Enter')confirmPin('${p.file}',${JSON.stringify(p.name)},${JSON.stringify(p.pin)})">` : ''}
+             <button onclick="${p.pin
+               ? `confirmPin('${p.file}',${JSON.stringify(p.name)},${JSON.stringify(p.pin)})`
+               : `switchProfile('${p.file}',${JSON.stringify(p.name)})`}"
+               class="modal-btn" style="font-size:.78rem;padding:.25rem .6rem">כניסה</button>
+           </div>`
+      }
+    </div>`;
+  }).join('');
+}
+
+function confirmPin(file, name, correctPin) {
+  const inp = document.getElementById(`pin-${file}`);
+  if (!inp) return;
+  if (inp.value === correctPin) {
+    switchProfile(file, name);
+  } else {
+    inp.value = '';
+    inp.style.borderColor = '#dc2626';
+    setTimeout(() => { inp.style.borderColor = '#cbd5e1'; }, 1200);
+    toast('❌ קוד שגוי');
+  }
 }
 
 function closeProfiles() {
@@ -1185,7 +1262,9 @@ async function switchProfile(file, name) {
 
 async function createProfile() {
   const inp = document.getElementById('new-profile-input');
+  const pinInp = document.getElementById('new-profile-pin');
   const name = inp.value.trim();
+  const pin = pinInp.value.trim();
   if (!name) { toast('❌ הזן שם לפרופיל'); return; }
   const pat = getPAT();
   if (!pat) { closeProfiles(); showSettings(); toast('⚙️ הזן PAT קודם'); return; }
@@ -1194,7 +1273,9 @@ async function createProfile() {
   if (list.some(p => p.name === name)) { toast('❌ פרופיל בשם זה כבר קיים'); return; }
 
   const file = `data-${list.length + 1}.json`;
-  const newList = [...list, { name, file }];
+  const entry = { name, file };
+  if (pin) entry.pin = pin;
+  const newList = [...list, entry];
 
   // Create empty data file in repo
   const empty = { savingsTarget: 15, months: Object.fromEntries(Array.from({length: 12}, (_, i) => [i, emptyMonth()])) };
@@ -1211,7 +1292,8 @@ async function createProfile() {
     if (!r.ok) { const e = await r.json(); toast('❌ ' + (e.message || 'יצירה נכשלה')); return; }
     await saveProfilesList(newList, pat);
     inp.value = '';
-    toast(`✅ פרופיל "${name}" נוצר`);
+    pinInp.value = '';
+    toast(`✅ פרופיל "${name}" נוצר${pin ? ` • קוד: ${pin}` : ''}`);
     await switchProfile(file, name);
   } catch(e) { toast('❌ בעיית רשת'); }
 }
@@ -1289,7 +1371,9 @@ async function saveToGitHub() {
     );
     if (!metaRes.ok) {
       const e = await metaRes.json();
-      setSyncStatus('error', e.message || 'auth נכשל');
+      const isBadCreds = metaRes.status === 401 || (e.message||'').toLowerCase().includes('bad credential');
+      setSyncStatus('error', isBadCreds ? 'Token לא תקין' : (e.message || 'auth נכשל'));
+      if (isBadCreds) { setTimeout(() => showSettings(), 300); toast('⚙️ יש לעדכן את ה-Token בהגדרות'); }
       return;
     }
     const { sha } = await metaRes.json();
@@ -1321,6 +1405,17 @@ async function saveToGitHub() {
 // ═══════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════
+
+// Auto-connect via share link (PAT in URL hash)
+(function() {
+  const m = location.hash.match(/[#&]pat=([^&]+)/);
+  if (m) {
+    setPAT(decodeURIComponent(m[1]));
+    history.replaceState(null, '', location.pathname + location.search);
+    toast('✅ מחובר אוטומטית לענן!');
+  }
+})();
+
 document.getElementById('savingsTargetInput').value = S.savingsTarget;
 updateProfileBtn();
 renderTabs();
