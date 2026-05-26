@@ -318,6 +318,25 @@ input{font-family:inherit}
 .pct{color:var(--purple)}
 .dash-val{color:#94a3b8}
 
+/* ── SYNC STATUS ── */
+#sync-status{font-size:.75rem;white-space:nowrap;transition:color .3s;min-width:90px;text-align:center}
+.hbtn-cloud{background:rgba(255,255,255,.22)!important}
+.hbtn-cloud:hover{background:rgba(255,255,255,.35)!important}
+
+/* ── MODAL ── */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center}
+.modal-backdrop.open{display:flex}
+.modal-box{background:#fff;border-radius:14px;padding:1.4rem 1.5rem;width:380px;max-width:92vw;box-shadow:0 20px 40px rgba(0,0,0,.2)}
+.pat-inp{width:100%;padding:.5rem .65rem;border:1px solid #e2e8f0;border-radius:7px;font-size:.85rem;font-family:monospace;color:#1e293b;margin-top:.25rem}
+.pat-inp:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.modal-btn{padding:.4rem .9rem;border-radius:7px;border:none;cursor:pointer;font-size:.82rem;font-weight:600}
+.modal-btn.primary{background:#1e3a8a;color:#fff}
+.modal-btn.primary:hover{background:#1d4ed8}
+.modal-btn.danger{background:#fee2e2;color:#dc2626}
+.modal-btn.danger:hover{background:#fecaca}
+.modal-btn:not(.primary):not(.danger){background:#f1f5f9;color:#374151}
+.modal-btn:not(.primary):not(.danger):hover{background:#e2e8f0}
+
 /* ── TOAST ── */
 .toast{
   position:fixed;
@@ -368,8 +387,27 @@ input{font-family:inherit}
       📤 ייבוא JSON
       <input type="file" id="importFile" accept=".json" onchange="importJSON(this)">
     </label>
+    <button class="hbtn hbtn-cloud" onclick="saveToGitHub()">☁️ שמור בענן</button>
+    <button class="hbtn hbtn-cloud" onclick="loadFromGitHubPrompt()">🔄 טען מענן</button>
+    <button class="hbtn" onclick="showSettings()" title="הגדרות סנכרון">⚙️</button>
+    <span id="sync-status"></span>
   </div>
 </header>
+
+<!-- SETTINGS MODAL -->
+<div id="settings-modal" class="modal-backdrop" onclick="if(event.target===this)closeSettings()">
+  <div class="modal-box">
+    <h2 style="margin-bottom:.75rem;font-size:1.05rem;font-weight:700">⚙️ הגדרות סנכרון ענן</h2>
+    <p style="font-size:.82rem;color:#6b7280;margin-bottom:.5rem">Personal Access Token (PAT) עם הרשאת <code style="background:#f1f5f9;padding:.1rem .3rem;border-radius:4px">repo</code></p>
+    <p style="font-size:.78rem;color:#9ca3af;margin-bottom:.75rem">הtoken נשמר רק במכשיר זה (localStorage)</p>
+    <input type="password" id="pat-input" class="pat-inp" placeholder="ghp_...">
+    <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:.85rem">
+      <button onclick="savePAT()" class="modal-btn primary">שמור</button>
+      <button onclick="clearPAT()" class="modal-btn danger">מחק Token</button>
+      <button onclick="closeSettings()" class="modal-btn">ביטול</button>
+    </div>
+  </div>
+</div>
 
 <!-- TABS -->
 <div class="tabs-wrap"><div class="tabs" id="tabs"></div></div>
@@ -988,11 +1026,149 @@ function toast(msg) {
 }
 
 // ═══════════════════════════════════════════════
+// GITHUB CLOUD SYNC
+// ═══════════════════════════════════════════════
+const GH_OWNER  = 'mayzamirstud';
+const GH_REPO   = 'budget-tracker';
+const GH_FILE   = 'data.json';
+const GH_BRANCH = 'main';
+
+const getPAT = () => localStorage.getItem('gh-pat') || '';
+const setPAT = p  => localStorage.setItem('gh-pat', p.trim());
+
+function showSettings() {
+  document.getElementById('pat-input').value = getPAT();
+  document.getElementById('settings-modal').classList.add('open');
+}
+function closeSettings() {
+  document.getElementById('settings-modal').classList.remove('open');
+}
+function savePAT() {
+  const v = document.getElementById('pat-input').value.trim();
+  if (!v) { toast('❌ הזן token לפני שמירה'); return; }
+  setPAT(v);
+  closeSettings();
+  toast('✅ Token נשמר במכשיר זה');
+}
+function clearPAT() {
+  localStorage.removeItem('gh-pat');
+  document.getElementById('pat-input').value = '';
+  toast('🗑️ Token נמחק');
+}
+
+function setSyncStatus(s, msg) {
+  const el = document.getElementById('sync-status');
+  if (!el) return;
+  const t = new Date().toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});
+  const MAP = {
+    saving:  ['⏳ שומר...', 'rgba(255,255,255,.7)'],
+    saved:   ['✅ נשמר ' + t, '#86efac'],
+    loading: ['⏳ טוען...', 'rgba(255,255,255,.7)'],
+    loaded:  ['☁️ נטען ' + t, '#93c5fd'],
+    error:   ['❌ ' + (msg||'שגיאה'), '#fca5a5'],
+    idle:    ['', 'transparent'],
+  };
+  const [text, color] = MAP[s] || MAP.idle;
+  el.textContent = text;
+  el.style.color = color;
+  if (s === 'saved' || s === 'loaded') setTimeout(() => setSyncStatus('idle'), 5000);
+}
+
+function hasAnyData(months) {
+  return Object.values(months).some(m =>
+    m && Object.values(m).some(cat =>
+      typeof cat === 'object' && Object.values(cat).some(v => v > 0)
+    )
+  );
+}
+
+async function loadFromGitHub(silent) {
+  if (!silent) setSyncStatus('loading');
+  try {
+    const res = await fetch(
+      `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${GH_FILE}?t=${Date.now()}`
+    );
+    if (!res.ok) { if (!silent) setSyncStatus('error','טעינה נכשלה'); return false; }
+    const d = await res.json();
+    if (!d || !d.months) { if (!silent) setSyncStatus('error','קובץ לא תקין'); return false; }
+
+    // Don't overwrite local data with an empty cloud template
+    if (!hasAnyData(d.months) && hasAnyData(S.months)) {
+      if (!silent) setSyncStatus('error','ענן ריק — שמור קודם בענן');
+      return false;
+    }
+
+    Object.assign(S, { months: d.months, savingsTarget: d.savingsTarget ?? S.savingsTarget });
+    for (let i = 0; i < 12; i++) if (!S.months[i]) S.months[i] = emptyMonth();
+    save();
+    document.getElementById('savingsTargetInput').value = S.savingsTarget;
+    go(S.currentMonth >= 0 ? S.currentMonth : new Date().getMonth());
+    if (!silent) setSyncStatus('loaded');
+    return true;
+  } catch(e) {
+    if (!silent) setSyncStatus('error', 'בעיית רשת');
+    return false;
+  }
+}
+
+function loadFromGitHubPrompt() {
+  if (hasAnyData(S.months) &&
+      !confirm('טעינה מהענן תחליף את הנתונים הנוכחיים. להמשיך?')) return;
+  loadFromGitHub(false);
+}
+
+async function saveToGitHub() {
+  const pat = getPAT();
+  if (!pat) { showSettings(); toast('⚙️ הזן PAT קודם'); return; }
+  setSyncStatus('saving');
+  try {
+    // Get current file SHA (required by GitHub API for updates)
+    const metaRes = await fetch(
+      `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`,
+      { headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json' } }
+    );
+    if (!metaRes.ok) {
+      const e = await metaRes.json();
+      setSyncStatus('error', e.message || 'auth נכשל');
+      return;
+    }
+    const { sha } = await metaRes.json();
+
+    // Encode as base64 (handle Hebrew Unicode)
+    const json = JSON.stringify({ savingsTarget: S.savingsTarget, months: S.months }, null, 2);
+    const content = btoa(unescape(encodeURIComponent(json)));
+    const d = new Date().toLocaleDateString('he-IL');
+
+    const putRes = await fetch(
+      `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`,
+      {
+        method: 'PUT',
+        headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: `עדכון תקציב ${d}`, content, sha, branch: GH_BRANCH })
+      }
+    );
+    if (putRes.ok) {
+      setSyncStatus('saved');
+    } else {
+      const e = await putRes.json();
+      setSyncStatus('error', e.message);
+    }
+  } catch(e) {
+    setSyncStatus('error', 'בעיית רשת');
+  }
+}
+
+// ═══════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════
 document.getElementById('savingsTargetInput').value = S.savingsTarget;
 renderTabs();
 go(S.currentMonth >= 0 ? S.currentMonth : new Date().getMonth());
+
+// Try loading from GitHub silently on startup if no local data
+if (!hasAnyData(S.months)) {
+  loadFromGitHub(true);
+}
 </script>
 </body>
 </html>
