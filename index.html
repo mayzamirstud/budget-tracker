@@ -1205,6 +1205,8 @@ async function showProfiles() {
   renderProfilesList(list);
 }
 
+let _profilesList = [];
+
 function renderProfilesList(list) {
   const el = document.getElementById('profiles-list');
   if (!list) {
@@ -1215,7 +1217,8 @@ function renderProfilesList(list) {
     el.innerHTML = '<div style="padding:1rem;text-align:center;color:#9ca3af">אין פרופילים עדיין</div>';
     return;
   }
-  el.innerHTML = list.map(p => {
+  _profilesList = list;
+  el.innerHTML = list.map((p, i) => {
     const isActive = p.file === GH_FILE;
     const icon = isActive ? '✅' : (p.pin ? '🔒' : '👤');
     return `
@@ -1226,17 +1229,32 @@ function renderProfilesList(list) {
         ? '<span style="font-size:.72rem;color:#2563eb;background:#dbeafe;padding:.1rem .45rem;border-radius:4px">פעיל</span>'
         : `<div style="display:flex;gap:.35rem;align-items:center">
              ${p.pin ? `<input type="password" maxlength="8" placeholder="קוד..."
-               id="pin-${p.file}"
+               id="pin-i${i}"
                style="width:72px;border:1px solid #cbd5e1;border-radius:6px;padding:.2rem .4rem;font-size:.82rem;text-align:center"
-               onkeydown="if(event.key==='Enter')confirmPin('${p.file}',${JSON.stringify(p.name)},${JSON.stringify(p.pin)})">` : ''}
-             <button onclick="${p.pin
-               ? `confirmPin('${p.file}',${JSON.stringify(p.name)},${JSON.stringify(p.pin)})`
-               : `switchProfile('${p.file}',${JSON.stringify(p.name)})`}"
+               onkeydown="if(event.key==='Enter')handleProfileBtn(${i})">` : ''}
+             <button onclick="handleProfileBtn(${i})"
                class="modal-btn" style="font-size:.78rem;padding:.25rem .6rem">כניסה</button>
            </div>`
       }
     </div>`;
   }).join('');
+}
+
+function handleProfileBtn(i) {
+  const p = _profilesList[i];
+  if (!p) return;
+  if (p.pin) {
+    const inp = document.getElementById(`pin-i${i}`);
+    const entered = inp ? inp.value : '';
+    if (entered === p.pin) {
+      switchProfile(p.file, p.name);
+    } else {
+      if (inp) { inp.value = ''; inp.style.borderColor = '#dc2626'; setTimeout(() => inp.style.borderColor = '#cbd5e1', 1200); }
+      toast('❌ קוד שגוי');
+    }
+  } else {
+    switchProfile(p.file, p.name);
+  }
 }
 
 function confirmPin(file, name, correctPin) {
