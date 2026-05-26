@@ -12,5 +12,10 @@
     "name": "מאי",
     "file": "data-3.json",
     "pin": "123"
+  },
+  {
+    "name": "אודה",
+    "file": "data-4.json",
+    "pin": "122"
   }
 ]
