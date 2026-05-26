@@ -1,10 +1,9 @@
-﻿<!DOCTYPE html>
-<!-- v3 -->
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>׳×׳§׳¦׳™׳‘ ׳©׳ ׳×׳™ - ׳”׳•׳¦׳׳•׳× ׳•׳”׳›׳ ׳¡׳•׳×</title>
+<title>תקציב שנתי - הוצאות והכנסות</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -35,7 +34,7 @@ body{
 button{cursor:pointer;font-family:inherit}
 input{font-family:inherit}
 
-/* ג”€ג”€ HEADER ג”€ג”€ */
+/* ── HEADER ── */
 .app-header{
   background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 60%,#2563eb 100%);
   color:#fff;
@@ -102,7 +101,7 @@ input{font-family:inherit}
 .hbtn:hover{background:rgba(255,255,255,.28)}
 .hbtn input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
 
-/* ג”€ג”€ TABS ג”€ג”€ */
+/* ── TABS ── */
 .tabs-wrap{
   background:#fff;
   border-bottom:2px solid var(--border);
@@ -131,7 +130,7 @@ input{font-family:inherit}
 .tab-btn.annual-tab.active{color:var(--purple);border-bottom-color:var(--purple)}
 .tab-btn.annual-tab{color:var(--purple);font-weight:600}
 
-/* ג”€ג”€ DASHBOARD (sticky) ג”€ג”€ */
+/* ── DASHBOARD (sticky) ── */
 .dashboard{
   background:#fff;
   border-bottom:1px solid var(--border);
@@ -186,10 +185,10 @@ input{font-family:inherit}
 .fill.behind{background:var(--red)}
 .progress-txt{color:var(--gray);white-space:nowrap;min-width:150px;direction:ltr;text-align:right}
 
-/* ג”€ג”€ MAIN ג”€ג”€ */
+/* ── MAIN ── */
 .main{max-width:940px;margin:0 auto;padding:1.25rem 1.25rem 3rem}
 
-/* ג”€ג”€ SECTION CARD ג”€ג”€ */
+/* ── SECTION CARD ── */
 .sec{
   background:#fff;
   border:1px solid var(--border);
@@ -252,7 +251,7 @@ input{font-family:inherit}
 .tot-row td{font-weight:700;border-top:2px solid var(--border)!important;font-size:.88rem;padding-top:.7rem;padding-bottom:.7rem}
 .tot-val{direction:ltr;text-align:left;color:var(--green)}
 
-/* ג”€ג”€ SUMMARY ג”€ג”€ */
+/* ── SUMMARY ── */
 .summary-card{
   background:#fff;
   border:1px solid var(--border);
@@ -286,7 +285,7 @@ input{font-family:inherit}
 .sum-red-lbl .sum-val{color:var(--red)}
 .sum-purple .sum-val{color:var(--purple)}
 
-/* ג”€ג”€ ANNUAL ג”€ג”€ */
+/* ── ANNUAL ── */
 .charts-grid{display:grid;grid-template-columns:2fr 1fr;gap:.85rem;margin-bottom:1rem}
 .chart-card{
   background:#fff;
@@ -319,7 +318,7 @@ input{font-family:inherit}
 .pct{color:var(--purple)}
 .dash-val{color:#94a3b8}
 
-/* ג”€ג”€ SYNC STATUS ג”€ג”€ */
+/* ── SYNC STATUS ── */
 #sync-status{font-size:.75rem;white-space:nowrap;transition:color .3s;min-width:90px;text-align:center}
 .hbtn-cloud{background:rgba(255,255,255,.22)!important}
 .hbtn-cloud:hover{background:rgba(255,255,255,.35)!important}
@@ -330,7 +329,7 @@ input{font-family:inherit}
 .prf-item:last-child{border-bottom:none}
 .prf-item.active{background:#eff6ff;font-weight:600;color:#1d4ed8}
 
-/* ג”€ג”€ MODAL ג”€ג”€ */
+/* ── MODAL ── */
 .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center}
 .modal-backdrop.open{display:flex}
 .modal-box{background:#fff;border-radius:14px;padding:1.4rem 1.5rem;width:380px;max-width:92vw;box-shadow:0 20px 40px rgba(0,0,0,.2)}
@@ -344,7 +343,7 @@ input{font-family:inherit}
 .modal-btn:not(.primary):not(.danger){background:#f1f5f9;color:#374151}
 .modal-btn:not(.primary):not(.danger):hover{background:#e2e8f0}
 
-/* ג”€ג”€ TOAST ג”€ג”€ */
+/* ── TOAST ── */
 .toast{
   position:fixed;
   bottom:1.5rem;
@@ -363,7 +362,7 @@ input{font-family:inherit}
 }
 .toast.show{opacity:1}
 
-/* ג”€ג”€ RESPONSIVE ג”€ג”€ */
+/* ── RESPONSIVE ── */
 @media(max-width:640px){
   .cards-row{grid-template-columns:1fr 1fr}
   .summary-grid{grid-template-columns:1fr}
@@ -382,17 +381,17 @@ input{font-family:inherit}
 
 <!-- HEADER -->
 <header class="app-header">
-  <h1>נ¦ ׳×׳§׳¦׳™׳‘ ׳©׳ ׳×׳™ - ׳”׳•׳¦׳׳•׳× ׳•׳”׳›׳ ׳¡׳•׳×</h1>
+  <h1>🏦 תקציב שנתי - הוצאות והכנסות</h1>
   <div class="header-controls">
     <div class="target-pill">
-      <span>׳™׳¢׳“ ׳—׳™׳¡׳›׳•׳:</span>
+      <span>יעד חיסכון:</span>
       <input type="number" id="savingsTargetInput" min="0" max="100" step="1" value="15">
       <span>%</span>
     </div>
-    <button class="hbtn hbtn-profile" onclick="showProfiles()" title="׳‘׳—׳¨ ׳₪׳¨׳•׳₪׳™׳">נ‘₪ <span id="profile-name">׳¨׳׳©׳™</span> ג–¾</button>
-    <button class="hbtn hbtn-cloud" onclick="saveToGitHub()">ג˜ן¸ ׳©׳׳•׳¨ ׳‘׳¢׳ ׳</button>
-    <button class="hbtn hbtn-cloud" onclick="loadFromGitHubPrompt()">נ”„ ׳˜׳¢׳ ׳׳¢׳ ׳</button>
-    <button class="hbtn" onclick="showSettings()" title="׳”׳’׳“׳¨׳•׳× ׳¡׳ ׳›׳¨׳•׳">ג™ן¸</button>
+    <button class="hbtn hbtn-profile" onclick="showProfiles()" title="בחר פרופיל">👤 <span id="profile-name">ראשי</span> ▾</button>
+    <button class="hbtn hbtn-cloud" onclick="saveToGitHub()">☁️ שמור בענן</button>
+    <button class="hbtn hbtn-cloud" onclick="loadFromGitHubPrompt()">🔄 טען מענן</button>
+    <button class="hbtn" onclick="showSettings()" title="הגדרות סנכרון">⚙️</button>
     <span id="sync-status"></span>
   </div>
 </header>
@@ -400,43 +399,43 @@ input{font-family:inherit}
 <!-- SETTINGS MODAL -->
 <div id="settings-modal" class="modal-backdrop" onclick="if(event.target===this)closeSettings()">
   <div class="modal-box" style="width:420px">
-    <h2 style="margin-bottom:.75rem;font-size:1.05rem;font-weight:700">ג™ן¸ ׳—׳™׳‘׳•׳¨ ׳׳¢׳ ׳</h2>
+    <h2 style="margin-bottom:.75rem;font-size:1.05rem;font-weight:700">⚙️ חיבור לענן</h2>
 
     <!-- Status indicator -->
     <div id="settings-status" style="display:none;margin-bottom:.8rem;padding:.55rem .8rem;border-radius:8px;font-size:.82rem"></div>
 
     <!-- Step 1: PAT entry (shown only when no PAT or bad credentials) -->
     <div id="step-setup">
-      <p style="font-size:.85rem;color:#374151;margin-bottom:.35rem;font-weight:600">נ”‘ ׳§׳•׳“ ׳’׳™׳©׳” ׳׳’׳™׳˜׳”׳׳‘</p>
+      <p style="font-size:.85rem;color:#374151;margin-bottom:.35rem;font-weight:600">🔑 קוד גישה לגיטהאב</p>
       <p style="font-size:.78rem;color:#6b7280;margin-bottom:.65rem">
-        ׳”׳›׳ ׳¡ ׳₪׳¢׳ ׳׳—׳× ג€” ׳ ׳©׳׳¨ ׳׳•׳˜׳•׳׳˜׳™׳× ׳‘׳׳›׳©׳™׳¨.<br>
+        הכנס פעם אחת — נשמר אוטומטית במכשיר.<br>
         <a href="https://github.com/settings/tokens/new?scopes=repo&description=budget-tracker" target="_blank"
-           style="color:#2563eb;text-decoration:none;font-size:.77rem">ג–¸ ׳¦׳•׳¨ ׳§׳•׳“ ׳’׳™׳©׳” ׳—׳“׳© ׳‘׳’׳™׳˜׳”׳׳‘ ג†’</a>
+           style="color:#2563eb;text-decoration:none;font-size:.77rem">▸ צור קוד גישה חדש בגיטהאב →</a>
       </p>
       <input type="password" id="pat-input" class="pat-inp" placeholder="ghp_..."
              onkeydown="if(event.key==='Enter')savePAT()">
       <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:.75rem">
-        <button onclick="savePAT()" class="modal-btn primary">׳©׳׳•׳¨</button>
-        <button onclick="closeSettings()" class="modal-btn">׳‘׳™׳˜׳•׳</button>
+        <button onclick="savePAT()" class="modal-btn primary">שמור</button>
+        <button onclick="closeSettings()" class="modal-btn">ביטול</button>
       </div>
     </div>
 
-    <!-- Step 2: Connected ג€” show share link -->
+    <!-- Step 2: Connected — show share link -->
     <div id="step-connected" style="display:none">
       <div id="connected-badge" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:.75rem;margin-bottom:.85rem">
-        <p style="font-size:.82rem;color:#166534;font-weight:600;margin-bottom:.15rem">ג… ׳׳—׳•׳‘׳¨ ׳׳¢׳ ׳</p>
-        <p id="connected-sub" style="font-size:.77rem;color:#15803d">׳”׳ ׳×׳•׳ ׳™׳ ׳ ׳©׳׳¨׳™׳ ׳•׳ ׳˜׳¢׳ ׳™׳ ׳׳•׳˜׳•׳׳˜׳™׳×</p>
+        <p style="font-size:.82rem;color:#166534;font-weight:600;margin-bottom:.15rem">✅ מחובר לענן</p>
+        <p id="connected-sub" style="font-size:.77rem;color:#15803d">הנתונים נשמרים ונטענים אוטומטית</p>
       </div>
-      <p style="font-size:.82rem;color:#374151;font-weight:600;margin-bottom:.35rem">נ“² ׳©׳×׳£ ׳¢׳ ׳‘׳ ׳™ ׳”׳׳©׳₪׳—׳”</p>
-      <p id="share-desc" style="font-size:.77rem;color:#6b7280;margin-bottom:.6rem">׳©׳׳— ׳׳× ׳”׳§׳™׳©׳•׳¨ ׳”׳‘׳ ג€” ׳”׳₪׳•׳×׳— ׳׳•׳×׳• ׳׳—׳•׳‘׳¨ ׳׳•׳˜׳•׳׳˜׳™׳×</p>
+      <p style="font-size:.82rem;color:#374151;font-weight:600;margin-bottom:.35rem">📲 שתף עם בני המשפחה</p>
+      <p id="share-desc" style="font-size:.77rem;color:#6b7280;margin-bottom:.6rem">שלח את הקישור הבא — הפותח אותו מחובר אוטומטית</p>
       <div style="display:flex;gap:.4rem">
         <input type="text" id="share-link-inp" readonly
                style="flex:1;padding:.35rem .6rem;border:1px solid #e2e8f0;border-radius:7px;font-size:.75rem;color:#6b7280;background:#f8fafc;direction:ltr">
-        <button onclick="copyShareLink()" class="modal-btn primary" style="white-space:nowrap">נ“‹ ׳”׳¢׳×׳§</button>
+        <button onclick="copyShareLink()" class="modal-btn primary" style="white-space:nowrap">📋 העתק</button>
       </div>
       <div style="display:flex;gap:.5rem;justify-content:space-between;margin-top:.85rem;align-items:center">
-        <button id="disconnect-btn" onclick="clearPAT()" style="font-size:.75rem;color:#dc2626;background:none;border:none;cursor:pointer;padding:.2rem 0">ג• ׳ ׳×׳§ ׳׳›׳©׳™׳¨ ׳–׳”</button>
-        <button onclick="closeSettings()" class="modal-btn">׳¡׳’׳•׳¨</button>
+        <button id="disconnect-btn" onclick="clearPAT()" style="font-size:.75rem;color:#dc2626;background:none;border:none;cursor:pointer;padding:.2rem 0">✕ נתק מכשיר זה</button>
+        <button onclick="closeSettings()" class="modal-btn">סגור</button>
       </div>
     </div>
   </div>
@@ -445,21 +444,21 @@ input{font-family:inherit}
 <!-- PROFILES MODAL -->
 <div id="profiles-modal" class="modal-backdrop" onclick="if(event.target===this)closeProfiles()">
   <div class="modal-box" style="width:430px">
-    <h2 style="margin-bottom:.9rem;font-size:1.05rem;font-weight:700">נ‘¥ ׳₪׳¨׳•׳₪׳™׳׳™׳ ׳׳©׳₪׳—׳×׳™׳™׳</h2>
+    <h2 style="margin-bottom:.9rem;font-size:1.05rem;font-weight:700">👥 פרופילים משפחתיים</h2>
     <div style="display:flex;gap:.5rem;margin-bottom:.5rem;align-items:center">
-      <input type="text" id="new-profile-input" class="pat-inp" placeholder="׳©׳ (׳׳׳©׳: ׳“׳ ׳™)..." style="flex:1;margin:0"
+      <input type="text" id="new-profile-input" class="pat-inp" placeholder="שם (למשל: דני)..." style="flex:1;margin:0"
              onkeydown="if(event.key==='Enter')document.getElementById('new-profile-pin').focus()">
-      <input type="text" id="new-profile-pin" class="pat-inp" placeholder="׳§׳•׳“ ׳¡׳•׳“׳™..." maxlength="8"
+      <input type="text" id="new-profile-pin" class="pat-inp" placeholder="קוד סודי..." maxlength="8"
              style="width:110px;margin:0" onkeydown="if(event.key==='Enter')createProfile()">
-      <button onclick="createProfile()" class="modal-btn primary" style="white-space:nowrap">+ ׳¦׳•׳¨</button>
+      <button onclick="createProfile()" class="modal-btn primary" style="white-space:nowrap">+ צור</button>
     </div>
-    <p style="font-size:.75rem;color:#9ca3af;margin-bottom:.75rem">׳”׳§׳•׳“ ׳”׳¡׳•׳“׳™ ׳ ׳“׳¨׳© ׳›׳“׳™ ׳׳₪׳×׳•׳— ׳׳× ׳”׳₪׳¨׳•׳₪׳™׳ ׳‘׳׳›׳©׳™׳¨ ׳׳—׳¨</p>
+    <p style="font-size:.75rem;color:#9ca3af;margin-bottom:.75rem">הקוד הסודי נדרש כדי לפתוח את הפרופיל במכשיר אחר</p>
     <div id="profiles-list" style="max-height:280px;overflow-y:auto;border:1px solid #e2e8f0;border-radius:8px">
-      <div style="padding:1rem;text-align:center;color:#9ca3af;font-size:.85rem">׳˜׳•׳¢׳...</div>
+      <div style="padding:1rem;text-align:center;color:#9ca3af;font-size:.85rem">טוען...</div>
     </div>
-    <p style="font-size:.77rem;color:#9ca3af;margin-top:.65rem">׳›׳ ׳₪׳¨׳•׳₪׳™׳ ׳©׳•׳׳¨ ׳§׳•׳‘׳¥ ׳ ׳×׳•׳ ׳™׳ ׳ ׳₪׳¨׳“ ׳‘׳¢׳ ׳</p>
+    <p style="font-size:.77rem;color:#9ca3af;margin-top:.65rem">כל פרופיל שומר קובץ נתונים נפרד בענן</p>
     <div style="display:flex;justify-content:flex-end;margin-top:.65rem">
-      <button onclick="closeProfiles()" class="modal-btn">׳¡׳’׳•׳¨</button>
+      <button onclick="closeProfiles()" class="modal-btn">סגור</button>
     </div>
   </div>
 </div>
@@ -471,26 +470,26 @@ input{font-family:inherit}
 <div class="dashboard">
   <div class="cards-row">
     <div class="kpi kpi-income">
-      <div class="kpi-label">נ’° ׳”׳›׳ ׳¡׳•׳×</div>
-      <div class="kpi-value" id="kpi-income">ג‚× 0</div>
+      <div class="kpi-label">💰 הכנסות</div>
+      <div class="kpi-value" id="kpi-income">₪ 0</div>
     </div>
     <div class="kpi kpi-expense">
-      <div class="kpi-label">נ’¸ ׳”׳•׳¦׳׳•׳×</div>
-      <div class="kpi-value" id="kpi-expense">ג‚× 0</div>
+      <div class="kpi-label">💸 הוצאות</div>
+      <div class="kpi-value" id="kpi-expense">₪ 0</div>
     </div>
     <div class="kpi kpi-savings" id="kpi-savings-card">
-      <div class="kpi-label">נ¦ ׳—׳™׳¡׳›׳•׳</div>
-      <div class="kpi-value" id="kpi-savings">ג‚× 0</div>
+      <div class="kpi-label">🏦 חיסכון</div>
+      <div class="kpi-value" id="kpi-savings">₪ 0</div>
     </div>
     <div class="kpi kpi-pct">
-      <div class="kpi-label">נ“ % ׳—׳™׳¡׳›׳•׳</div>
+      <div class="kpi-label">📊 % חיסכון</div>
       <div class="kpi-value" id="kpi-pct">0.0%</div>
     </div>
   </div>
   <div class="progress-row">
-    <span class="progress-lbl">׳™׳¢׳“ ׳—׳™׳¡׳›׳•׳:</span>
+    <span class="progress-lbl">יעד חיסכון:</span>
     <div class="track"><div class="fill" id="p-fill" style="width:0%"></div></div>
-    <span class="progress-txt" id="p-txt">ג‚×0 ׳׳×׳•׳ ג‚×0</span>
+    <span class="progress-txt" id="p-txt">₪0 מתוך ₪0</span>
   </div>
 </div>
 
@@ -503,10 +502,10 @@ input{font-family:inherit}
     <!-- Income -->
     <div class="sec income-sec">
       <div class="sec-head" onclick="toggleSec('income')">
-        <div class="sec-title">נ’° ׳”׳›׳ ׳¡׳•׳×</div>
+        <div class="sec-title">💰 הכנסות</div>
         <div class="sec-right">
-          <span class="sec-sub pos" id="inc-display">ג‚× 0</span>
-          <span class="chevron open" id="chev-income">ג–¼</span>
+          <span class="sec-sub pos" id="inc-display">₪ 0</span>
+          <span class="chevron open" id="chev-income">▼</span>
         </div>
       </div>
       <div class="sec-body open" id="body-income">
@@ -519,26 +518,26 @@ input{font-family:inherit}
 
     <!-- Summary -->
     <div class="summary-card">
-      <div class="summary-title">נ“‹ ׳¡׳™׳›׳•׳ ׳—׳•׳“׳©׳™</div>
+      <div class="summary-title">📋 סיכום חודשי</div>
       <div class="summary-grid">
         <div class="sum-item sum-red-lbl">
-          <span class="sum-lbl">נ’¸ ׳¡׳”"׳› ׳”׳•׳¦׳׳•׳×</span>
-          <span class="sum-val" id="s-exp">ג‚× 0</span>
+          <span class="sum-lbl">💸 סה"כ הוצאות</span>
+          <span class="sum-val" id="s-exp">₪ 0</span>
         </div>
         <div class="sum-item" id="s-sav-wrap">
-          <span class="sum-lbl">נ¦ ׳—׳™׳¡׳›׳•׳ ׳‘׳₪׳•׳¢׳</span>
-          <span class="sum-val" id="s-sav">ג‚× 0</span>
+          <span class="sum-lbl">🏦 חיסכון בפועל</span>
+          <span class="sum-val" id="s-sav">₪ 0</span>
         </div>
         <div class="sum-item sum-purple">
-          <span class="sum-lbl">נ¯ ׳™׳¢׳“ ׳—׳™׳¡׳›׳•׳</span>
-          <span class="sum-val" id="s-tgt">ג‚× 0</span>
+          <span class="sum-lbl">🎯 יעד חיסכון</span>
+          <span class="sum-val" id="s-tgt">₪ 0</span>
         </div>
         <div class="sum-item" id="s-gap-wrap">
-          <span class="sum-lbl">נ“ ׳₪׳¢׳¨ ׳׳”׳™׳¢׳“</span>
-          <span class="sum-val" id="s-gap">ג‚× 0</span>
+          <span class="sum-lbl">📏 פער מהיעד</span>
+          <span class="sum-val" id="s-gap">₪ 0</span>
         </div>
         <div class="sum-item sum-purple" style="grid-column:span 2">
-          <span class="sum-lbl">נ“ % ׳—׳™׳¡׳›׳•׳ ׳‘׳₪׳•׳¢׳ ׳׳”׳”׳›׳ ׳¡׳”</span>
+          <span class="sum-lbl">📊 % חיסכון בפועל מההכנסה</span>
           <span class="sum-val" id="s-pct">0.0%</span>
         </div>
       </div>
@@ -549,11 +548,11 @@ input{font-family:inherit}
   <div id="annual-view" style="display:none">
     <div class="charts-grid">
       <div class="chart-card">
-        <h3>נ“ ׳”׳›׳ ׳¡׳•׳× ׳׳•׳ ׳”׳•׳¦׳׳•׳× ג€” ׳›׳ ׳”׳—׳•׳“׳©׳™׳</h3>
+        <h3>📊 הכנסות מול הוצאות — כל החודשים</h3>
         <canvas id="barChart"></canvas>
       </div>
       <div class="chart-card">
-        <h3>נ¥§ ׳₪׳™׳¨׳•׳˜ ׳”׳•׳¦׳׳•׳× ׳׳₪׳™ ׳§׳˜׳’׳•׳¨׳™׳” (׳©׳ ׳×׳™)</h3>
+        <h3>🥧 פירוט הוצאות לפי קטגוריה (שנתי)</h3>
         <canvas id="donutChart"></canvas>
       </div>
     </div>
@@ -566,117 +565,117 @@ input{font-family:inherit}
 <div class="toast" id="toast"></div>
 
 <script>
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // DATA DEFINITIONS
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
-const MONTHS = ['׳™׳ ׳•׳׳¨','׳₪׳‘׳¨׳•׳׳¨','׳׳¨׳¥','׳׳₪׳¨׳™׳','׳׳׳™','׳™׳•׳ ׳™','׳™׳•׳׳™','׳׳•׳’׳•׳¡׳˜','׳¡׳₪׳˜׳׳‘׳¨','׳׳•׳§׳˜׳•׳‘׳¨','׳ ׳•׳‘׳׳‘׳¨','׳“׳¦׳׳‘׳¨'];
+// ═══════════════════════════════════════════════
+const MONTHS = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
 
 const INCOME_FIELDS = [
-  {id:'salary',      lbl:'׳׳©׳›׳•׳¨׳× (׳ ׳˜׳•)'},
-  {id:'freelance',   lbl:'׳”׳›׳ ׳¡׳” ׳ ׳•׳¡׳₪׳× / ׳₪׳¨׳™׳׳ ׳¡'},
-  {id:'taxReturn',   lbl:'׳”׳—׳–׳¨׳™ ׳׳¡ / ׳§׳¦׳‘׳”'},
-  {id:'investments', lbl:'׳¨׳™׳‘׳™׳× ׳׳”׳©׳§׳¢׳•׳× / ׳“׳™׳‘׳™׳“׳ ׳“׳™׳'},
-  {id:'gifts',       lbl:'׳׳×׳ ׳•׳× / ׳”׳—׳–׳¨׳™׳'},
-  {id:'other',       lbl:'׳׳—׳¨ (׳¦׳™׳™׳ ׳׳§׳•׳¨)'},
+  {id:'salary',      lbl:'משכורת (נטו)'},
+  {id:'freelance',   lbl:'הכנסה נוספת / פרילנס'},
+  {id:'taxReturn',   lbl:'החזרי מס / קצבה'},
+  {id:'investments', lbl:'ריבית מהשקעות / דיבידנדים'},
+  {id:'gifts',       lbl:'מתנות / החזרים'},
+  {id:'other',       lbl:'אחר (ציין מקור)'},
 ];
 
 const CATS = [
-  {id:'housing', lbl:'נ  ׳“׳™׳•׳¨ ׳•׳—׳©׳‘׳•׳ ׳•׳×', items:[
-    {id:'rent',        lbl:'׳©׳›׳¨ ׳“׳™׳¨׳”'},
-    {id:'hoa',         lbl:'׳•׳¢׳“ ׳‘׳™׳× / ׳׳—׳–׳§׳”'},
-    {id:'arnona',      lbl:'׳׳¨׳ ׳•׳ ׳”'},
-    {id:'electricity', lbl:'׳—׳©׳׳'},
-    {id:'water',       lbl:'׳׳™׳'},
-    {id:'gas',         lbl:'׳’׳– / ׳“׳׳§'},
-    {id:'internetTv',  lbl:'׳׳™׳ ׳˜׳¨׳ ׳˜ / ׳˜׳׳•׳•׳™׳–׳™׳” / ׳©׳™׳¨׳•׳×׳™ ׳¡׳˜׳¨׳™׳׳™׳ ׳’'},
-    {id:'phone',       lbl:'׳˜׳׳₪׳•׳ ׳ ׳™׳™׳“ ׳•׳—׳‘׳™׳׳× ׳’׳׳™׳©׳”'},
-    {id:'maintenance', lbl:'׳×׳—׳–׳•׳§׳× ׳“׳™׳¨׳” ׳•׳×׳™׳§׳•׳ ׳™׳'},
+  {id:'housing', lbl:'🏠 דיור וחשבונות', items:[
+    {id:'rent',        lbl:'שכר דירה'},
+    {id:'hoa',         lbl:'ועד בית / אחזקה'},
+    {id:'arnona',      lbl:'ארנונה'},
+    {id:'electricity', lbl:'חשמל'},
+    {id:'water',       lbl:'מים'},
+    {id:'gas',         lbl:'גז / דלק'},
+    {id:'internetTv',  lbl:'אינטרנט / טלוויזיה / שירותי סטרימינג'},
+    {id:'phone',       lbl:'טלפון נייד וחבילת גלישה'},
+    {id:'maintenance', lbl:'תחזוקת דירה ותיקונים'},
   ]},
-  {id:'food', lbl:'נ›ן¸ ׳׳–׳•׳ ׳•׳׳¦׳¨׳›׳™׳', items:[
-    {id:'supermarket', lbl:'׳§׳ ׳™׳•׳× ׳‘׳¡׳•׳₪׳¨׳׳¨׳§׳˜'},
-    {id:'vegetables',  lbl:'׳™׳¨׳§׳•׳× ׳•׳₪׳™׳¨׳•׳×'},
-    {id:'meat',        lbl:'׳‘׳©׳¨ ׳•׳“׳’׳™׳'},
-    {id:'cleaning',    lbl:'׳׳•׳¦׳¨׳™ ׳ ׳™׳§׳™׳•׳ ׳׳‘׳™׳×'},
-    {id:'hygiene',     lbl:'׳׳•׳¦׳¨׳™ ׳”׳™׳’׳™׳™׳ ׳” ׳׳™׳©׳™׳×'},
-    {id:'bread',       lbl:'׳׳—׳ ׳•׳׳׳₪׳”'},
-    {id:'restaurants', lbl:'׳׳¡׳¢׳“׳•׳× ׳‘׳—׳•׳¥'},
-    {id:'coffee',      lbl:'׳§׳₪׳” ׳•׳‘׳×׳™ ׳§׳₪׳”'},
-    {id:'takeout',     lbl:'׳׳•׳›׳ ׳׳•׳›׳ / ׳׳©׳׳•׳—׳™׳'},
+  {id:'food', lbl:'🛍️ מזון ומצרכים', items:[
+    {id:'supermarket', lbl:'קניות בסופרמרקט'},
+    {id:'vegetables',  lbl:'ירקות ופירות'},
+    {id:'meat',        lbl:'בשר ודגים'},
+    {id:'cleaning',    lbl:'מוצרי ניקיון לבית'},
+    {id:'hygiene',     lbl:'מוצרי היגיינה אישית'},
+    {id:'bread',       lbl:'לחם ומאפה'},
+    {id:'restaurants', lbl:'מסעדות בחוץ'},
+    {id:'coffee',      lbl:'קפה ובתי קפה'},
+    {id:'takeout',     lbl:'אוכל מוכן / משלוחים'},
   ]},
-  {id:'transport', lbl:'נ— ׳×׳—׳‘׳•׳¨׳” ׳•׳¨׳›׳‘', items:[
-    {id:'fuel',            lbl:'׳“׳׳§ / ׳”׳˜׳¢׳ ׳” ׳—׳©׳׳׳™׳×'},
-    {id:'carInsurance',    lbl:'׳‘׳™׳˜׳•׳— ׳¨׳›׳‘ ׳—׳•׳‘׳” ׳•׳׳§׳™׳£'},
-    {id:'carRepair',       lbl:'׳˜׳™׳₪׳•׳׳™׳ ׳•׳×׳™׳§׳•׳ ׳™׳'},
-    {id:'carTest',         lbl:'׳˜׳¡׳˜׳™׳ ׳•׳¨׳™׳©׳™׳•׳'},
-    {id:'parking',         lbl:'׳—׳ ׳™׳” / ׳›׳‘׳™׳©׳™׳'},
-    {id:'carLease',        lbl:'׳׳’׳¨׳× ׳¨׳›׳‘ / ׳׳™׳–׳™׳ ׳’'},
-    {id:'publicTransport', lbl:'׳×׳—׳‘׳•׳¨׳” ׳¦׳™׳‘׳•׳¨׳™׳× (׳׳•׳˜׳•׳‘׳•׳¡, ׳¨׳›׳‘׳×)'},
-    {id:'taxi',            lbl:'׳׳•׳ ׳™׳•׳× / ׳׳’׳¨׳× ׳×׳—׳‘׳•׳¨׳”'},
-    {id:'uber',            lbl:'׳ ׳¡׳™׳¢׳•׳× ׳‘׳׳•׳ ׳™׳× / ׳׳•׳‘׳¨'},
+  {id:'transport', lbl:'🚗 תחבורה ורכב', items:[
+    {id:'fuel',            lbl:'דלק / הטענה חשמלית'},
+    {id:'carInsurance',    lbl:'ביטוח רכב חובה ומקיף'},
+    {id:'carRepair',       lbl:'טיפולים ותיקונים'},
+    {id:'carTest',         lbl:'טסטים ורישיון'},
+    {id:'parking',         lbl:'חניה / כבישים'},
+    {id:'carLease',        lbl:'אגרת רכב / ליזינג'},
+    {id:'publicTransport', lbl:'תחבורה ציבורית (אוטובוס, רכבת)'},
+    {id:'taxi',            lbl:'מוניות / אגרת תחבורה'},
+    {id:'uber',            lbl:'נסיעות במונית / אובר'},
   ]},
-  {id:'communication', lbl:'נ“± ׳×׳§׳©׳•׳¨׳× ׳•׳׳™׳ ׳•׳™׳™׳', items:[
-    {id:'mobile',       lbl:'׳¡׳׳•׳׳¨ / ׳—׳‘׳™׳׳× ׳¡׳׳•׳׳¨׳™׳×'},
-    {id:'homeInternet', lbl:'׳׳™׳ ׳˜׳¨׳ ׳˜ ׳‘׳‘׳™׳×'},
-    {id:'streaming',    lbl:'׳ ׳˜׳₪׳׳™׳§׳¡ / ׳¡׳˜׳¨׳™׳׳™׳ ׳’ (׳“׳™׳¡׳ ׳™+, ׳׳₪׳׳™+, HBO)'},
-    {id:'music',        lbl:'׳¡׳₪׳•׳˜׳™׳₪׳™׳™ / ׳׳₪׳ ׳׳•׳–׳™׳§׳”'},
-    {id:'software',     lbl:'׳׳ ׳•׳™׳™׳ ׳׳×׳•׳›׳ ׳•׳× ׳•׳׳™׳—׳¡׳•׳ ׳¢׳ ׳ (Cloud)'},
+  {id:'communication', lbl:'📱 תקשורת ומינויים', items:[
+    {id:'mobile',       lbl:'סלולר / חבילת סלולרית'},
+    {id:'homeInternet', lbl:'אינטרנט בבית'},
+    {id:'streaming',    lbl:'נטפליקס / סטרימינג (דיסני+, אפלי+, HBO)'},
+    {id:'music',        lbl:'ספוטיפיי / אפל מוזיקה'},
+    {id:'software',     lbl:'מנויים לתוכנות ואיחסון ענן (Cloud)'},
   ]},
-  {id:'health', lbl:'נ’ ׳‘׳¨׳™׳׳•׳× ׳•׳¨׳₪׳•׳׳”', items:[
-    {id:'healthIns',   lbl:'׳‘׳™׳˜׳•׳— ׳‘׳¨׳™׳׳•׳× / ׳׳©׳׳™׳'},
-    {id:'suppIns',     lbl:'׳‘׳™׳˜׳•׳— ׳׳©׳׳™׳ (׳׳•׳©׳׳ / ׳׳›׳‘׳™ / ׳–׳”׳‘)'},
-    {id:'medications', lbl:'׳×׳¨׳•׳₪׳•׳× ׳•׳˜׳™׳₪׳•׳׳™׳'},
-    {id:'dentist',     lbl:'׳¨׳•׳₪׳׳™ ׳©׳™׳ ׳™׳™׳ / ׳׳•׳₪׳˜׳•׳׳˜׳¨׳™׳¡׳˜'},
-    {id:'glasses',     lbl:'׳׳©׳§׳₪׳™׳™׳ ׳•׳•׳™׳˜׳׳™׳ ׳™׳'},
-    {id:'gym',         lbl:'׳—׳“׳¨ ׳›׳•׳©׳¨ ׳•׳׳׳׳ ׳׳™׳•׳•׳™'},
+  {id:'health', lbl:'💊 בריאות ורפואה', items:[
+    {id:'healthIns',   lbl:'ביטוח בריאות / משלים'},
+    {id:'suppIns',     lbl:'ביטוח משלים (מושלם / מכבי / זהב)'},
+    {id:'medications', lbl:'תרופות וטיפולים'},
+    {id:'dentist',     lbl:'רופאי שיניים / אופטומטריסט'},
+    {id:'glasses',     lbl:'משקפיים וויטמינים'},
+    {id:'gym',         lbl:'חדר כושר ומאמן ליווי'},
   ]},
-  {id:'leisure', lbl:'נ½ן¸ ׳₪׳ ׳׳™ ׳•׳‘׳™׳׳•׳™', items:[
-    {id:'restLeisure', lbl:'׳׳¡׳¢׳“׳•׳× ׳•׳‘׳×׳™ ׳§׳₪׳”'},
-    {id:'bars',        lbl:'׳‘׳¨׳™׳ ׳•׳—׳™׳™ ׳׳™׳׳”'},
-    {id:'cinema',      lbl:'׳§׳•׳׳ ׳•׳¢ / ׳”׳•׳₪׳¢׳•׳× / ׳×׳™׳׳˜׳¨׳•׳'},
-    {id:'hobbies',     lbl:'׳×׳—׳‘׳™׳‘׳™׳ / ׳׳•׳¢׳“׳•׳ / ׳¡׳₪׳¨׳™׳'},
-    {id:'gaming',      lbl:'׳׳©׳—׳§׳™׳ / ׳’׳™׳׳™׳ ׳’'},
-    {id:'sports',      lbl:'׳×׳—׳‘׳™׳‘׳™ ׳¡׳₪׳•׳¨׳˜ (׳›׳•׳©׳¨, ׳˜׳ ׳™׳¡, ׳¡׳₪׳•׳¨׳˜)'},
-    {id:'vacation',    lbl:'׳—׳•׳₪׳©׳•׳× / ׳˜׳™׳•׳׳™׳ / ׳ ׳•׳₪׳©'},
+  {id:'leisure', lbl:'🍽️ פנאי ובילוי', items:[
+    {id:'restLeisure', lbl:'מסעדות ובתי קפה'},
+    {id:'bars',        lbl:'ברים וחיי לילה'},
+    {id:'cinema',      lbl:'קולנוע / הופעות / תיאטרון'},
+    {id:'hobbies',     lbl:'תחביבים / מועדון / ספרים'},
+    {id:'gaming',      lbl:'משחקים / גימינג'},
+    {id:'sports',      lbl:'תחביבי ספורט (כושר, טניס, ספורט)'},
+    {id:'vacation',    lbl:'חופשות / טיולים / נופש'},
   ]},
-  {id:'clothing', lbl:'נ‘• ׳׳‘׳•׳© ׳•׳׳™׳©׳™', items:[
-    {id:'clothes',     lbl:'׳‘׳’׳“׳™׳ ׳•׳”׳ ׳¢׳׳”'},
-    {id:'haircut',     lbl:'׳×׳¡׳₪׳•׳¨׳× / ׳¢׳™׳¦׳•׳‘ ׳©׳™׳¢׳¨'},
-    {id:'cosmetics',   lbl:'׳׳•׳¦׳¨׳™ ׳˜׳™׳₪׳•׳— ׳•׳§׳•׳¡׳׳˜׳™׳§׳”'},
-    {id:'accessories', lbl:'׳׳‘׳™׳–׳¨׳™ ׳׳•׳₪׳ ׳” (׳×׳›׳©׳™׳˜׳™׳, ׳×׳™׳§׳™׳, ׳׳©׳§׳₪׳™׳™׳)'},
+  {id:'clothing', lbl:'👕 לבוש ואישי', items:[
+    {id:'clothes',     lbl:'בגדים והנעלה'},
+    {id:'haircut',     lbl:'תספורת / עיצוב שיער'},
+    {id:'cosmetics',   lbl:'מוצרי טיפוח וקוסמטיקה'},
+    {id:'accessories', lbl:'אביזרי אופנה (תכשיטים, תיקים, משקפיים)'},
   ]},
-  {id:'education', lbl:'נ“ ׳”׳©׳›׳׳” ׳•׳”׳×׳₪׳×׳—׳•׳×', items:[
-    {id:'tuition',     lbl:'׳©׳›׳¨ ׳׳™׳׳•׳“ / ׳§׳•׳¨׳¡׳™׳'},
-    {id:'eduBooks',    lbl:'׳¡׳₪׳¨׳™׳ ׳•׳—׳•׳׳¨׳™ ׳׳™׳׳•׳“'},
-    {id:'conferences', lbl:'׳›׳ ׳¡׳™׳ ׳•׳”׳¨׳¦׳׳•׳×'},
-    {id:'workshops',   lbl:'׳¡׳“׳ ׳׳•׳× / ׳§׳•׳¦׳³׳™׳ ׳’'},
+  {id:'education', lbl:'🎓 השכלה והתפתחות', items:[
+    {id:'tuition',     lbl:'שכר לימוד / קורסים'},
+    {id:'eduBooks',    lbl:'ספרים וחומרי לימוד'},
+    {id:'conferences', lbl:'כנסים והרצאות'},
+    {id:'workshops',   lbl:'סדנאות / קוצ׳ינג'},
   ]},
-  {id:'culture', lbl:'נ¡ ׳₪׳ ׳׳™, ׳×׳¨׳‘׳•׳× ׳•׳‘׳™׳׳•׳™', items:[
-    {id:'entertainment', lbl:'׳‘׳™׳׳•׳™ (׳§׳•׳׳ ׳•׳¢, ׳×׳™׳׳˜׳¨׳•׳, ׳׳•׳₪׳¢׳™׳)'},
-    {id:'sportsGym',     lbl:'׳¡׳₪׳•׳¨׳˜ / ׳—׳“׳¨ ׳›׳•׳©׳¨ / ׳©׳™׳¢׳•׳¨׳™׳'},
-    {id:'cultHobbies',   lbl:'׳×׳—׳‘׳™׳‘׳™׳'},
-    {id:'press',         lbl:'׳¡׳₪׳¨׳™׳ / ׳›׳×׳‘׳™ ׳¢׳× / ׳¢׳™׳×׳•׳ ׳™׳'},
-    {id:'presents',      lbl:'׳׳×׳ ׳•׳× ׳•׳׳™׳¨׳•׳¢׳™׳'},
+  {id:'culture', lbl:'🎡 פנאי, תרבות ובילוי', items:[
+    {id:'entertainment', lbl:'בילוי (קולנוע, תיאטרון, מופעים)'},
+    {id:'sportsGym',     lbl:'ספורט / חדר כושר / שיעורים'},
+    {id:'cultHobbies',   lbl:'תחביבים'},
+    {id:'press',         lbl:'ספרים / כתבי עת / עיתונים'},
+    {id:'presents',      lbl:'מתנות ואירועים'},
   ]},
-  {id:'pets', lbl:'נ¾ ׳׳‘׳¢׳׳™ ׳—׳™׳™׳', items:[
-    {id:'vet',     lbl:'׳•׳˜׳¨׳™׳ ׳¨ / ׳׳–׳•׳ / ׳˜׳™׳₪׳•׳'},
-    {id:'petCare', lbl:'׳¢׳׳׳× ׳“׳•׳’ / ׳“׳™׳™׳¡׳™׳˜׳¨'},
+  {id:'pets', lbl:'🐾 לבעלי חיים', items:[
+    {id:'vet',     lbl:'וטרינר / מזון / טיפול'},
+    {id:'petCare', lbl:'עמלת דוג / דייסיטר'},
   ]},
-  {id:'finance', lbl:'נ’³ ׳₪׳™׳ ׳ ׳¡׳™׳ ׳•׳”׳×׳—׳™׳™׳‘׳•׳™׳•׳×', items:[
-    {id:'bankFees',   lbl:'׳¢׳׳׳•׳× ׳‘׳ ׳§'},
-    {id:'creditFees', lbl:'׳¢׳׳׳•׳× ׳›׳¨׳˜׳™׳¡ ׳׳©׳¨׳׳™ / ׳×׳©׳׳•׳'},
-    {id:'donations',  lbl:'׳×׳¨׳•׳׳•׳× ׳•׳׳×׳ ׳•׳×'},
-    {id:'taxes',      lbl:'׳׳¡׳™׳ ׳•׳×׳©׳׳•׳׳™ ׳—׳•׳‘׳”'},
+  {id:'finance', lbl:'💳 פיננסים והתחייבויות', items:[
+    {id:'bankFees',   lbl:'עמלות בנק'},
+    {id:'creditFees', lbl:'עמלות כרטיס אשראי / תשלום'},
+    {id:'donations',  lbl:'תרומות ומתנות'},
+    {id:'taxes',      lbl:'מסים ותשלומי חובה'},
   ]},
-  {id:'misc', lbl:'נ“¦ ׳”׳•׳¦׳׳•׳× ׳ ׳•׳¡׳₪׳•׳×', items:[
-    {id:'bdayGifts', lbl:'׳׳×׳ ׳•׳× (׳™׳׳™ ׳”׳•׳׳“׳×, ׳—׳’׳™׳)'},
-    {id:'charity',   lbl:'׳×׳¨׳•׳׳•׳× / ׳¦׳“׳§׳”'},
-    {id:'unplanned', lbl:'׳׳ ׳׳×׳•׳›׳ ׳ / ׳©׳•׳ ׳•׳×'},
+  {id:'misc', lbl:'📦 הוצאות נוספות', items:[
+    {id:'bdayGifts', lbl:'מתנות (ימי הולדת, חגים)'},
+    {id:'charity',   lbl:'תרומות / צדקה'},
+    {id:'unplanned', lbl:'לא מתוכנן / שונות'},
   ]},
 ];
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // STATE
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 const LS = 'budget-tracker-v1';
 
 function emptyMonth() {
@@ -713,9 +712,9 @@ for (let i = 0; i < 12; i++) {
 
 function save() { localStorage.setItem(LS, JSON.stringify(S)); }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // CALCULATIONS (mirror Excel formulas exactly)
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 const gv = (m, cat, fid) => Number(S.months[m]?.[cat]?.[fid]) || 0;
 
 const incomeTotal  = m => INCOME_FIELDS.reduce((s,f) => s + gv(m,'income',f.id), 0);
@@ -733,31 +732,31 @@ const annSav     = () => annIncome() - annExp();
 const annCatTot  = cid => Array.from({length:12},(_,i)=>catTotal(i,cid)).reduce((a,b)=>a+b,0);
 const annField   = (cat,fid) => Array.from({length:12},(_,i)=>gv(i,cat,fid)).reduce((a,b)=>a+b,0);
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // FORMATTING
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 const N = n => Math.abs(n).toLocaleString('he-IL',{maximumFractionDigits:0});
-const fmt  = n => n===0 ? 'ג‚× 0' : 'ג‚× '+N(n);
-const fmtS = n => n>=0 ? 'ג‚× '+N(n) : '- ג‚× '+N(n);
+const fmt  = n => n===0 ? '₪ 0' : '₪ '+N(n);
+const fmtS = n => n>=0 ? '₪ '+N(n) : '- ₪ '+N(n);
 const fmtP = n => (n*100).toFixed(1)+'%';
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // OPEN SECTIONS (persisted in memory only)
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 const openSecs = new Set(['income', 'housing', 'food']);
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // RENDER TABS
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 function renderTabs() {
   document.getElementById('tabs').innerHTML =
     MONTHS.map((m,i)=>`<button class="tab-btn${S.currentMonth===i?' active':''}" onclick="go(${i})">${m}</button>`).join('') +
-    `<button class="tab-btn annual-tab${S.currentMonth===-1?' active':''}" onclick="go(-1)">נ“ ׳©׳ ׳×׳™</button>`;
+    `<button class="tab-btn annual-tab${S.currentMonth===-1?' active':''}" onclick="go(-1)">📊 שנתי</button>`;
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // RENDER INCOME TABLE
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 function renderIncomeTbl() {
   const m = S.currentMonth;
   const rows = INCOME_FIELDS.map(f => {
@@ -772,13 +771,13 @@ function renderIncomeTbl() {
   }).join('');
   const tot = incomeTotal(m);
   document.getElementById('income-tbl').innerHTML = rows +
-    `<tr class="tot-row"><td class="item-lbl">׳¡׳”"׳› ׳”׳›׳ ׳¡׳•׳×</td><td class="tot-val">${fmt(tot)}</td></tr>`;
+    `<tr class="tot-row"><td class="item-lbl">סה"כ הכנסות</td><td class="tot-val">${fmt(tot)}</td></tr>`;
   document.getElementById('inc-display').textContent = fmt(tot);
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // RENDER CATEGORIES
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 function renderCats() {
   const m = S.currentMonth;
   document.getElementById('cats').innerHTML = CATS.map(c => {
@@ -799,7 +798,7 @@ function renderCats() {
         <div class="sec-title">${c.lbl}</div>
         <div class="sec-right">
           <span class="sec-sub" id="ct-${c.id}">${fmt(tot)}</span>
-          <span class="chevron${open?' open':''}" id="chev-${c.id}">ג–¼</span>
+          <span class="chevron${open?' open':''}" id="chev-${c.id}">▼</span>
         </div>
       </div>
       <div class="sec-body${open?' open':''}" id="body-${c.id}">
@@ -809,9 +808,9 @@ function renderCats() {
   }).join('');
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // UPDATE DASHBOARD
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 function updateDash(m) {
   const inc = m===-1 ? annIncome() : incomeTotal(m);
   const exp = m===-1 ? annExp()    : totalExp(m);
@@ -831,12 +830,12 @@ function updateDash(m) {
   const fill = document.getElementById('p-fill');
   fill.style.width = pct100+'%';
   fill.className = 'fill'+(sav<tgt?' behind':'');
-  document.getElementById('p-txt').textContent = `${fmtS(sav)} ׳׳×׳•׳ ${fmt(tgt)}`;
+  document.getElementById('p-txt').textContent = `${fmtS(sav)} מתוך ${fmt(tgt)}`;
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // UPDATE SUMMARY
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 function updateSummary(m) {
   const inc = incomeTotal(m);
   const exp = totalExp(m);
@@ -855,9 +854,9 @@ function updateSummary(m) {
   document.getElementById('s-gap-wrap').className = `sum-item ${gap>=0?'sum-green':'sum-red'}`;
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // INPUT HANDLER
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 function onInp(inp) {
   const m = S.currentMonth;
   const {cat, fid} = inp.dataset;
@@ -879,9 +878,9 @@ function onInp(inp) {
   updateSummary(m);
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // TOGGLE SECTION
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 function toggleSec(id) {
   const isOpen = openSecs.has(id);
   isOpen ? openSecs.delete(id) : openSecs.add(id);
@@ -892,9 +891,9 @@ function toggleSec(id) {
   if (chev) chev.classList.toggle('open', now);
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // CHARTS
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 let barC=null, donutC=null;
 
 function renderCharts() {
@@ -907,14 +906,14 @@ function renderCharts() {
     data:{
       labels:MONTHS,
       datasets:[
-        {label:'׳”׳›׳ ׳¡׳•׳×', data:incomes,  backgroundColor:'rgba(22,163,74,.75)', borderColor:'#16a34a', borderWidth:1},
-        {label:'׳”׳•׳¦׳׳•׳×', data:expenses, backgroundColor:'rgba(220,38,38,.75)', borderColor:'#dc2626', borderWidth:1},
+        {label:'הכנסות', data:incomes,  backgroundColor:'rgba(22,163,74,.75)', borderColor:'#16a34a', borderWidth:1},
+        {label:'הוצאות', data:expenses, backgroundColor:'rgba(220,38,38,.75)', borderColor:'#dc2626', borderWidth:1},
       ]
     },
     options:{
       responsive:true,
       plugins:{legend:{labels:{font:{family:'Segoe UI',size:12}}}},
-      scales:{y:{ticks:{callback:v=>'ג‚×'+v.toLocaleString('he-IL')},grid:{color:'#f1f5f9'}}}
+      scales:{y:{ticks:{callback:v=>'₪'+v.toLocaleString('he-IL')},grid:{color:'#f1f5f9'}}}
     }
   });
 
@@ -936,16 +935,16 @@ function renderCharts() {
   });
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // ANNUAL TABLE
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 function renderAnnTbl() {
   const mHdr = MONTHS.map(m=>`<th>${m}</th>`).join('');
-  let h = `<thead><tr><th>׳§׳˜׳’׳•׳¨׳™׳” / ׳©׳•׳¨׳”</th>${mHdr}<th>׳¡׳”"׳› ׳©׳ ׳×׳™</th><th>׳׳׳•׳¦׳¢ ׳—׳•׳“׳©׳™</th></tr></thead><tbody>`;
+  let h = `<thead><tr><th>קטגוריה / שורה</th>${mHdr}<th>סה"כ שנתי</th><th>ממוצע חודשי</th></tr></thead><tbody>`;
 
   // Income total row
   const annInc = annIncome();
-  h += `<tr class="ann-income"><td>נ’° ׳¡׳”"׳› ׳”׳›׳ ׳¡׳•׳×</td>
+  h += `<tr class="ann-income"><td>💰 סה"כ הכנסות</td>
     ${Array.from({length:12},(_,i)=>`<td class="pos">${fmt(incomeTotal(i))}</td>`).join('')}
     <td class="pos">${fmt(annInc)}</td><td class="pos">${fmt(annInc/12)}</td></tr>`;
 
@@ -953,7 +952,7 @@ function renderAnnTbl() {
     const a = annField('income',f.id);
     if (!a) return;
     h += `<tr><td style="padding-right:1.8rem;color:#6b7280;font-size:.73rem">${f.lbl}</td>
-      ${Array.from({length:12},(_,i)=>{const v=gv(i,'income',f.id);return`<td>${v?fmt(v):'<span class="dash-val">ג€”</span>'}</td>`;}).join('')}
+      ${Array.from({length:12},(_,i)=>{const v=gv(i,'income',f.id);return`<td>${v?fmt(v):'<span class="dash-val">—</span>'}</td>`;}).join('')}
       <td>${fmt(a)}</td><td>${fmt(a/12)}</td></tr>`;
   });
 
@@ -966,7 +965,7 @@ function renderAnnTbl() {
       const a = annField(c.id,it.id);
       if (!a) return;
       h += `<tr><td style="padding-right:1.8rem;color:#6b7280;font-size:.73rem">${it.lbl}</td>
-        ${Array.from({length:12},(_,i)=>{const v=gv(i,c.id,it.id);return`<td>${v?fmt(v):'<span class="dash-val">ג€”</span>'}</td>`;}).join('')}
+        ${Array.from({length:12},(_,i)=>{const v=gv(i,c.id,it.id);return`<td>${v?fmt(v):'<span class="dash-val">—</span>'}</td>`;}).join('')}
         <td>${fmt(a)}</td><td>${fmt(a/12)}</td></tr>`;
     });
   });
@@ -977,28 +976,28 @@ function renderAnnTbl() {
   const annGap   = annSavV - annTgt;
   const annPct   = annInc ? annSavV/annInc : 0;
 
-  h += `<tr class="ann-sum"><td>נ’¸ ׳¡׳”"׳› ׳”׳•׳¦׳׳•׳×</td>
+  h += `<tr class="ann-sum"><td>💸 סה"כ הוצאות</td>
     ${Array.from({length:12},(_,i)=>`<td class="neg">${fmt(totalExp(i))}</td>`).join('')}
     <td class="neg">${fmt(annExpV)}</td><td class="neg">${fmt(annExpV/12)}</td></tr>`;
-  h += `<tr class="ann-sav"><td>נ¦ ׳—׳™׳¡׳›׳•׳ ׳‘׳₪׳•׳¢׳ (׳”׳›׳ ׳¡׳•׳× - ׳”׳•׳¦׳׳•׳×)</td>
+  h += `<tr class="ann-sav"><td>🏦 חיסכון בפועל (הכנסות - הוצאות)</td>
     ${Array.from({length:12},(_,i)=>{const s=savings(i);return`<td class="${s>=0?'pos':'neg'}">${fmtS(s)}</td>`;}).join('')}
     <td class="${annSavV>=0?'pos':'neg'}">${fmtS(annSavV)}</td><td class="${annSavV>=0?'pos':'neg'}">${fmtS(annSavV/12)}</td></tr>`;
-  h += `<tr class="ann-sum"><td>נ¯ ׳™׳¢׳“ ׳—׳™׳¡׳›׳•׳ (׳׳₪׳™ % ׳׳”׳”׳›׳ ׳¡׳”)</td>
+  h += `<tr class="ann-sum"><td>🎯 יעד חיסכון (לפי % מההכנסה)</td>
     ${Array.from({length:12},(_,i)=>`<td>${fmt(savTarget(i))}</td>`).join('')}
     <td>${fmt(annTgt)}</td><td>${fmt(annTgt/12)}</td></tr>`;
-  h += `<tr class="ann-sum"><td>נ“ ׳₪׳¢׳¨ ׳׳”׳™׳¢׳“</td>
+  h += `<tr class="ann-sum"><td>📏 פער מהיעד</td>
     ${Array.from({length:12},(_,i)=>{const g=savGap(i);return`<td class="${g>=0?'pos':'neg'}">${fmtS(g)}</td>`;}).join('')}
     <td class="${annGap>=0?'pos':'neg'}">${fmtS(annGap)}</td><td class="${annGap>=0?'pos':'neg'}">${fmtS(annGap/12)}</td></tr>`;
-  h += `<tr class="ann-sum"><td>נ“ % ׳—׳™׳¡׳›׳•׳ ׳‘׳₪׳•׳¢׳ ׳׳”׳”׳›׳ ׳¡׳”</td>
+  h += `<tr class="ann-sum"><td>📊 % חיסכון בפועל מההכנסה</td>
     ${Array.from({length:12},(_,i)=>`<td class="pct">${fmtP(savPct(i))}</td>`).join('')}
     <td class="pct">${fmtP(annPct)}</td><td class="pct">${fmtP(annPct)}</td></tr>`;
   h += '</tbody>';
   document.getElementById('ann-tbl').innerHTML = h;
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // NAVIGATION
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 function go(m) {
   S.currentMonth = m;
   save();
@@ -1021,16 +1020,16 @@ function go(m) {
   }
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // EXPORT / IMPORT
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 function exportJSON() {
   const blob = new Blob([JSON.stringify({savingsTarget:S.savingsTarget,months:S.months},null,2)],{type:'application/json'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'data.json';
   a.click();
-  toast('ג… data.json ׳”׳•׳¨׳“ ׳‘׳”׳¦׳׳—׳”');
+  toast('✅ data.json הורד בהצלחה');
 }
 
 function importJSON(inp) {
@@ -1046,19 +1045,19 @@ function importJSON(inp) {
         save();
         document.getElementById('savingsTargetInput').value = S.savingsTarget;
         go(S.currentMonth);
-        toast('ג… ׳ ׳×׳•׳ ׳™׳ ׳ ׳˜׳¢׳ ׳• ׳‘׳”׳¦׳׳—׳”');
+        toast('✅ נתונים נטענו בהצלחה');
       }
     } catch {
-      toast('ג ׳©׳’׳™׳׳” ׳‘׳§׳¨׳™׳׳× ׳”׳§׳•׳‘׳¥');
+      toast('❌ שגיאה בקריאת הקובץ');
     }
     inp.value='';
   };
   r.readAsText(f);
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // SAVINGS TARGET CHANGE
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 document.getElementById('savingsTargetInput').addEventListener('input', function() {
   S.savingsTarget = Math.max(0, Math.min(100, parseFloat(this.value)||0));
   save();
@@ -1068,9 +1067,9 @@ document.getElementById('savingsTargetInput').addEventListener('input', function
   else { renderAnnTbl(); }
 });
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // TOAST
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 let toastT;
 function toast(msg) {
   const el = document.getElementById('toast');
@@ -1080,14 +1079,14 @@ function toast(msg) {
   toastT = setTimeout(()=>el.classList.remove('show'), 2600);
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // GITHUB CLOUD SYNC
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 const GH_OWNER  = 'mayzamirstud';
 const GH_REPO   = 'budget-tracker';
 const GH_BRANCH = 'main';
 let GH_FILE         = localStorage.getItem('gh-profile-file') || 'data.json';
-let GH_PROFILE_NAME = localStorage.getItem('gh-profile-name') || '׳¨׳׳©׳™';
+let GH_PROFILE_NAME = localStorage.getItem('gh-profile-name') || 'ראשי';
 
 // PAT is injected at deploy time (obfuscated so GitHub scanner doesn't revoke it)
 function _dec(s) {
@@ -1110,13 +1109,13 @@ function showSettings(forceSetup) {
     setup.style.display = 'none';
     connected.style.display = 'block';
     if (isBaked) {
-      document.getElementById('connected-sub').textContent = '׳׳—׳•׳‘׳¨ ׳׳•׳˜׳•׳׳˜׳™׳× ג€” ׳׳™׳ ׳¦׳•׳¨׳ ׳׳”׳’׳“׳™׳¨ ׳›׳׳•׳';
-      document.getElementById('share-desc').textContent = '׳©׳×׳£ ׳׳× ׳”׳§׳™׳©׳•׳¨ ג€” ׳›׳•׳׳ ׳ ׳›׳ ׳¡׳™׳ ׳™׳©׳™׳¨׳•׳× ׳‘׳׳™ ׳”׳’׳“׳¨׳”:';
+      document.getElementById('connected-sub').textContent = 'מחובר אוטומטית — אין צורך להגדיר כלום';
+      document.getElementById('share-desc').textContent = 'שתף את הקישור — כולם נכנסים ישירות בלי הגדרה:';
       document.getElementById('share-link-inp').value = 'https://mayzamirstud.github.io/budget-tracker/';
       document.getElementById('disconnect-btn').style.display = 'none';
     } else {
-      document.getElementById('connected-sub').textContent = '׳”׳ ׳×׳•׳ ׳™׳ ׳ ׳©׳׳¨׳™׳ ׳•׳ ׳˜׳¢׳ ׳™׳ ׳׳•׳˜׳•׳׳˜׳™׳×';
-      document.getElementById('share-desc').textContent = '׳©׳׳— ׳§׳™׳©׳•׳¨ ׳–׳” ג€” ׳”׳₪׳•׳×׳— ׳׳•׳×׳• ׳׳—׳•׳‘׳¨ ׳׳•׳˜׳•׳׳˜׳™׳×:';
+      document.getElementById('connected-sub').textContent = 'הנתונים נשמרים ונטענים אוטומטית';
+      document.getElementById('share-desc').textContent = 'שלח קישור זה — הפותח אותו מחובר אוטומטית:';
       const pat = localStorage.getItem('gh-pat');
       document.getElementById('share-link-inp').value = `${location.origin}${location.pathname}#pat=${encodeURIComponent(pat)}`;
       document.getElementById('disconnect-btn').style.display = '';
@@ -1133,27 +1132,27 @@ function closeSettings() {
 }
 function savePAT() {
   const v = document.getElementById('pat-input').value.trim();
-  if (!v) { toast('ג ׳”׳–׳ ׳§׳•׳“ ׳’׳™׳©׳” ׳׳₪׳ ׳™ ׳©׳׳™׳¨׳”'); return; }
+  if (!v) { toast('❌ הזן קוד גישה לפני שמירה'); return; }
   setPAT(v);
   closeSettings();
-  toast('ג… ׳׳—׳•׳‘׳¨! ׳›׳¢׳× ׳ ׳™׳×׳ ׳׳©׳׳•׳¨ ׳•׳׳¡׳ ׳›׳¨׳');
+  toast('✅ מחובר! כעת ניתן לשמור ולסנכרן');
 }
 function clearPAT() {
-  if (_BAKED) { toast('ג„¹ן¸ ׳”׳—׳™׳‘׳•׳¨ ׳׳•׳˜׳׳¢ ׳‘׳׳₪׳׳™׳§׳¦׳™׳”'); closeSettings(); return; }
+  if (_BAKED) { toast('ℹ️ החיבור מוטמע באפליקציה'); closeSettings(); return; }
   localStorage.removeItem('gh-pat');
-  toast('נ” ׳”׳׳›׳©׳™׳¨ ׳ ׳•׳×׳§ ׳׳”׳¢׳ ׳');
+  toast('🔌 המכשיר נותק מהענן');
   showSettings(true);
 }
 function copyShareLink() {
   const inp = document.getElementById('share-link-inp');
   navigator.clipboard.writeText(inp.value)
-    .then(() => toast('נ“‹ ׳§׳™׳©׳•׳¨ ׳”׳•׳¢׳×׳§! ׳©׳׳— ׳׳‘׳ ׳”׳׳©׳₪׳—׳”'))
-    .catch(() => { inp.select(); document.execCommand('copy'); toast('נ“‹ ׳§׳™׳©׳•׳¨ ׳”׳•׳¢׳×׳§!'); });
+    .then(() => toast('📋 קישור הועתק! שלח לבן המשפחה'))
+    .catch(() => { inp.select(); document.execCommand('copy'); toast('📋 קישור הועתק!'); });
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // PROFILE MANAGEMENT
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 function updateProfileBtn() {
   const el = document.getElementById('profile-name');
   if (el) el.textContent = GH_PROFILE_NAME;
@@ -1175,7 +1174,7 @@ async function fetchProfilesList() {
     return files
       .filter(f => f.type === 'file' && /^data(-\d+)?\.json$/.test(f.name))
       .map(f => ({
-        name: f.name === 'data.json' ? '׳¨׳׳©׳™' : `׳₪׳¨׳•׳₪׳™׳ ${f.name.replace(/^data-(\d+)\.json$/, '$1')}`,
+        name: f.name === 'data.json' ? 'ראשי' : `פרופיל ${f.name.replace(/^data-(\d+)\.json$/, '$1')}`,
         file: f.name
       }));
   } catch(e) { return null; }
@@ -1191,7 +1190,7 @@ async function saveProfilesList(list, pat) {
     );
     if (r.ok) { sha = (await r.json()).sha; }
   } catch(e) {}
-  const body = { message: '׳¢׳“׳›׳•׳ ׳¨׳©׳™׳׳× ׳₪׳¨׳•׳₪׳™׳׳™׳', content, branch: GH_BRANCH };
+  const body = { message: 'עדכון רשימת פרופילים', content, branch: GH_BRANCH };
   if (sha) body.sha = sha;
   return fetch(
     `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/profiles.json`,
@@ -1207,29 +1206,55 @@ async function showProfiles() {
 }
 
 let _profilesList = [];
+
 function renderProfilesList(list) {
   const el = document.getElementById('profiles-list');
-  if (!list) { el.innerHTML = '<div style="padding:12px;color:#64748b">טוען...</div>'; return; }
-  if (!list.length) { el.innerHTML = '<div style="padding:12px;color:#64748b">אין פרופילים עדיין</div>'; return; }
+  if (!list) {
+    el.innerHTML = '<div style="padding:1rem;text-align:center;color:#9ca3af;font-size:.85rem">טוען פרופילים...</div>';
+    return;
+  }
+  if (list.length === 0) {
+    el.innerHTML = '<div style="padding:1rem;text-align:center;color:#9ca3af">אין פרופילים עדיין</div>';
+    return;
+  }
   _profilesList = list;
   el.innerHTML = list.map((p, i) => {
     const isActive = p.file === GH_FILE;
-    return `<div class="prf-item${isActive ? ' active' : ''}">
-      <span class="prf-name">${p.name}${isActive ? ' ✓' : ''}</span>
-      ${p.pin ? `<input type="password" id="pin-i${i}" placeholder="קוד סודי" maxlength="8" style="width:90px;padding:4px 8px;border:1px solid #cbd5e1;border-radius:6px;font-size:14px">` : ''}
-      <button onclick="handleProfileBtn(${i})" class="modal-btn">כניסה</button>
+    const icon = isActive ? '✅' : (p.pin ? '🔒' : '👤');
+    return `
+    <div class="prf-item${isActive ? ' active' : ''}">
+      <span style="min-width:1.5rem;text-align:center;font-size:1rem">${icon}</span>
+      <span style="flex:1;font-weight:${isActive?'600':'400'}">${p.name}</span>
+      ${isActive
+        ? '<span style="font-size:.72rem;color:#2563eb;background:#dbeafe;padding:.1rem .45rem;border-radius:4px">פעיל</span>'
+        : `<div style="display:flex;gap:.35rem;align-items:center">
+             ${p.pin ? `<input type="password" maxlength="8" placeholder="קוד..."
+               id="pin-i${i}"
+               style="width:72px;border:1px solid #cbd5e1;border-radius:6px;padding:.2rem .4rem;font-size:.82rem;text-align:center"
+               onkeydown="if(event.key==='Enter')handleProfileBtn(${i})">` : ''}
+             <button onclick="handleProfileBtn(${i})"
+               class="modal-btn" style="font-size:.78rem;padding:.25rem .6rem">כניסה</button>
+           </div>`
+      }
     </div>`;
   }).join('');
 }
+
 function handleProfileBtn(i) {
   const p = _profilesList[i];
   if (!p) return;
   if (p.pin) {
-    const inp = document.getElementById('pin-i' + i);
+    const inp = document.getElementById(`pin-i${i}`);
     const entered = inp ? inp.value : '';
-    if (entered === p.pin) { closeProfiles(); switchProfile(p.file, p.name); }
-    else { if (inp) { inp.value = ''; inp.style.borderColor = '#dc2626'; setTimeout(() => inp.style.borderColor = '#cbd5e1', 1200); } toast('❌ קוד שגוי'); }
-  } else { closeProfiles(); switchProfile(p.file, p.name); }
+    if (entered === p.pin) {
+      switchProfile(p.file, p.name);
+    } else {
+      if (inp) { inp.value = ''; inp.style.borderColor = '#dc2626'; setTimeout(() => inp.style.borderColor = '#cbd5e1', 1200); }
+      toast('❌ קוד שגוי');
+    }
+  } else {
+    switchProfile(p.file, p.name);
+  }
 }
 
 function confirmPin(file, name, correctPin) {
@@ -1241,7 +1266,7 @@ function confirmPin(file, name, correctPin) {
     inp.value = '';
     inp.style.borderColor = '#dc2626';
     setTimeout(() => { inp.style.borderColor = '#cbd5e1'; }, 1200);
-    toast('ג ׳§׳•׳“ ׳©׳’׳•׳™');
+    toast('❌ קוד שגוי');
   }
 }
 
@@ -1267,7 +1292,7 @@ async function switchProfile(file, name) {
   document.getElementById('savingsTargetInput').value = S.savingsTarget;
   go(S.currentMonth);
   await loadFromGitHub(false);
-  toast(`נ‘₪ ${name}`);
+  toast(`👤 ${name}`);
 }
 
 async function createProfile() {
@@ -1275,12 +1300,12 @@ async function createProfile() {
   const pinInp = document.getElementById('new-profile-pin');
   const name = inp.value.trim();
   const pin = pinInp.value.trim();
-  if (!name) { toast('ג ׳”׳–׳ ׳©׳ ׳׳₪׳¨׳•׳₪׳™׳'); return; }
+  if (!name) { toast('❌ הזן שם לפרופיל'); return; }
   const pat = getPAT();
-  if (!pat) { closeProfiles(); showSettings(); toast('ג™ן¸ ׳”׳–׳ PAT ׳§׳•׳“׳'); return; }
+  if (!pat) { closeProfiles(); showSettings(); toast('⚙️ הזן PAT קודם'); return; }
 
-  const list = await fetchProfilesList() || [{ name: '׳¨׳׳©׳™', file: 'data.json' }];
-  if (list.some(p => p.name === name)) { toast('ג ׳₪׳¨׳•׳₪׳™׳ ׳‘׳©׳ ׳–׳” ׳›׳‘׳¨ ׳§׳™׳™׳'); return; }
+  const list = await fetchProfilesList() || [{ name: 'ראשי', file: 'data.json' }];
+  if (list.some(p => p.name === name)) { toast('❌ פרופיל בשם זה כבר קיים'); return; }
 
   const file = `data-${list.length + 1}.json`;
   const entry = { name, file };
@@ -1296,16 +1321,16 @@ async function createProfile() {
       {
         method: 'PUT',
         headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: `׳₪׳¨׳•׳₪׳™׳ ׳—׳“׳©: ${name}`, content, branch: GH_BRANCH })
+        body: JSON.stringify({ message: `פרופיל חדש: ${name}`, content, branch: GH_BRANCH })
       }
     );
-    if (!r.ok) { const e = await r.json(); toast('ג ' + (e.message || '׳™׳¦׳™׳¨׳” ׳ ׳›׳©׳׳”')); return; }
+    if (!r.ok) { const e = await r.json(); toast('❌ ' + (e.message || 'יצירה נכשלה')); return; }
     await saveProfilesList(newList, pat);
     inp.value = '';
     pinInp.value = '';
-    toast(`ג… ׳₪׳¨׳•׳₪׳™׳ "${name}" ׳ ׳•׳¦׳¨${pin ? ` ג€¢ ׳§׳•׳“: ${pin}` : ''}`);
+    toast(`✅ פרופיל "${name}" נוצר${pin ? ` • קוד: ${pin}` : ''}`);
     await switchProfile(file, name);
-  } catch(e) { toast('ג ׳‘׳¢׳™׳™׳× ׳¨׳©׳×'); }
+  } catch(e) { toast('❌ בעיית רשת'); }
 }
 
 function setSyncStatus(s, msg) {
@@ -1313,11 +1338,11 @@ function setSyncStatus(s, msg) {
   if (!el) return;
   const t = new Date().toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});
   const MAP = {
-    saving:  ['ג³ ׳©׳•׳׳¨...', 'rgba(255,255,255,.7)'],
-    saved:   ['ג… ׳ ׳©׳׳¨ ' + t, '#86efac'],
-    loading: ['ג³ ׳˜׳•׳¢׳...', 'rgba(255,255,255,.7)'],
-    loaded:  ['ג˜ן¸ ׳ ׳˜׳¢׳ ' + t, '#93c5fd'],
-    error:   ['ג ' + (msg||'׳©׳’׳™׳׳”'), '#fca5a5'],
+    saving:  ['⏳ שומר...', 'rgba(255,255,255,.7)'],
+    saved:   ['✅ נשמר ' + t, '#86efac'],
+    loading: ['⏳ טוען...', 'rgba(255,255,255,.7)'],
+    loaded:  ['☁️ נטען ' + t, '#93c5fd'],
+    error:   ['❌ ' + (msg||'שגיאה'), '#fca5a5'],
     idle:    ['', 'transparent'],
   };
   const [text, color] = MAP[s] || MAP.idle;
@@ -1340,13 +1365,13 @@ async function loadFromGitHub(silent) {
     const res = await fetch(
       `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${GH_FILE}?t=${Date.now()}`
     );
-    if (!res.ok) { if (!silent) setSyncStatus('error','׳˜׳¢׳™׳ ׳” ׳ ׳›׳©׳׳”'); return false; }
+    if (!res.ok) { if (!silent) setSyncStatus('error','טעינה נכשלה'); return false; }
     const d = await res.json();
-    if (!d || !d.months) { if (!silent) setSyncStatus('error','׳§׳•׳‘׳¥ ׳׳ ׳×׳§׳™׳'); return false; }
+    if (!d || !d.months) { if (!silent) setSyncStatus('error','קובץ לא תקין'); return false; }
 
     // Don't overwrite local data with an empty cloud template
     if (!hasAnyData(d.months) && hasAnyData(S.months)) {
-      if (!silent) setSyncStatus('error','׳¢׳ ׳ ׳¨׳™׳§ ג€” ׳©׳׳•׳¨ ׳§׳•׳“׳ ׳‘׳¢׳ ׳');
+      if (!silent) setSyncStatus('error','ענן ריק — שמור קודם בענן');
       return false;
     }
 
@@ -1358,20 +1383,20 @@ async function loadFromGitHub(silent) {
     if (!silent) setSyncStatus('loaded');
     return true;
   } catch(e) {
-    if (!silent) setSyncStatus('error', '׳‘׳¢׳™׳™׳× ׳¨׳©׳×');
+    if (!silent) setSyncStatus('error', 'בעיית רשת');
     return false;
   }
 }
 
 function loadFromGitHubPrompt() {
   if (hasAnyData(S.months) &&
-      !confirm('׳˜׳¢׳™׳ ׳” ׳׳”׳¢׳ ׳ ׳×׳—׳׳™׳£ ׳׳× ׳”׳ ׳×׳•׳ ׳™׳ ׳”׳ ׳•׳›׳—׳™׳™׳. ׳׳”׳׳©׳™׳?')) return;
+      !confirm('טעינה מהענן תחליף את הנתונים הנוכחיים. להמשיך?')) return;
   loadFromGitHub(false);
 }
 
 async function saveToGitHub() {
   const pat = getPAT();
-  if (!pat) { showSettings(); toast('ג™ן¸ ׳”׳–׳ PAT ׳§׳•׳“׳'); return; }
+  if (!pat) { showSettings(); toast('⚙️ הזן PAT קודם'); return; }
   setSyncStatus('saving');
   try {
     // Get current file SHA (required by GitHub API for updates)
@@ -1382,8 +1407,8 @@ async function saveToGitHub() {
     if (!metaRes.ok) {
       const e = await metaRes.json();
       const isBadCreds = metaRes.status === 401 || (e.message||'').toLowerCase().includes('bad credential');
-      setSyncStatus('error', isBadCreds ? 'Token ׳׳ ׳×׳§׳™׳' : (e.message || 'auth ׳ ׳›׳©׳'));
-      if (isBadCreds) { setTimeout(() => showSettings(), 300); toast('ג™ן¸ ׳™׳© ׳׳¢׳“׳›׳ ׳׳× ׳”-Token ׳‘׳”׳’׳“׳¨׳•׳×'); }
+      setSyncStatus('error', isBadCreds ? 'Token לא תקין' : (e.message || 'auth נכשל'));
+      if (isBadCreds) { setTimeout(() => showSettings(), 300); toast('⚙️ יש לעדכן את ה-Token בהגדרות'); }
       return;
     }
     const { sha } = await metaRes.json();
@@ -1398,7 +1423,7 @@ async function saveToGitHub() {
       {
         method: 'PUT',
         headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: `׳¢׳“׳›׳•׳ ׳×׳§׳¦׳™׳‘ ${d}`, content, sha, branch: GH_BRANCH })
+        body: JSON.stringify({ message: `עדכון תקציב ${d}`, content, sha, branch: GH_BRANCH })
       }
     );
     if (putRes.ok) {
@@ -1408,13 +1433,13 @@ async function saveToGitHub() {
       setSyncStatus('error', e.message);
     }
   } catch(e) {
-    setSyncStatus('error', '׳‘׳¢׳™׳™׳× ׳¨׳©׳×');
+    setSyncStatus('error', 'בעיית רשת');
   }
 }
 
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 // INIT
-// ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•ג•
+// ═══════════════════════════════════════════════
 
 // Auto-connect via share link (PAT in URL hash)
 (function() {
@@ -1422,7 +1447,7 @@ async function saveToGitHub() {
   if (m) {
     setPAT(decodeURIComponent(m[1]));
     history.replaceState(null, '', location.pathname + location.search);
-    toast('ג… ׳׳—׳•׳‘׳¨ ׳׳•׳˜׳•׳׳˜׳™׳× ׳׳¢׳ ׳!');
+    toast('✅ מחובר אוטומטית לענן!');
   }
 })();
 
@@ -1438,4 +1463,3 @@ if (!hasAnyData(S.months)) {
 </script>
 </body>
 </html>
-
